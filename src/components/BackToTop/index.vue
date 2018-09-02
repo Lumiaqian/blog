@@ -1,14 +1,14 @@
 <template>
-    <transition :name="transitionName">
-       <div class="back-to-ceiling" @click="backToTop" v-show="visible" :style="customStyle">
-           <svg width="16" height="16" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--backToTopArrow" aria-hidden="true" style="height: 16px; width: 16px;">
-              <title>回到顶部</title>
-              <g>
-                <path d="M12.036 15.59c0 .55-.453.995-.997.995H5.032c-.55 0-.997-.445-.997-.996V8.584H1.03c-1.1 0-1.36-.633-.578-1.416L7.33.29c.39-.39 1.026-.385 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.004z" fill-rule="evenodd"></path>
-              </g>
-           </svg>
-       </div>
-    </transition>
+  <transition :name="transitionName">
+    <div class="back-to-ceiling" @click="backToTop" v-show="visible" :style="customStyle">
+      <svg width="16" height="16" viewBox="0 0 17 17" xmlns="http://www.w3.org/2000/svg" class="Icon Icon--backToTopArrow" aria-hidden="true" style="height: 16px; width: 16px;">
+        <title>回到顶部</title>
+        <g>
+          <path d="M12.036 15.59c0 .55-.453.995-.997.995H5.032c-.55 0-.997-.445-.997-.996V8.584H1.03c-1.1 0-1.36-.633-.578-1.416L7.33.29c.39-.39 1.026-.385 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.004z" fill-rule="evenodd"></path>
+        </g>
+      </svg>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -42,23 +42,15 @@ export default {
       default: 'fade'
     }
   },
+  // mixins: [scroll],
   data () {
     return {
       visible: false,
       interval: null
     }
   },
-  computed: {
-
-  },
-  created () {
-
-  },
   mounted () {
     window.addEventListener('scroll', this.handleScroll)
-  },
-  watch: {
-
   },
   beforeDestroy () {
     window.removeEventListener('scroll', this.handleScroll)
@@ -69,13 +61,7 @@ export default {
   methods: {
     handleScroll () {
       this.visible = window.pageYOffset > this.visibilityHeight
-    },
-    easeInOutQuad (t, b, c, d) {
-      if ((t /= d / 2) < 1) {
-        return c / 2 * t * t + b
-      } else {
-        return -c / 2 * (--t * (t - 2) - 1) + b
-      }
+      console.log(this.visible)
     },
     backToTop () {
       const start = window.pageYOffset
@@ -90,16 +76,17 @@ export default {
         }
         i++
       }, 16.7)
+    },
+    easeInOutQuad (t, b, c, d) {
+      if ((t /= d / 2) < 1) return c / 2 * t * t + b
+      return -c / 2 * (--t * (t - 2) - 1) + b
     }
-  },
-  components: {
-
   }
 }
 </script>
 
 <style scoped>
-.back-to-ceiling {
+  .back-to-ceiling {
     position: fixed;
     display: inline-block;
     text-align: center;

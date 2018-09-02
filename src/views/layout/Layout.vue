@@ -45,6 +45,5 @@ export default {
 
 <style rel="stylesheet/scss" scoped>
   .layout {
-    background-color: #f5f5f5
   }
 </style>

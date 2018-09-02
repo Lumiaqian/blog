@@ -1,13 +1,13 @@
 <template>
     <div>
-
+      <router-view/>
     </div>
 </template>
 
 <script>
+
 export default {
   props: {
-
   },
   data () {
     return {
@@ -18,10 +18,8 @@ export default {
 
   },
   created () {
-
   },
   mounted () {
-
   },
   watch: {
 
