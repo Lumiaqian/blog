@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Layout from '@/views/layout/Layout.vue'
 import Home from '@/views/home/'
+import Post from '@/views/post'
 
 Vue.use(Router)
 
@@ -15,14 +16,15 @@ export const constantRouterMap = [
       {
         path: 'home',
         component: Home
+      },
+      ,
+      {
+        path: '/post',
+        name: 'post',
+        component: Post
       }
     ],
     redirect: '/home'
-  },
-  {
-    path: '/post/',
-    name: 'post',
-    component: Layout
   }
 ]
 

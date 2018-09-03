@@ -6,8 +6,10 @@
         <el-menu class="navbar"
           mode="horizontal"
           background-color="#f5f5f5"
-          text-color="#000000">
-          <el-menu-item class="index">首页
+          text-color="#000000"
+          :default-active="$router.path"
+          router>
+          <el-menu-item class="index" index="/">首页
             <svg-icon icon-class="index"></svg-icon>
           </el-menu-item>
           <el-menu-item class="label">标签

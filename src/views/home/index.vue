@@ -5,7 +5,7 @@
         <el-col :xs="{span:24}" :sm="{span:12,offset:6}" :lg="{span:8,offset:8}" :xl="{span:9,offset:8}">
           <el-card shadow="hover" >
            <div class="detail">
-              <p class="title" @click="toDetail()">{{posts[index-1].title}}</p>
+              <p class="title" @click="toDetail(posts[index-1].postId)">{{posts[index-1].title}}</p>
               <p>{{posts[index-1].publicDate | formatDate}}</p>
            </div>
             <div v-for="i in posts[index-1].tags.length" :key="i">
@@ -59,6 +59,14 @@ export default {
         this.posts = res.data.result.list
         // console.log(this.content)
         // formatDate()
+      })
+    },
+    toDetail (id) {
+      this.$router.push({
+        path: '/post',
+        query: {
+          id: id
+        }
       })
     }
   },
