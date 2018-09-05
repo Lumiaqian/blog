@@ -11,7 +11,7 @@
             <div v-for="i in posts[index-1].tags.length" :key="i">
               <el-tag>{{posts[index-1].tags[i-1].tagName}}</el-tag>
             </div>
-            <el-button type="text" >阅读全文</el-button>
+            <el-button type="text" @click="toDetail(posts[index-1].postId)">阅读全文</el-button>
           </el-card>
         </el-col>
        </el-row>

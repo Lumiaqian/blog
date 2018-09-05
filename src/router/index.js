@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Layout from '@/views/layout/Layout.vue'
 import Home from '@/views/home/'
 import Post from '@/views/post'
+import About from '@/views/about'
 
 Vue.use(Router)
 
@@ -22,6 +23,12 @@ export const constantRouterMap = [
         path: '/post',
         name: 'post',
         component: Post
+      }
+      ,
+      {
+        path: '/about',
+        name: 'about',
+        component: About
       }
     ],
     redirect: '/home'

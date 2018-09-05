@@ -21,7 +21,7 @@
           <el-menu-item class="archive">归档
             <svg-icon icon-class="archive"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="about">关于
+          <el-menu-item class="about" index="/about">关于
             <svg-icon icon-class="about"></svg-icon>
           </el-menu-item>
           <el-menu-item class="search">搜索
@@ -30,7 +30,7 @@
        </el-menu>
        <div class="weather">
            <div class="title">
-               <p>{{weatherInfo.temp}}℃ {{weatherInfo.weather}} <svg-icon :icon-class="weatherInfo.weather"></svg-icon></p>
+               <p>{{city}} {{weatherInfo.temp}}℃ {{weatherInfo.weather}} <svg-icon :icon-class="weatherInfo.weather"></svg-icon></p>
            </div>
        </div>
     </div>
@@ -50,11 +50,11 @@ export default {
         temp: '',
         weather: ''
       },
-      temp: ''
+      temp: '',
+      city: ''
     }
   },
   computed: {
-
   },
   created () {
     this.getWeather()
@@ -67,10 +67,13 @@ export default {
   methods: {
     getWeather () {
       getIp().then(res => {
-        let ip = JSON.parse(res.data.substring(19, 74)).cip
+        let length = res.data.length - 1
+        let ip = JSON.parse(res.data.substring(19, length)).cip
+        // console.log(res.data.length)
         getWeather(ip).then(res => {
           this.weatherInfo.temp = res.data.result[0].realtime.temp
           this.weatherInfo.weather = res.data.result[0].realtime.weather
+          this.city = res.data.result[0].city
           // console.log(this.weatherInfo)
         })
       })
