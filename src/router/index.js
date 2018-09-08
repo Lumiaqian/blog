@@ -5,6 +5,8 @@ import Layout from '@/views/layout/Layout.vue'
 import Home from '@/views/home/'
 import Post from '@/views/post'
 import About from '@/views/about'
+import Tag from '@/views/tag'
+import TagPosts from '@/views/tagPosts'
 
 Vue.use(Router)
 
@@ -29,6 +31,18 @@ export const constantRouterMap = [
         path: '/about',
         name: 'about',
         component: About
+      }
+      ,
+      {
+        path: '/tag',
+        name: 'tag',
+        component: Tag
+      }
+      ,
+      {
+        path: '/tag/:tag',
+        name: 'TagPosts',
+        component: TagPosts
       }
     ],
     redirect: '/home'

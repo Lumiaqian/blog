@@ -12,7 +12,7 @@
           <el-menu-item class="index" index="/">首页
             <svg-icon icon-class="index"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="label">标签
+          <el-menu-item class="label" index="/tag">标签
             <svg-icon icon-class="label"></svg-icon>
           </el-menu-item>
           <el-menu-item class="classify">分类
