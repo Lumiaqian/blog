@@ -7,6 +7,8 @@ import Post from '@/views/post'
 import About from '@/views/about'
 import Tag from '@/views/tag'
 import TagPosts from '@/views/tagPosts'
+import Category from '@/views/category'
+import CatePosts from '@/views/catePosts'
 
 Vue.use(Router)
 
@@ -43,6 +45,18 @@ export const constantRouterMap = [
         path: '/tag/:tag',
         name: 'TagPosts',
         component: TagPosts
+      }
+      ,
+      {
+        path: '/category',
+        name: 'category',
+        component: Category
+      }
+      ,
+      {
+        path: '/category/:category',
+        name: 'CatePosts',
+        component: CatePosts
       }
     ],
     redirect: '/home'

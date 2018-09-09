@@ -3,7 +3,7 @@
  <div>
      <div class="title">
          <p style="font-size:24px">标签</p>
-         <p>目前共计{{tags.length}}个标签</p>
+         <p>目前共计{{tags.length | 0}}个标签</p>
      </div>
      <div class="content">
          <tags-cloud v-if="tags.length!=0" :tags="tags"/>

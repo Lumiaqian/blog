@@ -1,8 +1,8 @@
 <!--  -->
 <template>
  <div>
-    <timeline class="tag">
-      <timeline-title bg-color="#C1FFC1">{{tag.tagName}}</timeline-title>
+    <timeline class="category">
+      <timeline-title bg-color="#C1FFC1">{{category.categoryName}}({{category.count}})</timeline-title>
       <timeline-item class="item" bg-color="#9dd8e0" v-for="(post,index) in posts" :key="index" @click.native="toPostDetail(post.postId)">
         {{post.publicDate | formatDate}} {{post.title}}
       </timeline-item>
@@ -13,16 +13,18 @@
 <script>
 import { Timeline, TimelineItem, TimelineTitle } from 'vue-cute-timeline'
 import {formatDate} from '@/utils/date.js'
-import {getPosts} from '@/api/tags'
+import {getPosts} from '@/api/categories'
 import Cookies from 'js-cookie'
 import { mapGetters } from 'vuex'
 
 export default {
   data () {
     return {
-      tag: {
-        tagId: '',
-        tagName: ''
+      category: {
+        categoryId: '',
+        categoryName: '',
+        fatherId: '',
+        count: 0
       },
       posts: []
     }
@@ -42,7 +44,7 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'Tag'
+      'Category'
     ])
   },
 
@@ -54,18 +56,22 @@ export default {
 
   methods: {
     getPosts () {
-      if (this.Tag.tagId === '' || this.Tag.tagName === '') {
-        console.log('进入Tag为空')
-        let tag = Cookies.getJSON('tag')
+      if (this.Category.categoryId === '' || this.Category.categoryName === '') {
+        console.log('进入Cate为空')
+        let category = Cookies.getJSON('category')
         // console.log('Cookies: ' + JSON.stringify(tag))
-        this.tag.tagId = tag.tagId
-        this.tag.tagName = tag.tagName
+        this.category.categoryId = category.categoryId
+        this.category.categoryName = category.categoryName
+        this.category.fatherId = category.fatherId
+        this.category.count = category.count
       } else {
-        this.tag.tagId = this.Tag.tagId
-        this.tag.tagName = this.Tag.tagName
+        this.category.categoryId = this.Category.categoryId
+        this.category.categoryName = this.Category.categoryName
+        this.category.fatherId = this.Category.fatherId
+        this.category.count = this.Category.count
       }
       // console.log(JSON.stringify(this.Tag))
-      getPosts(this.tag.tagId).then(res => {
+      getPosts(this.category.categoryId).then(res => {
         this.posts = res.data.result
       })
     },
@@ -82,7 +88,7 @@ export default {
 
 </script>
 <style scoped>
-.tag {
+.category {
  position: absolute;
  top: 25%;
  left: 40%;

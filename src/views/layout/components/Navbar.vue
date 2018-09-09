@@ -15,7 +15,7 @@
           <el-menu-item class="label" index="/tag">标签
             <svg-icon icon-class="label"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="classify">分类
+          <el-menu-item class="classify" index="/category">分类
             <svg-icon icon-class="classify"></svg-icon>
           </el-menu-item>
           <el-menu-item class="archive">归档
