@@ -1,7 +1,7 @@
 <!--  -->
 <template>
- <div>
-    <timeline class="tag">
+ <div >
+    <timeline class="tag" v-loading="loading">
       <timeline-title bg-color="#C1FFC1">{{tag.tagName}}</timeline-title>
       <timeline-item class="item" bg-color="#9dd8e0" v-for="(post,index) in posts" :key="index" @click.native="toPostDetail(post.postId)">
         {{post.publicDate | formatDate}} {{post.title}}
@@ -24,7 +24,8 @@ export default {
         tagId: '',
         tagName: ''
       },
-      posts: []
+      posts: [],
+      loading: true
     }
   },
 
@@ -67,11 +68,12 @@ export default {
       // console.log(JSON.stringify(this.Tag))
       getPosts(this.tag.tagId).then(res => {
         this.posts = res.data.result
+        this.loading = false
       })
     },
     toPostDetail (id) {
       this.$router.push({
-        path: '/post',
+        path: '/posts',
         query: {
           id: id
         }

@@ -9,6 +9,7 @@ import Tag from '@/views/tag'
 import TagPosts from '@/views/tagPosts'
 import Category from '@/views/category'
 import CatePosts from '@/views/catePosts'
+import Archive from '@/views/archive'
 
 Vue.use(Router)
 
@@ -24,8 +25,8 @@ export const constantRouterMap = [
       },
       ,
       {
-        path: '/post',
-        name: 'post',
+        path: '/posts',
+        name: 'posts',
         component: Post
       }
       ,
@@ -36,27 +37,33 @@ export const constantRouterMap = [
       }
       ,
       {
-        path: '/tag',
-        name: 'tag',
+        path: '/tags',
+        name: 'tags',
         component: Tag
       }
       ,
       {
-        path: '/tag/:tag',
+        path: '/tags/:tag',
         name: 'TagPosts',
         component: TagPosts
       }
       ,
       {
-        path: '/category',
-        name: 'category',
+        path: '/categories',
+        name: 'categories',
         component: Category
       }
       ,
       {
-        path: '/category/:category',
+        path: '/categories/:category',
         name: 'CatePosts',
         component: CatePosts
+      }
+      ,
+      {
+        path: '/archives',
+        name: 'archive',
+        component: Archive
       }
     ],
     redirect: '/home'

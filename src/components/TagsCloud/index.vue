@@ -116,7 +116,7 @@ export default {
       }
       this.$store.dispatch('setTag', tag).then(() => {
         this.$router.push({
-          path: '/tag/' + tagName
+          path: '/tags/' + tagName
         })
       })
     }

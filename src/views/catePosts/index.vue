@@ -1,7 +1,7 @@
 <!--  -->
 <template>
  <div>
-    <timeline class="category">
+    <timeline class="category" v-loading="loading">
       <timeline-title bg-color="#C1FFC1">{{category.categoryName}}({{category.count}})</timeline-title>
       <timeline-item class="item" bg-color="#9dd8e0" v-for="(post,index) in posts" :key="index" @click.native="toPostDetail(post.postId)">
         {{post.publicDate | formatDate}} {{post.title}}
@@ -26,7 +26,8 @@ export default {
         fatherId: '',
         count: 0
       },
-      posts: []
+      posts: [],
+      loading: true
     }
   },
 
@@ -73,11 +74,12 @@ export default {
       // console.log(JSON.stringify(this.Tag))
       getPosts(this.category.categoryId).then(res => {
         this.posts = res.data.result
+        this.loading = false
       })
     },
     toPostDetail (id) {
       this.$router.push({
-        path: '/post',
+        path: '/posts',
         query: {
           id: id
         }

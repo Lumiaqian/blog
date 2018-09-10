@@ -5,7 +5,7 @@
          <p style="font-size:24px">分类</p>
          <p>目前共计{{categories.length | 0}}个分类</p>
      </div>
-     <timeline class="categories" >
+     <timeline class="categories" v-loading="loading">
          <div v-for="(cate,index) in parentCate" :key="index">
              <timeline-title class="item" bg-color="#C1FFC1" @click.native="toCateDetail(cate)">
                 {{cate.categoryName}}({{cate.count}})
@@ -26,7 +26,8 @@ export default {
     return {
       categories: [],
       parentCate: [],
-      childrenCate: []
+      childrenCate: [],
+      loading: true
     }
   },
 
@@ -61,6 +62,7 @@ export default {
         console.log('categories: ' + this.categories)
         console.log('parent: ' + this.parentCate.length)
         console.log('chaild: ' + this.childrenCate.length)
+        this.loading = false
       })
     },
     bouncer (arr) {
@@ -72,7 +74,7 @@ export default {
     toCateDetail (cate) {
       this.$store.dispatch('setCategory', cate).then(() => {
         this.$router.push({
-          path: '/category/' + cate.categoryName
+          path: '/categories/' + cate.categoryName
         })
       })
     }

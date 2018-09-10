@@ -12,13 +12,13 @@
           <el-menu-item class="index" index="/">首页
             <svg-icon icon-class="index"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="label" index="/tag">标签
+          <el-menu-item class="label" index="/tags">标签
             <svg-icon icon-class="label"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="classify" index="/category">分类
+          <el-menu-item class="classify" index="/categories">分类
             <svg-icon icon-class="classify"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="archive">归档
+          <el-menu-item class="archive" index="/archives">归档
             <svg-icon icon-class="archive"></svg-icon>
           </el-menu-item>
           <el-menu-item class="about" index="/about">关于
