@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Layout from '@/views/layout/Layout.vue'
-import Home from '@/views/home/'
-import Post from '@/views/post'
-import About from '@/views/about'
-import Tag from '@/views/tag'
-import TagPosts from '@/views/tagPosts'
-import Category from '@/views/category'
-import CatePosts from '@/views/catePosts'
-import Archive from '@/views/archive'
+import Layout from '@/views/blog/layout/Layout.vue'
+import Home from '@/views/blog/home/'
+import Post from '@/views/blog/post'
+import About from '@/views/blog/about'
+import Tag from '@/views/blog/tag'
+import TagPosts from '@/views/blog/tagPosts'
+import Category from '@/views/blog/category'
+import CatePosts from '@/views/blog/catePosts'
+import Archive from '@/views/blog/archive'
 
 Vue.use(Router)
 

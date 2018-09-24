@@ -29,11 +29,11 @@ export default {
         return {
           right: '50px',
           bottom: '50px',
-          width: '40px',
-          height: '40px',
+          width: '35px',
+          height: '35px',
           'border-radius': '4px',
           'line-height': '45px',
-          background: '#e7eaf1'
+          background: '#262a30'
         }
       }
     },
@@ -91,6 +91,7 @@ export default {
     display: inline-block;
     text-align: center;
     cursor: pointer;
+    z-index: 1050;
   }
 
   .back-to-ceiling:hover {
@@ -108,7 +109,7 @@ export default {
   }
 
   .back-to-ceiling .Icon {
-    fill: #9aaabf;
+    fill: #fff;
     background: none;
   }
 </style>

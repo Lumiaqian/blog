@@ -69,14 +69,14 @@ export default {
     getPost () {
       var postId = this.$route.query.id
       post(postId).then(res => {
-        this.content = res.data.result.content
+        this.content = res.data.data.content
         // console.log(this.content)
-        this.title = res.data.result.title
-        this.tags = res.data.result.tags
-        this.categories = res.data.result.categories
-        this.publicDate = res.data.result.publicDate
-        // this.watchCount = res.date.result.publicDate
-        this.watchCount = res.data.result.watchCount
+        this.title = res.data.data.title
+        this.tags = res.data.data.tags
+        this.categories = res.data.data.categories
+        this.publicDate = res.data.data.publicDate
+        // this.watchCount = res.date.data.publicDate
+        this.watchCount = res.data.data.watchCount
       })
     }
   }

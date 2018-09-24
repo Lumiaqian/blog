@@ -1,13 +1,13 @@
 <template>
-    <div>
-
+    <div class="app-main">
+      <router-view/>
     </div>
 </template>
 
 <script>
+
 export default {
   props: {
-
   },
   data () {
     return {
@@ -18,10 +18,8 @@ export default {
 
   },
   created () {
-
   },
   mounted () {
-
   },
   watch: {
 
@@ -36,5 +34,8 @@ export default {
 </script>
 
 <style scoped>
-
+.app-main{
+  padding: 5%;
+  min-height: calc(100vh - 120px)
+}
 </style>

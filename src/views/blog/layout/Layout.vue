@@ -1,21 +1,19 @@
 <template>
     <div class="layout">
-        <div>
-            <navbar></navbar>
-            <app-main></app-main>
-            <footer></footer>
-        </div>
+      <navbar></navbar>
+      <app-main></app-main>
+      <app-footer></app-footer>
     </div>
 </template>
 
 <script>
-import { Navbar, AppMain, Footer } from './components'
+import { Navbar, AppMain, AppFooter } from './components'
 export default {
   name: 'layout',
   components: {
     Navbar,
     AppMain,
-    Footer
+    AppFooter
   },
   props: {
 
@@ -45,5 +43,6 @@ export default {
 
 <style rel="stylesheet/scss" scoped>
   .layout {
-  }
+    width: 100%;
+}
 </style>

@@ -1,7 +1,8 @@
 <template>
     <div class="top">
+      <div class="head">
         <div class="site-title">
-            <a>LumiaQian的踩坑日记</a>
+          <a>LumiaQian的踩坑日记</a>
         </div>
         <el-menu class="navbar"
           mode="horizontal"
@@ -33,6 +34,7 @@
                <p>{{city}} {{weatherInfo.temp}}℃ {{weatherInfo.weather}} <svg-icon :icon-class="weatherInfo.weather"></svg-icon></p>
            </div>
        </div>
+      </div>
     </div>
 
 </template>
@@ -71,9 +73,9 @@ export default {
         let ip = JSON.parse(res.data.substring(19, length)).cip
         // console.log(res.data.length)
         getWeather(ip).then(res => {
-          this.weatherInfo.temp = res.data.result[0].realtime.temp
-          this.weatherInfo.weather = res.data.result[0].realtime.weather
-          this.city = res.data.result[0].city
+          this.weatherInfo.temp = res.data.data[0].realtime.temp
+          this.weatherInfo.weather = res.data.data[0].realtime.weather
+          this.city = res.data.data[0].city
           // console.log(this.weatherInfo)
         })
       })
@@ -87,37 +89,49 @@ export default {
 
 <style rel="stylesheet/scss"  scoped>
   .top {
-      display: flex;
-      justify-content:center;
+      position: relative;
+      width: 100%;
+      /* justify-content:center;
       flex-direction: row;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: center; */
       background-color: #f5f5f5;
       padding:0px; margin:0px;
+      /* cursor: default;
+      animation: show .5s */
   }
-   .site-title {
-      font-size: 22px;
-      font-weight: bolder;
-      flex: 0 0 20%;
+  .head{
+    position: relative;
+    max-width: 1000px;
+    padding: 0 10px;
+    margin: 0 auto;
+    height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    transition: height .3s;
+  }
+  .site-title {
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 25px 0;
+      /* flex: 0 0 20%; */
   }
   .navbar {
-      display: flex;
-      top: 0px;
-      padding:0px;
-      /* background: #f5f5f5; */
-
-      text-align: center;
-      align-items: center;
-      justify-content:center;
+      position: relative;
+      cursor: default;
+      animation: show .5s;
   }
   .weather {
-       flex: 0 0 25%;
-       justify-content: flex-end;
-       display: flex;
+       position: relative;
   }
-  .title {
-      margin: 3%;
-  }
+
   el-el-menu-item {
       align-content: center;
   }

@@ -49,7 +49,7 @@ export default {
   methods: {
     getAbout () {
       about().then(res => {
-        this.content = res.data.result.content
+        this.content = res.data.data.content
       })
     }
   }

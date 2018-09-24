@@ -48,7 +48,7 @@ export default {
   methods: {
     getCayegoryList () {
       getCategories().then(res => {
-        this.categories = res.data.result
+        this.categories = res.data.data
         for (let i = 0; i < this.categories.length; i++) {
           if (this.categories[i].fatherId === '-1') {
             console.log('parent' + this.categories[i])
@@ -84,12 +84,13 @@ export default {
 </script>
 <style scoped>
 .title {
+    position: relative;
     text-align: center
 }
 .categories {
-    position: absolute;
-    top: 35%;
-    left: 40%;
+    position: relative;
+    top: 30%;
+    left: 45%;
 }
 .item:hover{
   text-decoration:underline;

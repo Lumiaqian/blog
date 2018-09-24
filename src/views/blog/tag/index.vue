@@ -37,7 +37,7 @@ export default {
   methods: {
     getTagList () {
       getTags().then(res => {
-        this.tags = res.data.result
+        this.tags = res.data.data
         // console.log(this.tags)
       })
     }

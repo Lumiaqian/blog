@@ -57,9 +57,9 @@ export default {
   methods: {
     getPosts () {
       posts(this.pageNo, this.pageSize).then(res => {
-        // console.log(res.date.result.total)
-        this.posts = res.data.result.list
-        this.total = res.data.result.total
+        // console.log(res.date.data.total)
+        this.posts = res.data.data.list
+        this.total = res.data.data.total
         let year = this.formatDateYear(this.posts[0].publicDate)
         this.years[0] = year
         for (let i = 0; i < posts.length; i++) {
@@ -70,7 +70,7 @@ export default {
         this.years = this.bouncer(this.years)
         console.log(this.years)
         this.loading = false
-        // console.log(res.date.result.total)
+        // console.log(res.date.data.total)
         // formatDate()
       })
     },
@@ -98,8 +98,8 @@ export default {
 </script>
 <style scoped>
 .posts {
-    position: absolute;
-    top: 35%;
+    position: relative;
+    top: 25%;
     left: 35%;
 }
 .item:hover{
