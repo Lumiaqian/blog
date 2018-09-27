@@ -122,7 +122,7 @@ export default {
 
   created () {
     this.toggleLineData = this.lineStyle.normalLineData
-    console.log('是否显示' + this.show)
+    // console.log('是否显示' + this.show)
   },
 
   mounted () {},
@@ -150,8 +150,8 @@ export default {
 <style scoped>
 .toggle{
    position: fixed;
-    width: 24px;
-    height: 24px;
+    width: 35px;
+    height: 35px;
     right: 50px;
     bottom: 95px;
     padding: 5px;
