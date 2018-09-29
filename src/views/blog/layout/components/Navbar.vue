@@ -31,7 +31,7 @@
        </el-menu>
        <div class="weather">
            <div class="title">
-               <p>{{city}} {{weatherInfo.temp}}℃ {{weatherInfo.weather}} <svg-icon :icon-class="weatherInfo.weather"></svg-icon></p>
+               <p>{{weather.city}} {{weather.temp}} {{weather.weather}} <svg-icon :icon-class="weather.weather"></svg-icon></p>
            </div>
        </div>
       </div>
@@ -40,23 +40,19 @@
 </template>
 
 <script>
-import {getIp} from '@/utils/net'
-import {getWeather} from '@/api/utils'
+import { mapGetters } from 'vuex'
 export default {
   props: {
 
   },
   data () {
     return {
-      weatherInfo: {
-        temp: '',
-        weather: ''
-      },
-      temp: '',
-      city: ''
     }
   },
   computed: {
+    ...mapGetters([
+      'weather'
+    ])
   },
   created () {
     this.getWeather()
@@ -68,17 +64,7 @@ export default {
   },
   methods: {
     getWeather () {
-      getIp().then(res => {
-        let length = res.data.length - 1
-        let ip = JSON.parse(res.data.substring(19, length)).cip
-        // console.log(res.data.length)
-        getWeather(ip).then(res => {
-          this.weatherInfo.temp = res.data.data[0].realtime.temp
-          this.weatherInfo.weather = res.data.data[0].realtime.weather
-          this.city = res.data.data[0].city
-          // console.log(this.weatherInfo)
-        })
-      })
+      this.$store.dispatch('getWeather')
     }
   },
   components: {

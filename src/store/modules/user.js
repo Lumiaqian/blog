@@ -14,7 +14,8 @@ const user = {
     setting: {
       articlePlatform: []
     },
-    username: ''
+    username: '',
+    motto: ''
   },
 
   mutations: {
@@ -45,6 +46,9 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+    SET_MOTTO: (state, motto) => {
+      state.motto = motto
     }
   },
 
@@ -61,8 +65,8 @@ const user = {
           // const data = response.data
           const headers = response.headers
           console.log(JSON.stringify(headers))
-          commit('SET_TOKEN', JSON.stringify(headers.authorization))
-          setToken(JSON.stringify(headers.authorization))
+          commit('SET_TOKEN',headers.authorization)
+          setToken(headers.authorization)
           resolve()
         }).catch(error => {
           reject(error)
@@ -97,9 +101,10 @@ const user = {
             reject('getInfo: roles must be a non-null array !')
           }
 
-          commit('SET_NAME', data.username)
-          //commit('SET_AVATAR', data.avatar)
-         //commit('SET_INTRODUCTION', data.introduction)
+          commit('SET_NAME', data.userName)
+          commit('SET_AVATAR', data.avatar)
+          commit('SET_INTRODUCTION', data.introduction)
+          commit('SET_MOTTO',data.motto)
           resolve(response)
         }).catch(error => {
           reject(error)

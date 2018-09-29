@@ -131,23 +131,13 @@ export const asyncRouterMap = [
     path: '/admin',
     component: AdminLayout,
     name: 'dashboard',
-    alwaysShow: true, // will always show the root menu
-    meta: {
-      roles: ['admin'], // you can set roles in root nav
-      title: 'dashboard',
-      icon: 'hello',
-      noCache: true
-    },
+    //alwaysShow: true, // will always show the root menu
     children: [
       {
-        path: 'hello',
-        name: 'hello',
-        component: () => import('@/components/HelloWorld'),
-        meta: {
-          title: 'hello',
-          icon: 'hello',
-          noCache: true
-        }
+        path: 'index',
+        component: () => import('@/views/admin/dashboard/index'),
+        name: 'dashboard',
+        meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
       }
     ]
   },

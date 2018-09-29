@@ -2,6 +2,8 @@ const getters = {
     Tag: state => state.tag.tag,
     Category: state => state.category.category,
     Common: state => state.common,
+    weather: state => state.common.weatherInfo,
+    //city: state => state.common.city,
     permission_routers: state => state.permission.routers,
     addRouters: state => state.permission.addRouters,
     token: state => state.user.token,
@@ -16,5 +18,9 @@ const getters = {
     device: state => state.app.device,
     visitedViews: state => state.tagsView.visitedViews,
     cachedViews: state => state.tagsView.cachedViews,
+    motto: state => state.user.motto,
+    postCount: state => state.count.postCount,
+    tagCount: state => state.count.tagCount,
+    cateCount: state => state.count.cateCount
 }
 export default getters

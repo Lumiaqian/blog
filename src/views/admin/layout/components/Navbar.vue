@@ -2,6 +2,7 @@
   <el-menu class="navbar" mode="horizontal">
     <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
     <breadcrumb class="breadcrumb-container"></breadcrumb>
+    <span class="weather">{{weather.city}} {{weather.temp}} {{weather.weather}} <svg-icon :icon-class="weather.weather"></svg-icon></span>
     <div class="right-menu">
        <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
@@ -33,6 +34,13 @@ import { mapGetters } from 'vuex'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 export default {
+  data () {
+    return {
+    }
+  },
+  created () {
+    this.getWeather()
+  },
   components: {
     Breadcrumb,
     Hamburger
@@ -41,7 +49,8 @@ export default {
     ...mapGetters([
       'sidebar',
       'name',
-      'avatar'
+      'avatar',
+      'weather'
     ])
   },
   methods: {
@@ -52,6 +61,9 @@ export default {
       this.$store.dispatch('LogOut').then(() => {
         location.reload()// In order to re-instantiate the vue-router object to avoid bugs
       })
+    },
+    getWeather () {
+      this.$store.dispatch('getWeather')
     }
   }
 }
@@ -70,6 +82,11 @@ export default {
   }
   .breadcrumb-container{
     float: left;
+  }
+  .weather{
+    position: relative;
+    text-align: center;
+    left: 40%;
   }
   .right-menu {
     float: right;

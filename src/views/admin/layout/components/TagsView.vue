@@ -99,7 +99,7 @@ export default {
     },
     closeAllTags () {
       this.$store.dispatch('delAllViews')
-      this.$router.push('/')
+      this.$router.push('/admin')
     },
     openMenu (tag, e) {
       this.visible = true

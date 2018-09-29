@@ -2,6 +2,7 @@ export default {
   route: {
     hello: '测试',
     dashboard: '首页',
+    admin: '首页',
     introduction: '简述',
     documentation: '文档',
     guide: '引导页',
