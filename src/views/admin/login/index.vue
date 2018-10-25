@@ -83,7 +83,7 @@ export default {
           this.$store.dispatch('LoginByUsername', this.userInfo).then(() => {
             this.loading = false
             this.$store.dispatch('setUserName', this.userInfo.username)
-            this.$router.push({ path: '/admin' })
+            this.$router.push({ path: '/admin/index' })
           }).catch(() => {
             this.loading = false
           })

@@ -9,6 +9,7 @@ import permission from './modules/permission'
 import user from './modules/user'
 import tagsView from './modules/tagsView'
 import count from './modules/admin/count'
+import post from './modules/admin/post'
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
     user,
     app,
     tagsView,
-    count
+    count,
+    post
   },
   getters
 })

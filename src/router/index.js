@@ -150,5 +150,36 @@ export const asyncRouterMap = [
       name: 'test',
       meta: { title: 'test', icon: 'hello', noCache: true }
     }]
+  },
+  {
+    path: '/admin/post',
+    component: AdminLayout,
+    name: 'post',
+    meta: { title: 'post', icon: 'post', noCache: true },
+    redirect: 'noredirect',
+    children: [{
+      path: 'write',
+      component: () => import('@/views/admin/writer/index'),
+      name: 'write',
+      meta: { title: 'write', icon: 'write', noCache: true }
+    },
+    {
+      path: 'management',
+      component: () => import('@/components/HelloWorld'),
+      name: 'management',
+      meta: { title: 'management', icon: 'management', noCache: true }
+    },
+    {
+      path: 'draftBox',
+      component: () => import('@/components/HelloWorld'),
+      name: 'draftBox',
+      meta: { title: 'draftBox', icon: 'draftBox', noCache: true }
+    },
+    {
+      path: 'trashCan',
+      component: () => import('@/components/HelloWorld'),
+      name: 'trashCan',
+      meta: { title: 'trashCan', icon: 'trashCan', noCache: true }
+    }]
   }
 ]

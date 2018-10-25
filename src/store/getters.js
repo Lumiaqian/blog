@@ -21,6 +21,7 @@ const getters = {
     motto: state => state.user.motto,
     postCount: state => state.count.postCount,
     tagCount: state => state.count.tagCount,
-    cateCount: state => state.count.cateCount
+    cateCount: state => state.count.cateCount,
+    post: state => state.post
 }
 export default getters
