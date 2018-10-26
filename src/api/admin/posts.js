@@ -22,7 +22,11 @@ export function post (postId) {
 }
 export function posts (pageNo, pageSize) {
   return request({
-    url: '/lumia/posts/list?pageNo=' + pageNo + '&pageSize=' + pageSize,
-    method: 'get'
+    url: '/admin/posts/list',
+    method: 'get',
+    params: {
+      pageNo: pageNo,
+      pageSize: pageSize
+    }
   })
 }

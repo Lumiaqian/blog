@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss" scoped>
 @import "src/styles/data-tabs.scss";
-.card-panel-num {
-    font-size: 30px;
-}
+// .card-panel-num {
+//     font-size: 30px;
+// }
 </style>

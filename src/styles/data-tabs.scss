@@ -26,16 +26,16 @@
         }
       }
       .item-body {
-        & > h2 {
+        .card-panel-num {
           margin: 0;
-          font-size: 32px;
-          line-height: 60px;
+          font-size: 30px;
+          line-height: 55px;
         }
       }
       .item-footer {
         line-height: 16px;
         & > span {
-          font-size: 10px;
+          font-size: 15px;
         }
         & > p {
           margin: 0px;

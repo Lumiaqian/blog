@@ -18,7 +18,7 @@ export default {
             title: '文章统计',
             subtitle: '实时',
             count: this.postCount,
-            // allcount: 10222,
+            allcount: this.postAllCount,
             text: '当前文章总记录数',
             color: 'rgb(117, 56, 199)',
             key: '章'
@@ -63,7 +63,8 @@ export default {
     ...mapGetters([
       'postCount',
       'tagCount',
-      'cateCount'
+      'cateCount',
+      'postAllCount'
     ])
   },
 
@@ -77,6 +78,7 @@ export default {
     getCount () {
       this.$store.dispatch('setCount').then(() => {
         this.option.data[0].count = this.postCount
+        this.option.data[0].allcount = this.postAllCount
         this.option.data[1].count = this.cateCount
         this.option.data[2].count = this.tagCount
       })

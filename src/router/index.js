@@ -131,6 +131,7 @@ export const asyncRouterMap = [
     path: '/admin',
     component: AdminLayout,
     name: 'dashboard',
+    redirect: '/admin/index',
     //alwaysShow: true, // will always show the root menu
     children: [
       {
@@ -165,7 +166,7 @@ export const asyncRouterMap = [
     },
     {
       path: 'management',
-      component: () => import('@/components/HelloWorld'),
+      component: () => import('@/views/admin/postManagement/index'),
       name: 'management',
       meta: { title: 'management', icon: 'management', noCache: true }
     },
