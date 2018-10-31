@@ -172,15 +172,21 @@ export const asyncRouterMap = [
     },
     {
       path: 'draftBox',
-      component: () => import('@/components/HelloWorld'),
+      component: () => import('@/views/admin/draftBox/index'),
       name: 'draftBox',
       meta: { title: 'draftBox', icon: 'draftBox', noCache: true }
     },
     {
       path: 'trashCan',
-      component: () => import('@/components/HelloWorld'),
+      component: () => import('@/views/admin/trashCan/index'),
       name: 'trashCan',
       meta: { title: 'trashCan', icon: 'trashCan', noCache: true }
+    },{
+      path: 'editPost',
+      hidden: true,
+      component: ()=> import('@/views/admin/editPost/index'),
+      name: 'editPost',
+      meta: {title: 'editPost', icon: 'editPost', noCache: true}
     }]
   }
 ]

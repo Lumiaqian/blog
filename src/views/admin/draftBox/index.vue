@@ -1,38 +1,6 @@
-<!-- 文章管理页面 -->
+<!-- 草稿箱 -->
 <template>
  <div>
-    <div class="form">
-       <p>标题：</p>
-       <div class="title">
-        <el-input v-model="title" size="medium" placeholder="请输入文章标题" clearable/>
-       </div>
-       <p>分类：</p>
-        <el-cascader
-        expand-trigger="hover"
-        :options="cates"
-        v-model="selectedCate"
-        change-on-select
-        @change="handleCateChange"
-        clearable>
-        </el-cascader>
-        <p>标签：</p>
-        <el-select
-        v-model="selectedTag"
-        size="medium"
-        multiple
-        filterable
-        allow-create
-        default-first-option
-        placeholder="请选择文章标签">
-        <el-option
-        v-for="item in tags"
-        :key=item.tagId
-        :label=item.tagName
-        :value=item.tagName>
-        </el-option>
-        </el-select>
-        <el-button icon="el-icon-search" type="primary" size="mini" circle @click="search"></el-button>
-     </div>
      <el-table
      v-loading="loading"
      ref="multipleTable"
@@ -133,14 +101,8 @@
           <el-button v-if="post.row.status != -1 "
           size="mini"
           type="danger"
-          @click="discard(post.row)"
+          @click="discard(post.$index,post.row)"
           >删除</el-button>
-          <el-button v-if="post.row.status != 0"
-          size="mini"
-          type="warning"
-          @click="draft(post.row)"
-          >草稿
-          </el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -155,9 +117,7 @@
 </template>
 
 <script>
-import {posts, discardPost, pubPost, draftPost, postList} from '@/api/admin/posts'
-import {getCategories} from '@/api/admin/categories'
-import {getTags} from '@/api/admin/tags'
+import {draftPosts, discardPost, pubPost} from '@/api/admin/posts'
 import {formatDate} from '@/utils/date.js'
 export default {
   data () {
@@ -166,13 +126,7 @@ export default {
       pageSize: 10,
       pageTotal: 20,
       posts: [],
-      loading: true,
-      dialogVisible: false,
-      title: '',
-      cates: [],
-      selectedCate: [],
-      tags: [],
-      selectedTag: []
+      loading: true
     }
   },
 
@@ -186,41 +140,14 @@ export default {
   computed: {},
 
   created () {
-    this.getCayegoryList()
-    this.getTagList()
     this.getPosts()
   },
 
   mounted () {},
 
   methods: {
-    getCayegoryList () {
-      getCategories().then(res => {
-        this.cates = res.data.data
-      })
-    },
-    handleCateChange () {
-      // console.log(this.selectedCate)
-    },
-    getTagList () {
-      getTags().then(res => {
-        this.tags = res.data.data
-        // console.log(this.tags)
-      })
-    },
     getPosts () {
-      this.loading = true
-      posts(this.pageNo, this.pageSize).then(res => {
-        let posts = res.data.data.list
-        this.posts = posts
-        this.pageTotal = res.data.data.total
-        this.loading = false
-      })
-    },
-    search () {
-      this.loading = true
-      let data = this.packData(this.pageNo, this.pageSize)
-      postList(data).then(res => {
+      draftPosts(this.pageNo, this.pageSize).then(res => {
         let posts = res.data.data.list
         this.posts = posts
         this.pageTotal = res.data.data.total
@@ -230,59 +157,26 @@ export default {
     handleSelectionChange () {
       console.log('多选！')
     },
-    packData (pageNo, pageSize) {
-      let cate = {
-        categoryId: null
-      }
-      let tag = {
-        tagName: null
-      }
-      let categories = new Array(this.selectedCate.length)
-      let tags = new Array(this.selectedTag.length)
-      for (let i = 0; i < this.selectedCate.length; i++) {
-        cate.categoryId = this.selectedCate[i]
-        categories[i] = cate
-      }
-      for (let i = 0; i < this.selectedTag.length; i++) {
-        tag.tagName = this.selectedTag[i]
-        console.log(tag.tagName)
-        tags[i] = tag
-      }
-      console.log(this.selectedTag)
-      console.log('选择的：' + categories + tags)
-      let data = {
-        title: this.title,
-        tags: tags,
-        categories: categories,
-        pageNo: pageNo,
-        pageSize: pageSize
-      }
-      return data
-    },
     handleCurrentChange (val) {
       console.log(`当前页: ${val}`)
       this.loading = true
-      if (this.title !== '' || this.selectedTag.length !== 0 || this.selectedCate.length !== 0) {
-        console.log(this.title + this.selectedTag + this.selectedCate)
-        console.log('搜索')
-        let data = this.packData(val, this.pageSize)
-        postList(data).then(res => {
-          let posts = res.data.data.list
-          this.posts = posts
-          this.pageTotal = res.data.data.total
-          this.loading = false
-        })
-      } else {
-        posts(val, this.pageSize).then(res => {
-          this.posts = res.data.data.list
-          this.pageNo = res.data.data.pageNum
-          this.pageSize = res.data.data.pageSize
-          this.pageTotal = res.data.data.total
-          this.loading = false
+      draftPosts(val, this.pageSize).then(res => {
+        this.posts = res.data.data.list
+        this.pageNo = res.data.data.pageNum
+        this.pageSize = res.data.data.pageSize
+        this.pageTotal = res.data.data.total
+        this.loading = false
         // console.log(this.content)
         // formatDate()
-        })
-      }
+      })
+    },
+    editPost (postId) {
+      this.$router.push({
+        path: '/admin/post/editPost',
+        query: {
+          postId: postId
+        }
+      })
     },
     edit (postId) {
       this.$router.push({
@@ -292,13 +186,12 @@ export default {
         }
       })
     },
-    discard (row) {
+    discard (index, row) {
       if (row.status === -1) {
         this.$message({
           message: '已在垃圾箱中无需重复删除！',
           type: 'error'
         })
-        return
       }
       this.$confirm('确认删除标题为：' + row.title + '的文章？')
         .then(_ => {
@@ -309,6 +202,7 @@ export default {
                 type: 'success'
               })
               row.status = -1
+              this.posts.splice(index, 1)
             } else {
               this.$message({
                 message: res.data.message,
@@ -352,48 +246,16 @@ export default {
           type: 'error'
         })
       })
-    },
-    draft (row) {
-      draftPost(row.postId).then(res => {
-        if (res.data.code === '200') {
-          this.$message({
-            message: res.data.message,
-            type: 'success'
-          })
-          row.status = 0
-          row.editDate = res.data.data.editDate
-        } else {
-          this.$message({
-            message: res.data.message,
-            type: 'error'
-          })
-        }
-      }).catch(() => {
-        this.$message({
-          message: '服务器异常！',
-          type: 'error'
-        })
-      })
     }
-
   }
 }
 
 </script>
-<style scoped rel="stylesheet/scss" lang="scss">
-.el-pagination {
+<style scoped>
+.el-table {
   margin: 10px;
 }
-.form {
-    //position: fixed;
-    display: flex;
-    flex-direction: row;
-    //justify-content: space-between;
-    align-items: center;
-    margin: 1%;
-    // width: 10%;
-}
-.el-button {
-    margin: 1%;
+.el-pagination {
+  margin: 10px;
 }
 </style>

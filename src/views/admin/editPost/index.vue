@@ -1,7 +1,7 @@
-<!-- 写文章 -->
+<!-- 编辑文章 -->
 <template>
  <div class="main-wrapper">
-    <div class="form">
+    <div class="from">
        <p>标题：</p>
        <div class="title">
         <el-input v-model="title" size="medium" placeholder="请输入文章标题" clearable/>
@@ -43,7 +43,7 @@
 <script>
 import {getCategories} from '@/api/admin/categories'
 import {getTags} from '@/api/admin/tags'
-import {save, pub} from '@/api/admin/posts'
+import {post, save, pub} from '@/api/admin/posts'
 import {getNow} from '@/utils/date'
 import { mapGetters } from 'vuex'
 export default {
@@ -70,18 +70,28 @@ export default {
   created () {
     this.getCayegoryList()
     this.getTagList()
+    this.getPost()
   },
 
   mounted () {},
 
   methods: {
+    getPost () {
+      var postId = this.$route.query.postId
+      post(postId).then(res => {
+        this.selectedTag = res.data.data.post.tags
+        this.selectedCate = res.data.data.cates
+        this.title = res.data.data.post.title
+        this.content = res.data.data.post.content
+      })
+    },
     getCayegoryList () {
       getCategories().then(res => {
         this.cates = res.data.data
       })
     },
     handleCateChange () {
-      // console.log(this.selectedCate)
+      console.log(this.selectedCate)
     },
     getTagList () {
       getTags().then(res => {
@@ -200,7 +210,7 @@ export default {
     width: 100%;
     height: 100%;
 }
-.form {
+.from {
     //position: fixed;
     display: flex;
     flex-direction: row;

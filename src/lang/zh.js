@@ -8,6 +8,7 @@ export default {
     management: '文章管理',
     draftBox: '草稿箱',
     trashCan: '垃圾箱',
+    editPost: '编辑文章',
     introduction: '简述',
     documentation: '文档',
     guide: '引导页',
