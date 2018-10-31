@@ -188,5 +188,59 @@ export const asyncRouterMap = [
       name: 'editPost',
       meta: {title: 'editPost', icon: 'editPost', noCache: true}
     }]
-  }
+  },
+  {
+    path: '/admin/tag',
+    component: AdminLayout,
+    children: [{
+      path: 'index',
+      component: () => import('@/components/HelloWorld'),
+      name: 'tag',
+      meta: {title: 'tag', icon: 'tag', noCache: true}
+    }]
+  },
+  {
+    path: '/admin/category',
+    component: AdminLayout,
+    children: [{
+      path: 'index',
+      component: () => import('@/components/HelloWorld'),
+      name: 'category',
+      meta: {title: 'category', icon: 'category', noCache: true}
+    }]
+  },
+  {
+    path: '/admin/setting',
+    component: AdminLayout,
+    name: 'setting',
+    meta: { title: 'setting', icon: 'setting', noCache: true },
+    redirect: 'noredirect',
+    children: [{
+      path: 'baseSetting',
+      component: () => import('@/components/HelloWorld'),
+      name: 'baseSetting',
+      meta: {title: 'baseSetting', icon: 'baseSetting', noCache: true}
+    },
+    {
+      path: 'aboutMe',
+      component: () => import('@/components/HelloWorld'),
+      name: 'aboutMe',
+      meta: {title: 'aboutMe', icon: 'aboutMe', noCache: true}
+    }]
+  },
+  {
+    path: '/admin/other',
+    component: AdminLayout,
+    name: 'other',
+    meta: { title: 'other', icon: 'other', noCache: true },
+    redirect: 'noredirect',
+    alwaysShow: true,
+    children: [
+    {
+      path: 'logout',
+      component: () => import('@/components/HelloWorld'),
+      name: 'logout',
+      meta: {title: 'logout', icon: 'logout', noCache: true}
+    }]
+  },
 ]
