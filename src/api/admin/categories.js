@@ -13,3 +13,19 @@ export function getPosts (categoryId) {
       method: 'get'
     })
 }
+export function getCates (pageNo,pageSize) {
+  return request({
+    url: '/admin/cates/alist',
+    method: 'get',
+    params:{
+      pageNo: pageNo,
+      pageSize: pageSize
+    }
+  })
+}
+export function getFatherCates(){
+  return request({
+    url: '/admin/cates/flist',
+    method: 'get'
+  })
+}

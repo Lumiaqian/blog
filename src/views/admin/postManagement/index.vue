@@ -167,7 +167,6 @@ export default {
       pageTotal: 20,
       posts: [],
       loading: true,
-      dialogVisible: false,
       title: '',
       cates: [],
       selectedCate: [],
@@ -382,7 +381,7 @@ export default {
 </script>
 <style scoped rel="stylesheet/scss" lang="scss">
 .el-pagination {
-  margin: 10px;
+  margin: 1%;
 }
 .form {
     //position: fixed;

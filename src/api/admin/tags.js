@@ -13,3 +13,39 @@ export function getPosts (tagId) {
     method: 'get'
   })
 }
+export function getTagList (pageNo, pageSize) {
+  return request({
+    url: '/admin/tags/alist',
+    method: 'get',
+    params: {
+      pageNo: pageNo,
+      pageSize: pageSize
+    }
+  })
+}
+export function addTag (tag) {
+  return request({
+    url: '/admin/tags/add',
+    method: 'post',
+    data: tag
+  })
+}
+export function updateTag (tag) {
+  return request({
+    url: '/admin/tags/tag',
+    method: 'put',
+    data: tag
+  })
+}
+export function discardTag (tagId) {
+  return request({
+    url: '/admin/tags/discard/' + tagId,
+    method: 'delete'
+  })
+}
+export function recoveryTag (tagId) {
+  return request({
+    url: '/admin/tags/recovery/' + tagId,
+    method: 'put'
+  })
+}

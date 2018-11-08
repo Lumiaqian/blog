@@ -194,7 +194,7 @@ export const asyncRouterMap = [
     component: AdminLayout,
     children: [{
       path: 'index',
-      component: () => import('@/components/HelloWorld'),
+      component: () => import('@/views/admin/tag/index'),
       name: 'tag',
       meta: {title: 'tag', icon: 'tag', noCache: true}
     }]
@@ -204,7 +204,7 @@ export const asyncRouterMap = [
     component: AdminLayout,
     children: [{
       path: 'index',
-      component: () => import('@/components/HelloWorld'),
+      component: () => import('@/views/admin/cate/index'),
       name: 'category',
       meta: {title: 'category', icon: 'category', noCache: true}
     }]
