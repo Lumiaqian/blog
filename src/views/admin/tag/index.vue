@@ -243,6 +243,7 @@ export default {
                 type: 'success'
               })
               row.status = 0
+              row.editDate = new Date().getTime()
             } else {
               this.$message({
                 message: res.data.message,
@@ -263,6 +264,7 @@ export default {
                 type: 'success'
               })
               row.status = 1
+              row.editDate = new Date().getTime()
             } else {
               this.$message({
                 message: res.data.message,

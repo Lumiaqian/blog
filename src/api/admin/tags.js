@@ -25,7 +25,7 @@ export function getTagList (pageNo, pageSize) {
 }
 export function addTag (tag) {
   return request({
-    url: '/admin/tags/add',
+    url: '/admin/tags/tag',
     method: 'post',
     data: tag
   })
@@ -39,13 +39,13 @@ export function updateTag (tag) {
 }
 export function discardTag (tagId) {
   return request({
-    url: '/admin/tags/discard/' + tagId,
+    url: '/admin/tags/tag/' + tagId,
     method: 'delete'
   })
 }
 export function recoveryTag (tagId) {
   return request({
-    url: '/admin/tags/recovery/' + tagId,
+    url: '/admin/tags/tag/' + tagId,
     method: 'put'
   })
 }

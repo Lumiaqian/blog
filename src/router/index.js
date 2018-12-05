@@ -25,8 +25,7 @@ export const constantRouterMap = [
     name: 'login',
     component: Login,
     hidden: true
-  }
-  ,
+  },
   {
     path: '',
     name: 'index',
@@ -38,50 +37,43 @@ export const constantRouterMap = [
         path: 'home',
         component: Home,
         hidden: true
-      }
-      ,
+      },
       {
         path: '/posts',
         name: 'posts',
         component: Post,
         hidden: true
-      }
-      ,
+      },
       {
         path: '/about',
         name: 'about',
         component: About,
         hidden: true
-      }
-      ,
+      },
       {
         path: '/tags',
         name: 'tags',
         component: Tag,
         hidden: true
-      }
-      ,
+      },
       {
         path: '/tags/:tag',
         name: 'TagPosts',
         component: TagPosts,
         hidden: true
-      }
-      ,
+      },
       {
         path: '/categories',
         name: 'categories',
         component: Category,
         hidden: true
-      }
-      ,
+      },
       {
         path: '/categories/:category',
         name: 'CatePosts',
         component: CatePosts,
         hidden: true
-      }
-      ,
+      },
       {
         path: '/archives',
         name: 'archive',
@@ -103,12 +95,13 @@ const router = new Router({
   routes: constantRouterMap
 })
 router.beforeEach((to, from, next) => {
-  if (to.fullPath.indexOf('/admin') !== -1){
-    store.commit('IS_ADMIN_WRAP',true)
-  }else{
-    store.commit('IS_ADMIN_WRAP',false)
+  if (to.fullPath.indexOf('/admin') !== -1) {
+    store.commit('IS_ADMIN_WRAP', true)
+  } else {
+    store.commit('IS_ADMIN_WRAP', false)
   }
   if (to.meta.requireAuth) {
+    // eslint-disable-next-line no-undef
     if (!getAccessToken()) {
       store.commit('IS_LOGIN', false)
     }
@@ -132,7 +125,7 @@ export const asyncRouterMap = [
     component: AdminLayout,
     name: 'dashboard',
     redirect: '/admin/index',
-    //alwaysShow: true, // will always show the root menu
+    // alwaysShow: true, // will always show the root menu
     children: [
       {
         path: 'index',
@@ -181,10 +174,10 @@ export const asyncRouterMap = [
       component: () => import('@/views/admin/trashCan/index'),
       name: 'trashCan',
       meta: { title: 'trashCan', icon: 'trashCan', noCache: true }
-    },{
+    }, {
       path: 'editPost',
       hidden: true,
-      component: ()=> import('@/views/admin/editPost/index'),
+      component: () => import('@/views/admin/editPost/index'),
       name: 'editPost',
       meta: {title: 'editPost', icon: 'editPost', noCache: true}
     }]
@@ -236,11 +229,11 @@ export const asyncRouterMap = [
     redirect: 'noredirect',
     alwaysShow: true,
     children: [
-    {
-      path: 'logout',
-      component: () => import('@/components/HelloWorld'),
-      name: 'logout',
-      meta: {title: 'logout', icon: 'logout', noCache: true}
-    }]
-  },
+      {
+        path: 'logout',
+        component: () => import('@/components/HelloWorld'),
+        name: 'logout',
+        meta: {title: 'logout', icon: 'logout', noCache: true}
+      }]
+  }
 ]

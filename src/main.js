@@ -14,7 +14,7 @@ import i18n from './lang' // Internationalization
 import '@/styles/index.scss'
 
 Vue.config.productionTip = false
-Vue.use(ElementUI,{
+Vue.use(ElementUI, {
   // size: 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })

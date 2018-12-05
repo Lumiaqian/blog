@@ -14,7 +14,7 @@ export function pub (data) {
     data: data
   })
 }
-export function postList(data) {
+export function postList (data) {
   return request({
     url: '/admin/posts/list',
     method: 'post',
@@ -37,7 +37,7 @@ export function posts (pageNo, pageSize) {
     }
   })
 }
-export function draftPosts (pageNo,pageSize) {
+export function draftPosts (pageNo, pageSize) {
   return request({
     url: '/admin/posts/draftPosts',
     method: 'get',
@@ -47,7 +47,7 @@ export function draftPosts (pageNo,pageSize) {
     }
   })
 }
-export function deletedPosts(pageNo,pageSize) {
+export function deletedPosts (pageNo, pageSize) {
   return request({
     url: '/admin/posts/deletedPosts',
     method: 'get',

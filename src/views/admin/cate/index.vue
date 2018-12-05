@@ -117,11 +117,41 @@
     :page-size=pageSize
     :total=pageTotal>
     </el-pagination>
+    <el-dialog title="编辑分类" :visible.sync="editDialogVisible" width="25%">
+         <el-form :model="cate">
+             <el-form-item label="分类名称" :label-width="formLabelWidth">
+                 <el-input v-model="cate.cateName"></el-input>
+            </el-form-item>
+            <el-form-item label="父分类" :label-width="formLabelWidth">
+                <el-select v-model="cate.fatherId" placeholder="请选择" clearable>
+                    <el-option
+                    v-for="item in fatherCates"
+                    :key="item.categoryId"
+                    :label="item.categoryName"
+                    :value="item.categoryId">
+                    </el-option>
+                </el-select>
+            </el-form-item>
+            <el-form-item label="保存时间" :label-width="formLabelWidth">
+                <el-date-picker
+                v-model="cate.saveDate"
+                type="datetime"
+                placeholder="选择日期时间"
+                align="right"
+                :picker-options="pickerOptions">
+                </el-date-picker>
+            </el-form-item>
+        </el-form>
+        <div slot="footer" class="dialog-footer">
+            <el-button @click="editDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="editCate">确 定</el-button>
+        </div>
+     </el-dialog>
  </div>
 </template>
 
 <script>
-import {getCates, getFatherCates} from '@/api/admin/categories'
+import {getCates, getFatherCates, saveCate, updateCate, discardCate, recoveryCate} from '@/api/admin/categories'
 import {formatDate} from '@/utils/date.js'
 export default {
   data () {
@@ -142,6 +172,7 @@ export default {
         editDate: null,
         status: 0
       },
+      status: 0,
       formLabelWidth: '100px',
       pickerOptions: {
         shortcuts: [{
@@ -211,19 +242,88 @@ export default {
 
     },
     edit (row, index) {
-
+      this.cate = row
+      this.editDialogVisible = true
+      console.log(JSON.stringify(this.cate))
+    },
+    editCate () {
+      updateCate(this.cate).then(res => {
+        if (res.data.code === '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+          this.getCates()
+        } else {
+          this.$message({
+            message: res.data.message,
+            type: 'error'
+          })
+        }
+        this.editDialogVisible = false
+      })
     },
     rev (row) {
-
+      this.$confirm('确认恢复名称为：' + row.cateName + '的分类？')
+        .then(_ => {
+          recoveryCate(row.cateId).then(res => {
+            if (res.data.code === '200') {
+              this.$message({
+                message: res.data.message,
+                type: 'success'
+              })
+              row.status = 0
+              row.editDate = new Date().getTime()
+            } else {
+              this.$message({
+                message: res.data.message,
+                type: 'error'
+              })
+            }
+          })
+        })
+        .catch(_ => {})
     },
     discard (row) {
-
+      this.$confirm('确认删除名称为：' + row.cateName + '的分类？')
+        .then(_ => {
+          discardCate(row.cateId).then(res => {
+            if (res.data.code === '200') {
+              this.$message({
+                message: res.data.message,
+                type: 'success'
+              })
+              row.status = 1
+              row.editDate = new Date().getTime()
+            } else {
+              this.$message({
+                message: res.data.message,
+                type: 'error'
+              })
+            }
+          })
+        })
+        .catch(_ => {})
     },
     handleCurrentChange (val) {
 
     },
     addCate () {
-      this.dialogVisible = false
+      saveCate(this.cate).then(res => {
+        if (res.data.code === '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+          this.getCates()
+        } else {
+          this.$message({
+            message: res.data.message,
+            type: 'error'
+          })
+        }
+        this.dialogVisible = false
+      })
     }
   }
 }
