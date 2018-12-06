@@ -53,7 +53,6 @@ export default {
       content: '',
       cates: [],
       selectedCate: [],
-      value4: '',
       tags: [],
       selectedTag: []
     }
@@ -217,5 +216,8 @@ export default {
 }
 .el-button {
     margin: 1%;
+}
+.upload-md {
+  margin-left: 15%
 }
 </style>

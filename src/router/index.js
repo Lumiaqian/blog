@@ -158,6 +158,12 @@ export const asyncRouterMap = [
       meta: { title: 'write', icon: 'write', noCache: true }
     },
     {
+      path: 'uploadPost',
+      component: () => import('@/views/admin/uploadPost/index'),
+      name: 'uploadPost',
+      meta: { title: 'uploadPost', icon: 'upload', noCache: true }
+    },
+    {
       path: 'management',
       component: () => import('@/views/admin/postManagement/index'),
       name: 'management',

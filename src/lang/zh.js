@@ -5,6 +5,7 @@ export default {
     admin: '首页',
     post: '文章',
     write: '写文章',
+    uploadPost: '导入文章',
     management: '文章管理',
     draftBox: '草稿箱',
     trashCan: '垃圾箱',
