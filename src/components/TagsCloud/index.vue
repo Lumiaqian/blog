@@ -15,6 +15,7 @@ export default {
   props: {
     tags: {
       type: Array,
+      // eslint-disable-next-line vue/require-valid-default-prop
       default: []
     },
     tagsNum: {

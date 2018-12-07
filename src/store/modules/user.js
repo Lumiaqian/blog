@@ -1,5 +1,5 @@
 import { loginByUsername, logout, getUserInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, setUserId } from '@/utils/auth'
 
 const user = {
   state: {
@@ -21,7 +21,7 @@ const user = {
   mutations: {
     SET_USERNAME: (state, username) => {
       state.username = username
-      localStorage.setItem('username',username)
+      localStorage.setItem('username', username)
     },
     SET_CODE: (state, code) => {
       state.code = code
@@ -53,19 +53,19 @@ const user = {
   },
 
   actions: {
-    //存储username
-    setUserName({ commit }, username){
-      commit('SET_USERNAME',username)
+    // 存储username
+    setUserName ({ commit }, username) {
+      commit('SET_USERNAME', username)
     },
     // 用户名登录
-    LoginByUsername({ commit }, userInfo) {
+    LoginByUsername ({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
           // const data = response.data
           const headers = response.headers
           console.log(JSON.stringify(headers))
-          commit('SET_TOKEN',headers.authorization)
+          commit('SET_TOKEN', headers.authorization)
           setToken(headers.authorization)
           resolve()
         }).catch(error => {
@@ -75,16 +75,17 @@ const user = {
     },
 
     // 获取用户信息
-    GetUserInfo({ commit, state }) {
+    GetUserInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
         let username = ''
-        if(state.username === null || state.username === ''){
+        if (state.username === null || state.username === '') {
           username = localStorage.getItem('username')
-        }else{
+        } else {
           username = state.username
         }
         getUserInfo(username).then(response => {
           if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
+            // eslint-disable-next-line prefer-promise-reject-errors
             reject('error')
           }
           const data = response.data.data
@@ -92,19 +93,24 @@ const user = {
             let temp = data.roles
             console.log(temp)
             let roles = new Array(temp.length)
-            for(let i = 0; i < temp.length; i++){
+            for (let i = 0; i < temp.length; i++) {
               roles[i] = temp[i].roleName.toLowerCase()
             }
             console.log(roles)
             commit('SET_ROLES', roles)
           } else {
+            // eslint-disable-next-line prefer-promise-reject-errors
             reject('getInfo: roles must be a non-null array !')
           }
 
           commit('SET_NAME', data.userName)
-          commit('SET_AVATAR', data.avatar)
-          commit('SET_INTRODUCTION', data.introduction)
-          commit('SET_MOTTO',data.motto)
+          commit('SET_USERNAME', data.userId)
+          setUserId(data.userId)
+          if (data.setting !== null) {
+            commit('SET_AVATAR', data.setting.avatar)
+            commit('SET_INTRODUCTION', data.setting.introduction)
+            commit('SET_MOTTO', data.setting.motto)
+          }
           resolve(response)
         }).catch(error => {
           reject(error)
@@ -127,7 +133,7 @@ const user = {
     // },
 
     // 登出
-    LogOut({ commit, state }) {
+    LogOut ({ commit, state }) {
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')
@@ -141,13 +147,13 @@ const user = {
     },
 
     // 前端 登出
-    FedLogOut({ commit }) {
+    FedLogOut ({ commit }) {
       return new Promise(resolve => {
         commit('SET_TOKEN', '')
         removeToken()
         resolve()
       })
-    },
+    }
 
     // 动态修改权限
     // ChangeRoles({ commit }, role) {

@@ -12,6 +12,7 @@
       :on-success="handleSuccess"
       drag
       multiple
+      :headers="myHeader"
       >
         <i class="el-icon-upload"/>
         <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
@@ -24,16 +25,28 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
+import { getToken, setToken, removeToken } from '@/utils/auth'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      fileList: []
+      files: this.fileList
     }
   },
 
   components: {},
 
-  computed: {},
+  computed: {
+    myHeader () {
+      return {
+        'Authorization': getToken()
+      }
+    },
+    ...mapGetters([
+      'fileList'
+    ])
+  },
 
   created () {},
 
@@ -45,18 +58,21 @@ export default {
     },
     // eslint-disable-next-line handle-callback-err
     handleError (err, file, fileList) {
-      console.log(JSON.stringify(file))
+      // console.log(JSON.stringify(err))
       this.$message({
         message: file.name + '上传失败！',
         type: 'error'
       })
+      this.fileList = fileList
     },
     handleSuccess (response, file, fileList) {
-      console.log(JSON.stringify(file))
+      // console.log(JSON.stringify(file))
+      // console.log(getToken())
       this.$message({
         message: file.name + '上传成功！',
         type: 'success'
       })
+      this.$store.dispatch('setFileList', fileList)
     }
   }
 }

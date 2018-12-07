@@ -216,7 +216,7 @@ export const asyncRouterMap = [
     redirect: 'noredirect',
     children: [{
       path: 'baseSetting',
-      component: () => import('@/components/HelloWorld'),
+      component: () => import('@/views/admin/setting/index'),
       name: 'baseSetting',
       meta: {title: 'baseSetting', icon: 'baseSetting', noCache: true}
     },
