@@ -38,11 +38,12 @@
         </div>
      </el-dialog>
     <el-table
+    class="table"
      v-loading="loading"
      ref="multipleTable"
      :data="cates"
      tooltip-effect="dark"
-     style="width: 100%"
+     style="width: 90%"
      :row-class-name="tableRowClassName"
      @selection-change="handleSelectionChange"
      >
@@ -332,6 +333,7 @@ export default {
 <style rel="stylesheet/scss" lang="scss">
 .el-pagination {
   margin: 1%;
+  margin-left: 3%
 }
 .el-table .warning-row {
     background: oldlace;
@@ -341,6 +343,10 @@ export default {
     background: #f0f9eb;
   }
 .addCate{
-    margin: 1%
+    margin: 1%;
+    margin-left: 3%
+}
+.table{
+  margin-left: 3%;
 }
 </style>

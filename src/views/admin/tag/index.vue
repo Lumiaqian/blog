@@ -28,11 +28,12 @@
         </div>
      </el-dialog>
      <el-table
+     class="table"
      v-loading="loading"
      ref="multipleTable"
      :data="tags"
      tooltip-effect="dark"
-     style="width: 100%"
+     style="width: 90%"
      @selection-change="handleSelectionChange">
      <el-table-column
        type="selection"
@@ -300,8 +301,13 @@ export default {
 <style scoped rel="stylesheet/scss" lang="scss">
 .el-pagination {
   margin: 1%;
+  margin: 3%;
 }
 .addTag {
-    margin: 1%;
+   margin: 1%;
+   margin-left: 3%;
+}
+.table {
+   margin-left: 3%;
 }
 </style>

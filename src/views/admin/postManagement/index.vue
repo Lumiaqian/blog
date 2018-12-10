@@ -34,11 +34,12 @@
         <el-button icon="el-icon-search" type="primary" size="mini" circle @click="search"></el-button>
      </div>
      <el-table
+     class="table"
      v-loading="loading"
      ref="multipleTable"
      :data="posts"
      tooltip-effect="dark"
-     style="width: 100%"
+     style="width: 90%"
      @selection-change="handleSelectionChange">
      <el-table-column
        type="selection"
@@ -382,6 +383,7 @@ export default {
 <style scoped rel="stylesheet/scss" lang="scss">
 .el-pagination {
   margin: 1%;
+  margin-left: 3%;
 }
 .form {
     //position: fixed;
@@ -391,8 +393,12 @@ export default {
     align-items: center;
     margin: 1%;
     // width: 10%;
+    margin-left: 25%;
 }
 .el-button {
     margin: 1%;
+}
+.table {
+  margin-left: 3%;
 }
 </style>

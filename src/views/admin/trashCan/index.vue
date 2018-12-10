@@ -2,11 +2,12 @@
 <template>
  <div>
      <el-table
+     class="table"
      v-loading="loading"
      ref="multipleTable"
      :data="posts"
      tooltip-effect="dark"
-     style="width: 100%"
+     style="width: 90%"
      @selection-change="handleSelectionChange">
      <el-table-column
        type="selection"
@@ -202,9 +203,13 @@ export default {
 </script>
 <style scoped>
 .el-table {
-  margin: 10px;
+  margin: 1%;
 }
 .el-pagination {
-  margin: 10px;
+  margin: 1%;
+  margin-left: 3%;
+}
+.table {
+  margin-left: 3%;
 }
 </style>
