@@ -1,12 +1,16 @@
 <!-- 写文章 -->
 <template>
  <div class="main-wrapper">
+    <div class="md">
+        <mavon-editor v-model="content" />
+    </div>
     <div class="form">
-       <p>标题：</p>
        <div class="title">
-        <el-input v-model="title" size="medium" placeholder="请输入文章标题" clearable/>
+         <p>标题：</p>
+         <el-input v-model="title" style="width:80%" placeholder="请输入文章标题" clearable/>
        </div>
-       <p>分类：</p>
+       <div class="category">
+         <p>分类：</p>
         <el-cascader
         expand-trigger="hover"
         :options="cates"
@@ -15,27 +19,29 @@
         @change="handleCateChange"
         clearable>
         </el-cascader>
-        <p>标签：</p>
-        <el-select
-        v-model="selectedTag"
-        size="medium"
-        multiple
-        filterable
-        allow-create
-        default-first-option
-        placeholder="请选择文章标签">
-        <el-option
-        v-for="item in tags"
-        :key=item.tagId
-        :label=item.tagName
-        :value=item.tagName>
-        </el-option>
+       </div>
+       <div class="tag">
+          <p>标签：</p>
+           <el-select
+           v-model="selectedTag"
+           size="medium"
+           multiple
+           filterable
+           allow-create
+           default-first-option
+           placeholder="请选择文章标签">
+           <el-option
+           v-for="item in tags"
+           :key=item.tagId
+           :label=item.tagName
+           :value=item.tagName>
+           </el-option>
         </el-select>
-        <el-button type="primary" size="mini" round @click="save">保存</el-button>
-        <el-button type="primary" size="mini" round @click="pub">发布</el-button>
-    </div>
-    <div>
-        <mavon-editor class="md" v-model="content" />
+       </div>
+       <div class="operation">
+         <el-button type="primary" size="mini" round @click="save">保存</el-button>
+         <el-button type="primary" size="mini" round @click="pub">发布</el-button>
+       </div>
     </div>
  </div>
 </template>
@@ -195,26 +201,33 @@ export default {
 </script>
 <style scoped rel="stylesheet/scss" lang="scss">
 .main-wrapper {
-    position: relative;
+    // position: relative;
     width: 100%;
     height: 100%;
-}
-.form {
-    //position: fixed;
     display: flex;
     flex-direction: row;
+    align-items: center;
+}
+.form {
+    width: 30%;
+    //position: fixed;
+    display: flex;
+    flex-direction: column;
     //justify-content: space-between;
     align-items: center;
-    margin: 1%;
+    // margin: 1%;
     // width: 10%;
 }
 .md {
     margin: 1%;
+    width: 70%;
+
 }
-.title {
+.title,.category,.tag,.operation {
     // width: 100px;
-}
-.el-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin: 1%;
 }
 .upload-md {
