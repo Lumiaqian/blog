@@ -3,20 +3,41 @@
  <div class="main_wrapper">
    <div class="main">
     <div class="avatar">
-       <p>头像：</p>
-       <pan-thumb :image=image v-if="image!=''"></pan-thumb>
-       <el-button type="primary" round class="setAvatar" @click="toggleShow">设置头像</el-button>
+       <p>{{$t('setting.avatar')}}</p>
+       <pan-thumb :image=image v-if="image!=''" class="image"></pan-thumb>
+       <el-button type="primary" round class="setAvatar" @click="toggleShow" size="medium">设置头像</el-button>
        <my-upload field="img"
         @crop-success="cropSuccess"
         @crop-upload-success="cropUploadSuccess"
         @crop-upload-fail="cropUploadFail"
         v-model="show"
-        :width="300"
-        :height="300"
+        :width="150"
+        :height="150"
         url="http://localhost:8080/avatar"
         :headers="myHeader"
         :params="myParam"
         img-format="png"></my-upload>
+    </div>
+    <div class="motto">
+      <p>{{$t('setting.motto')}}</p>
+      <el-input
+      class="mottoInput"
+      placeholder="请输入内容"
+      v-model="myMotto"
+      clearable>
+      </el-input>
+      <el-button type="primary" round class="setMotto" size="medium" @click="setMotto">设置格言</el-button>
+    </div>
+    <div class="introduction">
+      <p>{{$t('setting.introduction')}}</p>
+      <el-input
+      class="introductionInput"
+      type="textarea"
+      placeholder="请输入内容"
+      v-model="myIntroduction"
+      clearable>
+      </el-input>
+      <el-button type="primary" round class="setIntroduction" size="medium" @click="setIntroduction">设置简介</el-button>
     </div>
    </div>
  </div>
@@ -29,14 +50,15 @@ import { getToken, setToken, removeToken, getUserId } from '@/utils/auth'
 // eslint-disable-next-line no-unused-vars
 import { mapGetters } from 'vuex'
 import myUpload from 'vue-image-crop-upload'
+// eslint-disable-next-line no-unused-vars
+import {updateSetting} from '@/api/admin/setting'
 export default {
   data () {
     return {
       image: '',
       show: false,
-      params: {
-        id: this.userId
-      }
+      myMotto: '',
+      myIntroduction: ''
     }
   },
 
@@ -54,9 +76,18 @@ export default {
       return {
         userId: getUserId()
       }
-    }
+    },
+    ...mapGetters([
+      'avatar',
+      'motto',
+      'introduction'
+    ])
   },
-  created () {},
+  created () {
+    this.image = this.avatar
+    this.myMotto = this.motto
+    this.myIntroduction = this.introduction
+  },
 
   mounted () {},
 
@@ -73,6 +104,7 @@ export default {
     cropUploadSuccess (jsonData, field) {
       console.log('-------- upload success --------')
       console.log(jsonData)
+      this.$store.dispatch('setSetting', jsonData.data)
       console.log('field: ' + field)
     },
 
@@ -80,6 +112,34 @@ export default {
       console.log('-------- upload fail --------')
       console.log(status)
       console.log('field: ' + field)
+    },
+    setMotto () {
+      let data = {
+        motto: this.myMotto,
+        userId: getUserId()
+      }
+      updateSetting(data).then(res => {
+        if (res.data.code === '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+        }
+      })
+    },
+    setIntroduction () {
+      let data = {
+        introduction: this.myIntroduction,
+        userId: getUserId()
+      }
+      updateSetting(data).then(res => {
+        if (res.data.code === '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+        }
+      })
     }
   }
 }
@@ -96,13 +156,24 @@ export default {
   flex-direction: column;
   //align-items: center;
 }
-.avatar {
+.avatar,.motto,.introduction {
   display: flex;
   flex-direction: row;
-  margin: 5%;
+  align-items: center;
+  margin: 1%;
   margin-left: 25%;
 }
+.image{
+  margin-left: 5%;
+}
 .setAvatar{
+  margin-left: 5%;
+}
+.mottoInput,.introductionInput {
+  width: 200px;
+  margin-left: 1%
+}
+.setMotto,.setIntroduction {
   margin-left: 5%;
 }
 </style>

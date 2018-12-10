@@ -107,7 +107,7 @@ const user = {
           commit('SET_USERNAME', data.userId)
           setUserId(data.userId)
           if (data.setting !== null) {
-            commit('SET_AVATAR', data.setting.avatar)
+            commit('SET_AVATAR', 'data:image/png;base64,' + data.setting.avatar)
             commit('SET_INTRODUCTION', data.setting.introduction)
             commit('SET_MOTTO', data.setting.motto)
           }
@@ -153,8 +153,13 @@ const user = {
         removeToken()
         resolve()
       })
+    },
+    // 设置setting
+    setSetting ({ commit }, setting) {
+      commit('SET_AVATAR', 'data:image/png;base64,' + setting.avatar)
+      commit('SET_INTRODUCTION', setting.introduction)
+      commit('SET_MOTTO', setting.motto)
     }
-
     // 动态修改权限
     // ChangeRoles({ commit }, role) {
     //   return new Promise(resolve => {
