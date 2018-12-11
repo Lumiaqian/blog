@@ -256,7 +256,7 @@ export default {
   margin-left: 5%;
 }
 .setAvatar{
-  margin-left: 7%;
+  margin-left: 6%;
 }
 .mottoInput,.introductionInput,.weiboInput,.QQInput,.emailInput {
   width: 200px;
@@ -267,7 +267,7 @@ export default {
   margin-left: 2%
 }
 .setMotto,.setIntroduction {
-  margin-left: 5%;
+  margin-left: 4%;
 }
 .setSocial {
   margin-left: 4%;
