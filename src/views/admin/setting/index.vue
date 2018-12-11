@@ -5,7 +5,7 @@
     <div class="avatar">
        <p>{{$t('setting.avatar')}}</p>
        <pan-thumb :image=image v-if="image!=''" class="image"></pan-thumb>
-       <el-button type="primary" round class="setAvatar" @click="toggleShow" size="medium">设置头像</el-button>
+       <el-button type="primary" round class="setAvatar" @click="toggleShow" size="medium">设置{{$t('setting.avatar')}}</el-button>
        <my-upload field="img"
         @crop-success="cropSuccess"
         @crop-upload-success="cropUploadSuccess"
@@ -26,7 +26,7 @@
       v-model="myMotto"
       clearable>
       </el-input>
-      <el-button type="primary" round class="setMotto" size="medium" @click="setMotto">设置格言</el-button>
+      <el-button type="primary" round class="setMotto" size="medium" @click="setMotto">设置{{$t('setting.motto')}}</el-button>
     </div>
     <div class="introduction">
       <p>{{$t('setting.introduction')}}</p>
@@ -37,7 +37,50 @@
       v-model="myIntroduction"
       clearable>
       </el-input>
-      <el-button type="primary" round class="setIntroduction" size="medium" @click="setIntroduction">设置简介</el-button>
+      <el-button type="primary" round class="setIntroduction" size="medium" @click="setIntroduction">设置{{$t('setting.introduction')}}</el-button>
+    </div>
+    <div class="weibo">
+      <p>{{$t('setting.weibo')}}</p>
+      <el-input
+      class="weiboInput"
+      type="url"
+      placeholder="请输入内容"
+      v-model="myWeibo"
+      clearable>
+      </el-input>
+      <el-button type="primary" round class="setSocial" size="medium" @click="setSocial('weibo')">设置{{$t('setting.weibo')}}</el-button>
+    </div>
+    <div class="QQ">
+      <p>{{$t('setting.QQ')}}</p>
+      <el-input
+      class="QQInput"
+      placeholder="请输入内容"
+      v-model="myQQ"
+      clearable>
+      </el-input>
+      <el-button type="primary" round class="setSocial" size="medium" @click="setSocial('QQ')">设置{{$t('setting.QQ')}}</el-button>
+    </div>
+    <div class="github">
+      <p>{{$t('setting.github')}}</p>
+      <el-input
+      class="githubInput"
+      type="url"
+      placeholder="请输入内容"
+      v-model="myGithub"
+      clearable>
+      </el-input>
+      <el-button type="primary" round class="setSocial" size="medium" @click="setSocial('github')">设置{{$t('setting.github')}}</el-button>
+    </div>
+    <div class="email">
+      <p>{{$t('setting.email')}}</p>
+      <el-input
+      class="emailInput"
+      type="email"
+      placeholder="请输入内容"
+      v-model="myEmail"
+      clearable>
+      </el-input>
+      <el-button type="primary" round class="setSocial" size="medium" @click="setSocial('email')">设置{{$t('setting.email')}}</el-button>
     </div>
    </div>
  </div>
@@ -51,14 +94,18 @@ import { getToken, setToken, removeToken, getUserId } from '@/utils/auth'
 import { mapGetters } from 'vuex'
 import myUpload from 'vue-image-crop-upload'
 // eslint-disable-next-line no-unused-vars
-import {updateSetting} from '@/api/admin/setting'
+import {updateSetting, updateSocial} from '@/api/admin/setting'
 export default {
   data () {
     return {
       image: '',
       show: false,
       myMotto: '',
-      myIntroduction: ''
+      myIntroduction: '',
+      myWeibo: '',
+      myQQ: '',
+      myGithub: '',
+      myEmail: ''
     }
   },
 
@@ -80,13 +127,21 @@ export default {
     ...mapGetters([
       'avatar',
       'motto',
-      'introduction'
+      'introduction',
+      'weibo',
+      'QQ',
+      'github',
+      'email'
     ])
   },
   created () {
     this.image = this.avatar
     this.myMotto = this.motto
     this.myIntroduction = this.introduction
+    this.myWeibo = this.weibo
+    this.myGithub = this.github
+    this.myQQ = this.QQ
+    this.myEmail = this.email
   },
 
   mounted () {},
@@ -140,6 +195,40 @@ export default {
           })
         }
       })
+    },
+    setSocial (data) {
+      let user = {
+      }
+      if (data === 'weibo') {
+        user = {
+          weibo: this.myWeibo,
+          userId: getUserId()
+        }
+      } else if (data === 'QQ') {
+        user = {
+          QQ: this.myQQ,
+          userId: getUserId()
+        }
+      } else if (data === 'github') {
+        user = {
+          github: this.myGithub,
+          userId: getUserId()
+        }
+      } else if (data === 'email') {
+        user = {
+          email: this.myEmail,
+          userId: getUserId()
+        }
+      }
+      console.log(user)
+      updateSocial(user).then(res => {
+        if (res.data.code === '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+        }
+      })
     }
   }
 }
@@ -156,7 +245,7 @@ export default {
   flex-direction: column;
   //align-items: center;
 }
-.avatar,.motto,.introduction {
+.avatar,.motto,.introduction,.weibo,.QQ,.github,.email {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -167,13 +256,20 @@ export default {
   margin-left: 5%;
 }
 .setAvatar{
-  margin-left: 5%;
+  margin-left: 7%;
 }
-.mottoInput,.introductionInput {
+.mottoInput,.introductionInput,.weiboInput,.QQInput,.emailInput {
   width: 200px;
-  margin-left: 1%
+  margin-left: 3%
+}
+.githubInput {
+  width: 200px;
+  margin-left: 2%
 }
 .setMotto,.setIntroduction {
   margin-left: 5%;
+}
+.setSocial {
+  margin-left: 4%;
 }
 </style>

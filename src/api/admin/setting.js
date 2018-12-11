@@ -7,3 +7,10 @@ export function updateSetting (data) {
     data: data
   })
 }
+export function updateSocial (user) {
+  return request({
+    url: 'admin/social',
+    method: 'post',
+    data: user
+  })
+}

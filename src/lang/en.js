@@ -43,6 +43,10 @@ export default {
   setting: {
     motto: 'Motto',
     avatar: 'Avatar',
-    introduction: 'Introduction'
+    introduction: 'Introduction',
+    weibo: 'WeiBo',
+    QQ: 'QQ',
+    github: 'GitHub',
+    email: 'Email'
   }
 }

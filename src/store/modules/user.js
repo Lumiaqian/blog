@@ -11,11 +11,12 @@ const user = {
     avatar: '',
     introduction: '',
     roles: [],
-    setting: {
-      articlePlatform: []
-    },
     username: '',
-    motto: ''
+    motto: '',
+    weibo: '',
+    QQ: '',
+    github: '',
+    email: ''
   },
 
   mutations: {
@@ -32,9 +33,6 @@ const user = {
     SET_INTRODUCTION: (state, introduction) => {
       state.introduction = introduction
     },
-    SET_SETTING: (state, setting) => {
-      state.setting = setting
-    },
     SET_STATUS: (state, status) => {
       state.status = status
     },
@@ -49,6 +47,18 @@ const user = {
     },
     SET_MOTTO: (state, motto) => {
       state.motto = motto
+    },
+    SET_WEIBO: (state, weibo) => {
+      state.weibo = weibo
+    },
+    SET_QQ: (state, QQ) => {
+      state.QQ = QQ
+    },
+    SET_GITHUB: (state, github) => {
+      state.github = github
+    },
+    SET_EMAIL: (state, email) => {
+      state.email = email
     }
   },
 
@@ -105,6 +115,10 @@ const user = {
 
           commit('SET_NAME', data.userName)
           commit('SET_USERNAME', data.userId)
+          commit('SET_QQ', data.QQ)
+          commit('SET_WEIBO', data.weibo)
+          commit('SET_GITHUB', data.github)
+          commit('SET_EMAIL', data.email)
           setUserId(data.userId)
           if (data.setting !== null) {
             commit('SET_AVATAR', 'data:image/png;base64,' + data.setting.avatar)
@@ -159,6 +173,12 @@ const user = {
       commit('SET_AVATAR', 'data:image/png;base64,' + setting.avatar)
       commit('SET_INTRODUCTION', setting.introduction)
       commit('SET_MOTTO', setting.motto)
+    },
+    // 设置social
+    setSocial ({ commit }, user) {
+      commit('SET_QQ', user.QQ)
+      commit('SET_WEIBO', user.weibo)
+      commit('SET_GITHUB', user.github)
     }
     // 动态修改权限
     // ChangeRoles({ commit }, role) {

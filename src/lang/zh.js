@@ -80,6 +80,10 @@ export default {
   setting: {
     motto: '格言',
     avatar: '头像',
-    introduction: '简介'
+    introduction: '简介',
+    weibo: '微博',
+    QQ: '扣扣',
+    github: '给哈普',
+    email: '邮箱'
   }
 }
