@@ -17,7 +17,9 @@ export default {
     baseSetting: 'BaseSetting',
     aboutMe: 'AboutMe',
     other: 'Other',
-    logout: 'Logout'
+    logout: 'Logout',
+    qiniu: 'Qiniu',
+    imags: 'Imags'
   },
   navbar: {
     logOut: 'Log Out',
@@ -47,6 +49,7 @@ export default {
     weibo: 'WeiBo',
     QQ: 'QQ',
     github: 'GitHub',
-    email: 'Email'
+    email: 'Email',
+    blogName: 'BlogName'
   }
 }

@@ -19,7 +19,9 @@ export default {
     baseSetting: '基本配置',
     aboutMe: '关于我',
     other: '其他',
-    logout: '退出'
+    logout: '退出',
+    qiniu: '七牛云',
+    imags: '图片管理'
   },
   navbar: {
     logOut: '退出登录',
@@ -84,6 +86,7 @@ export default {
     weibo: '微博',
     QQ: '扣扣',
     github: '给哈普',
-    email: '邮箱'
+    email: '邮箱',
+    blogName: '博客名称'
   }
 }

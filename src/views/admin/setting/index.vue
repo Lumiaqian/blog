@@ -18,6 +18,16 @@
         :params="myParam"
         img-format="png"></my-upload>
     </div>
+    <div class="blogName">
+      <p>{{$t('setting.blogName')}}</p>
+      <el-input
+      class="blogNameInput"
+      placeholder="请输入内容"
+      v-model="myBlogName"
+      clearable>
+      </el-input>
+      <el-button type="primary" round class="setBlogName" size="medium" @click="setBlogName">设置{{$t('setting.blogName')}}</el-button>
+    </div>
     <div class="motto">
       <p>{{$t('setting.motto')}}</p>
       <el-input
@@ -105,7 +115,8 @@ export default {
       myWeibo: '',
       myQQ: '',
       myGithub: '',
-      myEmail: ''
+      myEmail: '',
+      myBlogName: ''
     }
   },
 
@@ -131,7 +142,8 @@ export default {
       'weibo',
       'QQ',
       'github',
-      'email'
+      'email',
+      'blogName'
     ])
   },
   created () {
@@ -142,6 +154,7 @@ export default {
     this.myGithub = this.github
     this.myQQ = this.QQ
     this.myEmail = this.email
+    this.myBlogName = this.blogName
   },
 
   mounted () {},
@@ -185,6 +198,20 @@ export default {
     setIntroduction () {
       let data = {
         introduction: this.myIntroduction,
+        userId: getUserId()
+      }
+      updateSetting(data).then(res => {
+        if (res.data.code === '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+        }
+      })
+    },
+    setBlogName () {
+      let data = {
+        blogName: this.myBlogName,
         userId: getUserId()
       }
       updateSetting(data).then(res => {
@@ -245,7 +272,7 @@ export default {
   flex-direction: column;
   //align-items: center;
 }
-.avatar,.motto,.introduction,.weibo,.QQ,.github,.email {
+.avatar,.motto,.introduction,.weibo,.QQ,.github,.email,.blogName {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -256,20 +283,27 @@ export default {
   margin-left: 5%;
 }
 .setAvatar{
-  margin-left: 6%;
+  margin-left: 10%;
 }
 .mottoInput,.introductionInput,.weiboInput,.QQInput,.emailInput {
+  width: 200px;
+  margin-left: 6%
+}
+.blogNameInput {
   width: 200px;
   margin-left: 3%
 }
 .githubInput {
   width: 200px;
-  margin-left: 2%
+  margin-left: 5%
 }
 .setMotto,.setIntroduction {
-  margin-left: 4%;
+  margin-left: 5%;
+}
+.setBlogName {
+  margin-left: 5%;
 }
 .setSocial {
-  margin-left: 4%;
+  margin-left: 5%;
 }
 </style>

@@ -39,7 +39,7 @@
      ref="multipleTable"
      :data="posts"
      tooltip-effect="dark"
-     style="width: 90%"
+     style="width: 100%"
      @selection-change="handleSelectionChange">
      <el-table-column
        type="selection"

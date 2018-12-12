@@ -228,6 +228,21 @@ export const asyncRouterMap = [
     }]
   },
   {
+    path: '/admin/qiniu',
+    component: AdminLayout,
+    name: 'qiniu',
+    meta: { title: 'qiniu', icon: 'qiniu', noCache: true },
+    redirect: 'noredirect',
+    alwaysShow: true,
+    children: [
+      {
+        path: 'imags',
+        component: () => import('@/components/HelloWorld'),
+        name: 'imags',
+        meta: {title: 'imags', icon: 'imags', noCache: true}
+      }]
+  },
+  {
     path: '/admin/other',
     component: AdminLayout,
     name: 'other',

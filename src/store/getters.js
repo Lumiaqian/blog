@@ -17,6 +17,7 @@ const getters = {
   QQ: state => state.user.QQ,
   github: state => state.user.github,
   email: state => state.user.email,
+  blogName: state => state.user.blogName,
   sidebar: state => state.app.sidebar,
   language: state => state.app.language,
   device: state => state.app.device,
