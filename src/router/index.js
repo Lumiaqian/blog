@@ -237,7 +237,7 @@ export const asyncRouterMap = [
     children: [
       {
         path: 'imags',
-        component: () => import('@/components/HelloWorld'),
+        component: () => import('@/views/admin/images/index'),
         name: 'imags',
         meta: {title: 'imags', icon: 'imags', noCache: true}
       }]
