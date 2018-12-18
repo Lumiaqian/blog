@@ -22,6 +22,10 @@
        <el-table
        :data="qiniu_images"
        highlight-current-row
+        v-loading="loading"
+        element-loading-text="拼命加载中"
+        element-loading-spinner="el-icon-loading"
+        element-loading-background="rgba(0, 0, 0, 0.8)"
       >
        <el-table-column
          prop="id"
@@ -37,6 +41,21 @@
          prop="url"
          label="外链地址"
          width="200">
+       </el-table-column>
+       <el-table-column
+         label="图片"
+         width="60">
+        <template slot-scope="scope">
+          <img
+          v-if="scope.row.url"
+          :src="scope.row.url"
+          style="width: 100%;height: 20px; cursor: pointer"
+          @click="showImgViewer"
+          >
+          <div class="hidden viewer-box" v-viewer="{url: 'data-large', navbar: false, movable: false}">
+            <img :data-large="scope.row.url" alt="">
+          </div>
+        </template>
        </el-table-column>
      </el-table>
      <el-pagination
@@ -65,7 +84,7 @@ export default {
       pageNo: 1,
       pageSize: 10,
       pageTotal: 0,
-      loading: true
+      loading: false
     }
   },
 
@@ -125,6 +144,7 @@ export default {
       return isJPG && isLt2M
     },
     getImages (pageNo, pageSize) {
+      this.loading = true
       getImages(pageNo, pageSize).then(res => {
         if (res.data.code === '200') {
           this.qiniu_images = res.data.data.list
@@ -132,10 +152,23 @@ export default {
           this.pageSize = res.data.data.pageSize
           this.pageTotal = res.data.data.total
         }
+        this.loading = false
       })
     },
     handleCurrentChange (val) {
       this.getImages(val, this.pageSize)
+    },
+    // 点击"图片图标"显示大图
+    showImgViewer (e) {
+      let event = e || window.event
+      this.$nextTick(() => {
+        // eslint-disable-next-line one-var
+        let target = event.currentTarget || event.target.parentElement,
+          parent = target.parentElement
+
+        let viewer = parent.querySelector('.viewer-box').$viewer
+        viewer.show()
+      })
     }
 
   }

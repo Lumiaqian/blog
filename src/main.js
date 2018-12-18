@@ -13,6 +13,8 @@ import 'mavon-editor/dist/css/index.css'
 import i18n from './lang' // Internationalization
 import '@/styles/index.scss'
 import uploader from 'vue-simple-uploader'
+import 'viewerjs/dist/viewer.css'
+import Viewer from 'v-viewer'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
@@ -21,6 +23,7 @@ Vue.use(ElementUI, {
 })
 Vue.use(mavonEditor)
 Vue.use(uploader)
+Vue.use(Viewer)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
