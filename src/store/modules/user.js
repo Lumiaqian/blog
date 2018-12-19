@@ -1,4 +1,4 @@
-import { loginByUsername, logout, getUserInfo } from '@/api/login'
+import { loginByUsername, logout, getUserInfo, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken, setUserId } from '@/utils/auth'
 
 const user = {
@@ -17,7 +17,9 @@ const user = {
     QQ: '',
     github: '',
     email: '',
-    blogName: ''
+    blogName: '',
+    startYear: '',
+    endYear: ''
   },
 
   mutations: {
@@ -63,6 +65,12 @@ const user = {
     },
     SET_BLOGNAME: (state, blogName) => {
       state.blogName = blogName
+    },
+    SET_STARTYEAR: (state, startYear) => {
+      state.startYear = startYear
+    },
+    SET_ENDYEAR: (state, endYear) => {
+      state.endYear = endYear
     }
   },
 
@@ -129,6 +137,8 @@ const user = {
             commit('SET_INTRODUCTION', data.setting.introduction)
             commit('SET_MOTTO', data.setting.motto)
             commit('SET_BLOGNAME', data.setting.blogName)
+            commit('SET_STARTYEAR', data.setting.startYear)
+            commit('SET_ENDYEAR', data.setting.endYear)
           }
           resolve(response)
         }).catch(error => {
@@ -136,7 +146,46 @@ const user = {
         })
       })
     },
-
+    // 获取信息
+    GetInfo ({ commit, state }) {
+      return new Promise((resolve, reject) => {
+        getInfo().then(response => {
+          if (!response.data) { // 由于mockjs 不支持自定义状态码只能这样hack
+            // eslint-disable-next-line prefer-promise-reject-errors
+            reject('error')
+          }
+          const data = response.data.data
+          // eslint-disable-next-line no-undef
+          commit('SET_NAME', data.userName)
+          // eslint-disable-next-line no-undef
+          commit('SET_USERNAME', data.userId)
+          // eslint-disable-next-line no-undef
+          commit('SET_QQ', data.QQ)
+          // eslint-disable-next-line no-undef
+          commit('SET_WEIBO', data.weibo)
+          // eslint-disable-next-line no-undef
+          commit('SET_GITHUB', data.github)
+          // eslint-disable-next-line no-undef
+          commit('SET_EMAIL', data.email)
+          setUserId(data.userId)
+          if (data.setting !== null) {
+            // eslint-disable-next-line no-undef
+            commit('SET_AVATAR', 'data:image/png;base64,' + data.setting.avatar)
+            // eslint-disable-next-line no-undef
+            commit('SET_INTRODUCTION', data.setting.introduction)
+            // eslint-disable-next-line no-undef
+            commit('SET_MOTTO', data.setting.motto)
+            // eslint-disable-next-line no-undef
+            commit('SET_BLOGNAME', data.setting.blogName)
+            commit('SET_STARTYEAR', data.setting.startYear)
+            commit('SET_ENDYEAR', data.setting.endYear)
+          }
+          resolve(response)
+        }).catch(error => {
+          reject(error)
+        })
+      })
+    },
     // 第三方验证登录
     // LoginByThirdparty({ commit, state }, code) {
     //   return new Promise((resolve, reject) => {
@@ -179,6 +228,8 @@ const user = {
       commit('SET_INTRODUCTION', setting.introduction)
       commit('SET_MOTTO', setting.motto)
       commit('SET_BLOGNAME', setting.blogName)
+      commit('SET_STARTYEAR', setting.startYear)
+      commit('SET_ENDYEAR', setting.endYear)
     },
     // 设置social
     setSocial ({ commit }, user) {

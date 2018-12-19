@@ -33,3 +33,9 @@ export function getUserInfo (username) {
     params: { username }
   })
 }
+export function getInfo () {
+  return request({
+    url: 'lumia/info',
+    method: 'get'
+  })
+}

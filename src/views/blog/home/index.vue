@@ -8,7 +8,7 @@
               <p>{{posts[index-1].publicDate | formatDate}}</p>
            </div>
             <div v-for="i in posts[index-1].tags.length" :key="i">
-              <el-tag>{{posts[index-1].tags[i-1].tagName}}</el-tag>
+              <el-tag size="medium">{{posts[index-1].tags[i-1].tagName}}</el-tag>
             </div>
             <el-button type="text" @click="toDetail(posts[index-1].postId)">阅读全文</el-button>
           </el-card>

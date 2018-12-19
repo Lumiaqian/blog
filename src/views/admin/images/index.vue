@@ -189,7 +189,7 @@ export default {
 .upload-md {
   width: 20%;
   margin-top: 8%;
-  margin-left: 15%;
+  margin-left: 5%;
 }
 .el-table {
   //flex:0 0 auto;
@@ -203,6 +203,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: left;
-  margin-left: 5%;
+  margin-left: 10%;
 }
 </style>

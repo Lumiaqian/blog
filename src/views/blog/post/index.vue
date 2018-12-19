@@ -18,7 +18,7 @@
       :editable="prop.editable"
       >
       </mavon-editor>
-      <p v-for="index in tags.length" :key="index"><el-tag># {{tags[index-1].tagName}}</el-tag></p>
+      <p v-for="index in tags.length" :key="index" size="medium"><el-tag># {{tags[index-1].tagName}}</el-tag></p>
       </div>
  </div>
 </template>

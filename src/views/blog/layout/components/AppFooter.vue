@@ -1,14 +1,21 @@
 <template>
     <div class="foo">
       <div class="main">
-        <p>
-        本博客已萌萌哒运行<span>{{ runningTime }}</span><span class="time-jump">(●'◡'●)ﾉ♥</span>
+        <p><span>©{{startYear}} — {{endYear}}&ensp;</span>
+          <span><svg-icon icon-class="user"/>&ensp;{{name}}</span>
         </p>
+        <p>
+          <span>赣ICP备17009582号-1</span>
+        </p>
+        <!-- <p>
+        本博客已萌萌哒运行<span>{{ runningTime }}</span><span class="time-jump">(●'◡'●)ﾉ♥</span>
+        </p> -->
       </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   props: {
 
@@ -19,7 +26,11 @@ export default {
     }
   },
   computed: {
-
+    ...mapGetters([
+      'name',
+      'startYear',
+      'endYear'
+    ])
   },
   created () {
 
@@ -53,7 +64,7 @@ export default {
   margin: 0 auto;
   height: 90px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
  transition: height .3s;

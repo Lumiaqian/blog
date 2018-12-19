@@ -136,16 +136,6 @@ export const asyncRouterMap = [
     ]
   },
   {
-    path: '/admin/hello',
-    component: AdminLayout,
-    children: [{
-      path: 'index',
-      component: () => import('@/components/HelloWorld'),
-      name: 'test',
-      meta: { title: 'test', icon: 'hello', noCache: true }
-    }]
-  },
-  {
     path: '/admin/post',
     component: AdminLayout,
     name: 'post',

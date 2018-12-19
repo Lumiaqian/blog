@@ -27,7 +27,7 @@ export default {
 
   },
   created () {
-
+    this.$store.dispatch('GetInfo')
   },
   mounted () {
 
