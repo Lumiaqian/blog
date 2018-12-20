@@ -28,6 +28,7 @@ export default {
   },
   created () {
     this.$store.dispatch('GetInfo')
+    this.$store.dispatch('setLcount')
   },
   mounted () {
 

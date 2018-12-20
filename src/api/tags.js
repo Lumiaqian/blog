@@ -7,9 +7,14 @@ export function getTags () {
   })
 }
 
-export function getPosts (tagId) {
+export function getPosts (tagId, pageNo, pageSize) {
+  console.log(pageNo, pageSize)
   return request({
     url: '/lumia/tags/posts/' + tagId,
-    method: 'get'
+    method: 'get',
+    params: {
+      pageNo: pageNo,
+      pageSize: pageSize
+    }
   })
 }

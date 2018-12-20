@@ -11,7 +11,7 @@ const category = {
   },
   mutations: {
     SETCATE: (state, data) => {
-      console.log('进入mutations')
+      // console.log('进入mutations')
       state.category.categoryId = data.categoryId
       state.category.categoryName = data.categoryName
       state.category.fatherId = data.fatherId
@@ -23,7 +23,7 @@ const category = {
   actions: {
     // eslint-disable-next-line standard/object-curly-even-spacing
     setCategory ({ commit}, data) {
-      console.log('进入actions')
+      // console.log('进入actions')
       commit('SETCATE', data)
     }
   }

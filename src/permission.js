@@ -15,7 +15,7 @@ function hasPermission (roles, permissionRoles) {
   return roles.some(role => permissionRoles.indexOf(role) >= 0)
 }
 
-const whiteList = ['/login', '', '/posts', '/about', '/home', '/tags', '/tags/:tag', '/categories', '/categories/:category', '/archives']// no redirect whitelist
+const whiteList = ['/login', '', '/posts', '/about', '/home', '/tags', '/tags/tag', '/categories', '/categories/category', '/archives']// no redirect whitelist
 
 router.beforeEach((to, from, next) => {
   NProgress.start() // start progress bar
@@ -52,6 +52,7 @@ router.beforeEach((to, from, next) => {
     }
   } else {
     /* has no token */
+    // console.log('跳转的路由' + to.path + '是否在白名单内：' + whiteList.indexOf(to.path))
     if (whiteList.indexOf(to.path) !== -1) { // 在免登录白名单，直接进入
       next()
     } else {

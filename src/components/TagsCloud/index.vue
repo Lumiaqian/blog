@@ -44,7 +44,7 @@ export default {
   created () { // 初始化标签位置
     let tags = this.tags
     let tagList = []
-    console.log('tagsLength' + tags.length)
+    //  console.log('tagsLength' + tags.length)
     if (tags.length === 0) {
       for (let i = 0; i < this.tagsNum; i++) {
         let tag = {}
@@ -57,7 +57,7 @@ export default {
         tag.z = this.RADIUS * Math.cos(a)
         tag.id = 1
         tagList.push(tag)
-        console.log('k:' + k + 'a:' + a + 'b:' + b)
+        // console.log('k:' + k + 'a:' + a + 'b:' + b)
       }
     } else {
       for (let i = 0; i < tags.length; i++) {
@@ -65,7 +65,7 @@ export default {
         let k = -1 + (2 * (i + 1) - 1) / tags.length
         let a = Math.acos(k)
         let b = a * Math.sqrt(tags.length * Math.PI)
-        console.log('k:' + k + 'a:' + a + 'b:' + b)
+        // console.log('k:' + k + 'a:' + a + 'b:' + b)
         tag.text = tags[i].tagName
         tag.x = this.CX + this.RADIUS * Math.sin(a) * Math.cos(b)
         tag.y = this.CY + this.RADIUS * Math.sin(a) * Math.sin(b)
@@ -110,14 +110,17 @@ export default {
       this.speedY = y * 0.0001 > 0 ? Math.min(this.RADIUS * 0.00002, y * 0.0001) : Math.max(-this.RADIUS * 0.00002, y * 0.0001)
     },
     toTagDetail (tagName, tagId) {
-      console.log(tagName, tagId)
+      // console.log(tagName, tagId)
       let tag = {
         tagId: tagId,
         tagName: tagName
       }
       this.$store.dispatch('setTag', tag).then(() => {
         this.$router.push({
-          path: '/tags/' + tagName
+          path: '/tags/tag',
+          query: {
+            id: tag.tagId
+          }
         })
       })
     }

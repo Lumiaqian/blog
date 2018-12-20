@@ -30,6 +30,9 @@ const getters = {
   tagCount: state => state.count.tagCount,
   cateCount: state => state.count.cateCount,
   postAllCount: state => state.count.postAllCount,
+  lpostCount: state => state.lcount.lpostCount,
+  ltagCount: state => state.lcount.ltagCount,
+  lcateCount: state => state.lcount.lcateCount,
   post: state => state.post,
   fileList: state => state.post.fileList
 }

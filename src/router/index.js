@@ -57,7 +57,7 @@ export const constantRouterMap = [
         hidden: true
       },
       {
-        path: '/tags/:tag',
+        path: '/tags/tag',
         name: 'TagPosts',
         component: TagPosts,
         hidden: true
@@ -69,7 +69,7 @@ export const constantRouterMap = [
         hidden: true
       },
       {
-        path: '/categories/:category',
+        path: '/categories/category',
         name: 'CatePosts',
         component: CatePosts,
         hidden: true

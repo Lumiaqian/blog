@@ -1,12 +1,19 @@
 <!--  -->
 <template>
- <div >
-    <timeline class="tag" v-loading="loading">
+ <div class="tag">
+    <timeline v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
       <timeline-title bg-color="#C1FFC1">{{tag.tagName}}</timeline-title>
       <timeline-item class="item" bg-color="#9dd8e0" v-for="(post,index) in posts" :key="index" @click.native="toPostDetail(post.postId)">
         {{post.publicDate | formatDate}} {{post.title}}
       </timeline-item>
     </timeline>
+    <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="total, prev, pager, next"
+          :page-size=pageSize
+          :total=pageTotal>
+    </el-pagination>
  </div>
 </template>
 
@@ -25,7 +32,10 @@ export default {
         tagName: ''
       },
       posts: [],
-      loading: true
+      loading: true,
+      pageNo: 1,
+      pageSize: 5,
+      pageTotal: 20
     }
   },
 
@@ -48,13 +58,13 @@ export default {
   },
 
   created () {
-    this.getPosts()
+    this.getPosts(this.pageNo, this.pageSize)
   },
 
   mounted () {},
 
   methods: {
-    getPosts () {
+    getPosts (pageNo, pageSize) {
       if (this.Tag.tagId === '' || this.Tag.tagName === '') {
         console.log('进入Tag为空')
         let tag = Cookies.getJSON('tag')
@@ -66,8 +76,11 @@ export default {
         this.tag.tagName = this.Tag.tagName
       }
       // console.log(JSON.stringify(this.Tag))
-      getPosts(this.tag.tagId).then(res => {
-        this.posts = res.data.data
+      getPosts(this.tag.tagId, pageNo, pageSize).then(res => {
+        this.posts = res.data.data.list
+        this.pageNo = res.data.data.pageNum
+        this.pageSize = res.data.data.pageSize
+        this.pageTotal = res.data.data.total
         this.loading = false
       })
     },
@@ -78,6 +91,9 @@ export default {
           id: id
         }
       })
+    },
+    handleCurrentChange (val) {
+      this.posts(val, this.pageSize)
     }
   }
 }
@@ -85,12 +101,16 @@ export default {
 </script>
 <style scoped>
 .tag {
- position: relative;
- top: 25%;
- left: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .item:hover{
   text-decoration:underline;
   cursor:pointer
+}
+.el-pagination{
+  margin: 5%;
+  margin-left: -1%;
 }
 </style>

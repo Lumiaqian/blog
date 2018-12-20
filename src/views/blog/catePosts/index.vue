@@ -1,12 +1,19 @@
 <!--  -->
 <template>
- <div>
-    <timeline class="category" v-loading="loading">
+ <div class="category">
+    <timeline  v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
       <timeline-title bg-color="#C1FFC1">{{category.categoryName}}({{category.count}})</timeline-title>
       <timeline-item class="item" bg-color="#9dd8e0" v-for="(post,index) in posts" :key="index" @click.native="toPostDetail(post.postId)">
         {{post.publicDate | formatDate}} {{post.title}}
       </timeline-item>
     </timeline>
+     <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="total, prev, pager, next"
+          :page-size=pageSize
+          :total=pageTotal>
+    </el-pagination>
  </div>
 </template>
 
@@ -27,7 +34,10 @@ export default {
         count: 0
       },
       posts: [],
-      loading: true
+      loading: true,
+      pageNo: 1,
+      pageSize: 5,
+      pageTotal: 20
     }
   },
 
@@ -50,15 +60,15 @@ export default {
   },
 
   created () {
-    this.getPosts()
+    this.getPosts(this.pageNo, this.pageSize)
   },
 
   mounted () {},
 
   methods: {
-    getPosts () {
+    getPosts (pageNo, pageSize) {
       if (this.Category.categoryId === '' || this.Category.categoryName === '') {
-        console.log('进入Cate为空')
+        // console.log('进入Cate为空')
         let category = Cookies.getJSON('category')
         // console.log('Cookies: ' + JSON.stringify(tag))
         this.category.categoryId = category.categoryId
@@ -72,8 +82,11 @@ export default {
         this.category.count = this.Category.count
       }
       // console.log(JSON.stringify(this.Tag))
-      getPosts(this.category.categoryId).then(res => {
-        this.posts = res.data.data
+      getPosts(this.category.categoryId, pageNo, pageSize).then(res => {
+        this.posts = res.data.data.list
+        this.pageNo = res.data.data.pageNum
+        this.pageSize = res.data.data.pageSize
+        this.pageTotal = res.data.data.total
         this.loading = false
       })
     },
@@ -84,6 +97,9 @@ export default {
           id: id
         }
       })
+    },
+    handleCurrentChange (val) {
+      this.getPosts(val, this.pageSize)
     }
   }
 }
@@ -91,12 +107,16 @@ export default {
 </script>
 <style scoped>
 .category {
- position: relative;
- top: 25%;
- left: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .item:hover{
   text-decoration:underline;
   cursor:pointer
+}
+.el-pagination{
+  margin: 5%;
+  margin-left: -1%;
 }
 </style>

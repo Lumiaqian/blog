@@ -1,12 +1,12 @@
 <!-- 博客文章 -->
 <template>
- <div>
+ <div v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
      <div class="head">
        <p class="title">{{title}}</p>
        <p class="detail"><svg-icon icon-class="calendar"></svg-icon> 发表于 {{publicDate | formatDate}} |
        <svg-icon icon-class="folder"></svg-icon> 分类于
        </p>
-       <p class="detail" v-for="index in categories.length" :key="index">{{categories[index-1].categoryName}} |</p>
+       <p class="detail" v-for="cate in categories" :key="cate.categoryId">{{cate.categoryName}} |</p>
        <p class="detail"><svg-icon icon-class="eye"></svg-icon> 阅读次数 {{watchCount}}</p>
      </div>
      <div class="content">
@@ -18,7 +18,7 @@
       :editable="prop.editable"
       >
       </mavon-editor>
-      <p v-for="index in tags.length" :key="index" size="medium"><el-tag># {{tags[index-1].tagName}}</el-tag></p>
+      <p v-for="tag in tags" :key="tag.tagId" size="medium"><el-button size="mini" type="success" round @click="toTag(tag)">#{{tag.tagName}}</el-button></p>
       </div>
  </div>
 </template>
@@ -29,12 +29,13 @@ import {formatDate} from '@/utils/date.js'
 export default {
   data () {
     return {
-      content: '## 这里是要展示的markdown文字，也可以通过props传递',
+      content: '',
       title: '',
       publicDate: null,
-      tags: null,
+      tags: [],
       watchCount: 1,
-      categories: null
+      categories: [],
+      loading: true
     }
   },
   filters: {
@@ -77,6 +78,17 @@ export default {
         this.publicDate = res.data.data.publicDate
         // this.watchCount = res.date.data.publicDate
         this.watchCount = res.data.data.watchCount
+        this.loading = false
+      })
+    },
+    toTag (tag) {
+      this.$store.dispatch('setTag', tag).then(() => {
+        this.$router.push({
+          path: '/tags/tag',
+          query: {
+            id: tag.tagId
+          }
+        })
       })
     }
   }

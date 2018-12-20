@@ -15,15 +15,33 @@
           <div class="motto">
             <p>{{motto}}</p>
           </div>
+          <div class="count">
+            <a class="count-item" v-if="lpostCount">
+              <p class="count-item-num">{{lpostCount}}</p>
+              <p >文章</p>
+            </a>
+            <a class="count-item" v-if="lcateCount">
+              <p class="count-item-num">{{lcateCount}}</p>
+              <p>分类</p>
+            </a>
+            <a class="count-item" v-if="ltagCount">
+              <p class="count-item-num">{{ltagCount}}</p>
+              <p>标签</p>
+            </a>
+          </div>
           <div class="social">
             <a target='_blank' class="social-item" :href="weibo" v-if="weibo"><svg-icon icon-class="weibo" /></a>
-            <el-tooltip effect="dark" :content="QQ" placement="bottom" v-if="QQ">
-              <svg-icon class="social-item" icon-class="qq"/>
-            </el-tooltip>
+            <div class="social-item">
+              <el-tooltip effect="dark" :content="QQ" placement="bottom" v-if="QQ" class="social-item">
+                 <svg-icon icon-class="qq"/>
+              </el-tooltip>
+            </div>
             <a target='_blank' class="social-item" :href="github" v-if="github"><svg-icon icon-class="github"/></a>
-            <el-tooltip effect="dark" :content="email" placement="bottom" v-if="email">
-               <svg-icon class="social-item" icon-class="email" />
-            </el-tooltip>
+            <div class="social-item">
+              <el-tooltip effect="dark" :content="email" placement="bottom" v-if="email" >
+               <svg-icon icon-class="email" />
+              </el-tooltip>
+            </div>
           </div>
         </div>
       </transition>
@@ -142,7 +160,10 @@ export default {
       'weibo',
       'QQ',
       'github',
-      'email'
+      'email',
+      'lpostCount',
+      'ltagCount',
+      'lcateCount'
     ])
   },
 
@@ -212,14 +233,42 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 30px;
+  padding-top: 1%;
   overflow: hidden;
+}
+.count{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+}
+.social{
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: space-around;
+  width: 50%;
+}
+.count-item {
+  display: inline-flex;;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  width: 100%;
+}
+.social-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.count-item-num {
+  bottom: 0;
+  padding: 0;
+  margin: 0;
 }
 /* .avatar{
   border: 4px;
   border-radius: 50%;
-} */
-/* .social-item {
-  margin-left: 0.5%;
 } */
 </style>

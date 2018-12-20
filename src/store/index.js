@@ -10,6 +10,7 @@ import user from './modules/user'
 import tagsView from './modules/tagsView'
 import count from './modules/admin/count'
 import post from './modules/admin/post'
+import lcount from './modules/count'
 
 Vue.use(Vuex)
 
@@ -23,7 +24,8 @@ const store = new Vuex.Store({
     app,
     tagsView,
     count,
-    post
+    post,
+    lcount
   },
   getters
 })

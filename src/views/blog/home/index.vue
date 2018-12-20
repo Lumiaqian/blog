@@ -1,16 +1,17 @@
 <template >
-    <div v-loading.body="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
-      <div  v-for="index in posts.length" :key="index" class="post">
-        <div class="post-card">
-          <el-card shadow="hover" class="card">
+    <div v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+      <div  class="post" v-for=" post in posts" :key="post.postId">
+        <div class="post-card" >
+          <el-card  shadow="hover" class="card">
            <div class="detail">
-              <p class="title" @click="toDetail(posts[index-1].postId)">{{posts[index-1].title}}</p>
-              <p>{{posts[index-1].publicDate | formatDate}}</p>
+              <p class="title" @click="toDetail(post.postId)">{{post.title}}</p>
+              <p>{{post.publicDate | formatDate}}</p>
            </div>
-            <div v-for="i in posts[index-1].tags.length" :key="i">
-              <el-tag size="medium">{{posts[index-1].tags[i-1].tagName}}</el-tag>
+            <div v-for="tag of post.tags" :key="tag.tagId" v-if="tag">
+              <!-- <el-tag size="medium">{{tag.tagName}}</el-tag> -->
+              <el-button size="mini" type="success" round @click="toTag(tag)">#{{tag.tagName}}</el-button>
             </div>
-            <el-button type="text" @click="toDetail(posts[index-1].postId)">阅读全文</el-button>
+            <el-button type="text" @click="toDetail(post.postId)">阅读全文</el-button>
           </el-card>
         </div>
       </div>
@@ -19,7 +20,7 @@
           <el-pagination
           background
           @current-change="handleCurrentChange"
-          layout="prev, pager, next"
+          layout="total, prev, pager, next"
           :page-size=pageSize
           :total=pageTotal>
           </el-pagination>
@@ -37,9 +38,9 @@ export default {
   },
   data () {
     return {
-      posts: null,
-      tags: null,
-      categories: null,
+      posts: [],
+      tags: [],
+      // categories: [],
       pageNo: 1,
       pageSize: 5,
       pageTotal: 20,
@@ -72,7 +73,8 @@ export default {
         this.pageSize = res.data.data.pageSize
         this.pageTotal = res.data.data.total
         this.loading = false
-        // console.log(this.content)
+        // console.log(JSON.stringify(this.posts[0].tags))
+        // localStorage.setItem('posts', JSON.stringify(this.posts))
         // formatDate()
       })
     },
@@ -84,8 +86,18 @@ export default {
         }
       })
     },
+    toTag (tag) {
+      this.$store.dispatch('setTag', tag).then(() => {
+        this.$router.push({
+          path: '/tags/tag',
+          query: {
+            id: tag.tagId
+          }
+        })
+      })
+    },
     handleCurrentChange (val) {
-      console.log(`当前页: ${val}`)
+      // console.log(`当前页: ${val}`)
       posts(val, this.pageSize).then(res => {
         this.posts = res.data.data.list
         this.pageNo = res.data.data.pageNum

@@ -1,7 +1,7 @@
 <!--  -->
 <template>
  <div>
-      <timeline class="posts" v-loading="loading">
+      <timeline class="posts" v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
           <timeline-title bg-color="#C1FFC1">不错! 目前共计 {{total}} 篇日志。 继续努力。</timeline-title>
          <div v-for="(year,index) in years" :key="index">
              <timeline-title bg-color="#C1FFC1">
@@ -68,7 +68,7 @@ export default {
           }
         }
         this.years = this.bouncer(this.years)
-        console.log(this.years)
+        // console.log(this.years)
         this.loading = false
         // console.log(res.date.data.total)
         // formatDate()

@@ -9,7 +9,7 @@ const tag = {
   },
   mutations: {
     SETTAG: (state, data) => {
-      console.log('进入mutations')
+      // console.log('进入mutations')
       state.tag.tagId = data.tagId
       state.tag.tagName = data.tagName
       Cookies.set('tag', data)
@@ -19,7 +19,7 @@ const tag = {
   actions: {
     // eslint-disable-next-line standard/object-curly-even-spacing
     setTag ({ commit}, data) {
-      console.log('进入actions')
+      // console.log('进入actions')
       commit('SETTAG', data)
     }
   }

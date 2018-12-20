@@ -7,9 +7,13 @@ export function getCategories () {
   })
 }
 
-export function getPosts (categoryId) {
-    return request({
-      url: '/lumia/categories/posts/' + categoryId,
-      method: 'get'
-    })
+export function getPosts (categoryId, pageNo, pageSize) {
+  return request({
+    url: '/lumia/categories/posts/' + categoryId,
+    method: 'get',
+    params: {
+      pageNo: pageNo,
+      pageSize: pageSize
+    }
+  })
 }

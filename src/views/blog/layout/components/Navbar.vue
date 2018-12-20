@@ -25,7 +25,7 @@
           <el-menu-item class="about" index="/about">关于
             <svg-icon icon-class="about"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="search">搜索
+          <el-menu-item class="search" index="/">搜索
             <svg-icon icon-class="search"></svg-icon>
           </el-menu-item>
        </el-menu>
