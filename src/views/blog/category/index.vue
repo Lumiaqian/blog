@@ -1,11 +1,11 @@
 <!--  -->
 <template>
- <div>
+ <div class="categories">
      <div class="title">
          <p style="font-size:24px">分类</p>
          <p>目前共计{{categories.length}}个分类</p>
      </div>
-     <timeline class="categories" v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+     <timeline v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
          <div v-for="cate in parentCate" :key="cate.categoryId">
              <timeline-title class="item" bg-color="#C1FFC1" @click.native="toCateDetail(cate)">
                 {{cate.categoryName}}({{cate.count}})
@@ -15,6 +15,13 @@
              </timeline-item>
          </div>
      </timeline>
+     <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="total, prev, pager, next"
+          :page-size=pageSize
+          :total=pageTotal>
+    </el-pagination>
  </div>
 </template>
 
@@ -27,7 +34,10 @@ export default {
       categories: [],
       parentCate: [],
       childrenCate: [],
-      loading: true
+      loading: true,
+      pageNo: 1,
+      pageSize: 10,
+      pageTotal: 0
     }
   },
 
@@ -40,15 +50,18 @@ export default {
   computed: {},
 
   created () {
-    this.getCayegoryList()
+    this.getCayegoryList(this.pageNo, this.pageSize)
   },
 
   mounted () {},
 
   methods: {
-    getCayegoryList () {
-      getCategories().then(res => {
-        this.categories = res.data.data
+    getCayegoryList (pageNo, pageSize) {
+      getCategories(pageNo, pageSize).then(res => {
+        this.categories = res.data.data.list
+        this.pageNo = res.data.data.pageNum
+        this.pageSize = res.data.data.pageSize
+        this.pageTotal = res.data.data.total
         for (let i = 0; i < this.categories.length; i++) {
           if (this.categories[i].fatherId === '-1') {
             // console.log('parent' + this.categories[i])
@@ -80,6 +93,9 @@ export default {
           }
         })
       })
+    },
+    handleCurrentChange (val) {
+      this.posts(val, this.pageSize)
     }
   }
 }
@@ -91,12 +107,15 @@ export default {
     text-align: center
 }
 .categories {
-    position: relative;
-    top: 30%;
-    left: 45%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .item:hover{
   text-decoration:underline;
   cursor:pointer
+}
+.el-pagination{
+  margin: 5%;
 }
 </style>

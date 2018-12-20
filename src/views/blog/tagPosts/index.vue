@@ -34,7 +34,7 @@ export default {
       posts: [],
       loading: true,
       pageNo: 1,
-      pageSize: 5,
+      pageSize: 10,
       pageTotal: 20
     }
   },

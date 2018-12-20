@@ -1,8 +1,8 @@
 <!--  -->
 <template>
- <div>
-      <timeline class="posts" v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
-          <timeline-title bg-color="#C1FFC1">不错! 目前共计 {{total}} 篇日志。 继续努力。</timeline-title>
+ <div class="posts">
+      <timeline v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+          <timeline-title bg-color="#C1FFC1">不错! 目前共计 {{pageTotal}} 篇日志。 继续努力。</timeline-title>
          <div v-for="(year,index) in years" :key="index">
              <timeline-title bg-color="#C1FFC1">
                  {{year}}
@@ -12,6 +12,13 @@
              </timeline-item>
          </div>
      </timeline>
+     <el-pagination
+          background
+          @current-change="handleCurrentChange"
+          layout="total, prev, pager, next"
+          :page-size=pageSize
+          :total=pageTotal>
+    </el-pagination>
  </div>
 </template>
 
@@ -23,11 +30,12 @@ export default {
   data () {
     return {
       posts: [],
-      total: 0,
       pageNo: 1,
       pageSize: 10,
+      pageTotal: 0,
       years: [],
-      loading: true
+      loading: true,
+      total: 0
     }
   },
 
@@ -49,17 +57,20 @@ export default {
   computed: {},
 
   created () {
-    this.getPosts()
+    this.getPosts(this.pageNo, this.pageSize)
   },
 
   mounted () {},
 
   methods: {
-    getPosts () {
-      posts(this.pageNo, this.pageSize).then(res => {
+    getPosts (pageNo, pageSize) {
+      posts(pageNo, pageSize).then(res => {
         // console.log(res.date.data.total)
         this.posts = res.data.data.list
-        this.total = res.data.data.total
+        this.pageNo = res.data.data.pageNum
+        this.pageSize = res.data.data.pageSize
+        this.pageTotal = res.data.data.total
+        // this.total = this.pageTotal
         let year = this.formatDateYear(this.posts[0].publicDate)
         this.years[0] = year
         for (let i = 0; i < posts.length; i++) {
@@ -91,6 +102,9 @@ export default {
       return arr.filter(function (val) {
         return !(!val || val === '')
       })
+    },
+    handleCurrentChange (val) {
+      this.posts(val, this.pageSize)
     }
   }
 }
@@ -98,12 +112,20 @@ export default {
 </script>
 <style scoped>
 .posts {
-    position: relative;
-    top: 25%;
-    left: 35%;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .item:hover{
   text-decoration:underline;
   cursor:pointer
+}
+.el-pagination{
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  /* display: -webkit-flex */
+  flex-direction: row;
+  justify-content: center;
 }
 </style>

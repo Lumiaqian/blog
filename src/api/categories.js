@@ -1,9 +1,13 @@
 import request from '@/utils/request'
 
-export function getCategories () {
+export function getCategories (pageNo, pageSize) {
   return request({
     url: '/lumia/categories/list',
-    method: 'get'
+    method: 'get',
+    params: {
+      pageNo: pageNo,
+      pageSize: pageSize
+    }
   })
 }
 
