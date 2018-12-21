@@ -3,7 +3,7 @@
  <div >
      <svg :width='width' :height='height' @mousemove='listener($event)'>
         <a @click="toTagDetail(tag.text,tag.id)" v-for='(tag,index) in tagList' :key="index" class="detail">
-            <text :x='tag.x' :y='tag.y' :font-size='20 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)'>{{tag.text}}</text>
+            <text :x='tag.x' :y='tag.y' :font-size='20 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)' v-text="tag.text"></text>
         </a>
     </svg>
  </div>

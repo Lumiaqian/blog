@@ -4,6 +4,7 @@ const common = {
   state: {
     showRightNav: false,
     isAdminWrap: false,
+    isErrorWrap: false,
     weatherInfo: {
       temp: '',
       weather: '',
@@ -21,6 +22,10 @@ const common = {
     },
     SET_WEATHER: (state, weather) => {
       state.weatherInfo = weather
+    },
+    IS_ERROR_WRAP: (state, data) => {
+      console.log('IS_ERROR_WRAP: ' + data)
+      state.isErrorWrap = data
     }
   },
   actions: {
@@ -32,6 +37,9 @@ const common = {
     // eslint-disable-next-line standard/object-curly-even-spacing
     isAdminWrap ({ commit}, data) {
       commit('IS_ADMIN_WRAP', data)
+    },
+    isErrorWrap ({commit}, data) {
+      commit('IS_ERROR_WRAP', data)
     },
     // eslint-disable-next-line standard/object-curly-even-spacing
     getWeather ({ commit}) {

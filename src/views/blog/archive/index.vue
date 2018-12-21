@@ -1,7 +1,9 @@
 <!--  -->
 <template>
- <div class="posts">
-      <timeline v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+ <div class="posts" v-loading.lock="loading"
+      element-loading-text="正在施工"
+      element-loading-spinner="el-icon-loading">
+      <timeline >
           <timeline-title bg-color="#C1FFC1">不错! 目前共计 {{pageTotal}} 篇日志。 继续努力。</timeline-title>
          <div v-for="(year,index) in years" :key="index">
              <timeline-title bg-color="#C1FFC1">

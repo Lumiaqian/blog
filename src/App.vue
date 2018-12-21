@@ -8,7 +8,7 @@
     <div class="admin-content" v-if="Common.isAdminWrap">
       <router-view/>
     </div>
-    <right-nav v-if="!Common.isAdminWrap"/>
+    <right-nav v-if="!Common.isAdminWrap && !Common.isErrorWrap"/>
     <!--可自定义按钮的样式、show/hide临界点、返回的位置  -->
     <!--如需文字提示，可在外部添加element的<el-tooltip></el-tooltip>元素  -->
     <back-to-top transitionName="fade" :visibilityHeight="50" :backPosition="0"></back-to-top>

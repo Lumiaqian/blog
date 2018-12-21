@@ -1,11 +1,13 @@
 <!--  -->
 <template>
- <div class="categories">
+ <div class="categories" v-loading.lock="loading"
+      element-loading-text="正在施工"
+      element-loading-spinner="el-icon-loading">
      <div class="title">
          <p style="font-size:24px">分类</p>
-         <p>目前共计{{categories.length}}个分类</p>
+         <p>目前共计<span v-text="categories.length"/>个分类</p>
      </div>
-     <timeline v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+     <timeline>
          <div v-for="cate in parentCate" :key="cate.categoryId">
              <timeline-title class="item" bg-color="#C1FFC1" @click.native="toCateDetail(cate)">
                 {{cate.categoryName}}({{cate.count}})
@@ -20,7 +22,8 @@
           @current-change="handleCurrentChange"
           layout="total, prev, pager, next"
           :page-size=pageSize
-          :total=pageTotal>
+          :total=pageTotal
+          v-show="categories.length!=0">
     </el-pagination>
  </div>
 </template>

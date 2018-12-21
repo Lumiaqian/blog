@@ -36,6 +36,7 @@ export default {
 <style scoped>
 .app-main{
   padding: 5%;
-  min-height: calc(100vh - 120px)
+  min-height: calc(100vh - 120px);
+  overflow: hidden;
 }
 </style>

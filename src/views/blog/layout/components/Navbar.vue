@@ -25,13 +25,17 @@
           <el-menu-item class="about" index="/about">关于
             <svg-icon icon-class="about"></svg-icon>
           </el-menu-item>
-          <el-menu-item class="search" index="/">搜索
+          <el-menu-item class="search" index="/search">搜索
             <svg-icon icon-class="search"></svg-icon>
           </el-menu-item>
        </el-menu>
        <div class="weather">
            <div class="title">
-               <p>{{weather.city}} {{weather.temp}} {{weather.weather}} <svg-icon :icon-class="weather.weather"></svg-icon></p>
+               <p><span v-text="weather.city"></span>
+               <span v-text="weather.temp"></span>
+               <span v-text="weather.weather"></span>
+               <svg-icon :icon-class="weather.weather"></svg-icon>
+               </p>
            </div>
        </div>
       </div>
@@ -75,7 +79,7 @@ export default {
 
 <style rel="stylesheet/scss"  scoped>
   .top {
-      position: relative;
+      /* position: relative; */
       width: 100%;
       /* justify-content:center;
       flex-direction: row;
@@ -87,7 +91,7 @@ export default {
       animation: show .5s */
   }
   .head{
-    position: relative;
+    /* position: relative; */
     max-width: 1000px;
     padding: 0 10px;
     margin: 0 auto;
@@ -110,17 +114,16 @@ export default {
       /* flex: 0 0 20%; */
   }
   .navbar {
-      position: relative;
+      /* position: relative; */
       cursor: default;
-      animation: show .5s;
+      /* animation: show .5s; */
   }
-  .weather {
+  /* .weather {
        position: relative;
-  }
-
-  el-el-menu-item {
+  } */
+  /* el-menu-item {
       align-content: center;
-  }
+  } */
   /* .site-title {
     display: block;
    font-size: 22px;

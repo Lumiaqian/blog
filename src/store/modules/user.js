@@ -202,6 +202,7 @@ const user = {
 
     // 登出
     LogOut ({ commit, state }) {
+      console.log('退出！')
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')

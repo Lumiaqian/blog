@@ -42,8 +42,10 @@ export default {
 }
 </script>
 
-<style rel="stylesheet/scss" scoped>
-  .layout {
-    width: 100%;
+<style rel="stylesheet/scss" lang="scss" scoped>
+.layout {
+     width: 100%;
+     position: relative;
+     height: 100%;
 }
 </style>

@@ -16,6 +16,7 @@ import CatePosts from '@/views/blog/catePosts'
 import Archive from '@/views/blog/archive'
 import Login from '@/views/admin/login'
 import AdminLayout from '@/views/admin/layout/Layout'
+import Search from '@/views/blog/search'
 
 Vue.use(Router)
 
@@ -79,8 +80,26 @@ export const constantRouterMap = [
         name: 'archive',
         component: Archive,
         hidden: true
+      },
+      {
+        path: '/search',
+        name: 'search',
+        component: Search,
+        hidden: true
       }
     ]
+  },
+  {
+    path: '/401',
+    component: () => import('@/views/errorPage/401'),
+    name: 'Page401',
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/errorPage/404'),
+    name: 'Page404',
+    hidden: true
   }
   // ,
   // {
@@ -95,8 +114,12 @@ const router = new Router({
   routes: constantRouterMap
 })
 router.beforeEach((to, from, next) => {
+  // console.log(constantRouterMap.path)
   if (to.fullPath.indexOf('/admin') !== -1) {
     store.commit('IS_ADMIN_WRAP', true)
+  } else if (to.fullPath.indexOf('/40') !== -1) {
+    // console.log(to)
+    store.commit('IS_ERROR_WRAP', true)
   } else {
     store.commit('IS_ADMIN_WRAP', false)
   }
@@ -246,5 +269,6 @@ export const asyncRouterMap = [
         name: 'logout',
         meta: {title: 'logout', icon: 'logout', noCache: true}
       }]
-  }
+  },
+  { path: '*', redirect: '/404', hidden: true }
 ]

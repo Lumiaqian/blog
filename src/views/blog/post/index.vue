@@ -1,6 +1,7 @@
 <!-- 博客文章 -->
 <template>
- <div v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+ <div v-loading.lock="loading" element-loading-text="正在施工"
+      element-loading-spinner="el-icon-loading">
      <div class="head">
        <p class="title">{{title}}</p>
        <p class="detail"><svg-icon icon-class="calendar"></svg-icon> 发表于 {{publicDate | formatDate}} |
@@ -11,14 +12,16 @@
      </div>
      <div class="content">
         <mavon-editor class="md"
-      :value="content"
-      :subfield = "prop.subfield"
-      :defaultOpen = "prop.defaultOpen"
-      :toolbarsFlag = "prop.toolbarsFlag"
-      :editable="prop.editable"
-      >
-      </mavon-editor>
-      <p v-for="tag in tags" :key="tag.tagId" size="medium"><el-button size="mini" type="success" round @click="toTag(tag)">#{{tag.tagName}}</el-button></p>
+         :value="content"
+         :subfield = "prop.subfield"
+         :defaultOpen = "prop.defaultOpen"
+         :toolbarsFlag = "prop.toolbarsFlag"
+         :editable="prop.editable"
+         :codeStyle="prop.codeStyle"
+         :boxShadow="prop.boxShadow"
+         >
+        </mavon-editor>
+        <p v-for="tag in tags" :key="tag.tagId" size="medium"><el-button size="mini" type="success" round @click="toTag(tag)">#{{tag.tagName}}</el-button></p>
       </div>
  </div>
 </template>
@@ -54,7 +57,9 @@ export default {
         defaultOpen: 'preview', // edit： 默认展示编辑区域 ， preview： 默认展示预览区域
         editable: false,
         toolbarsFlag: false,
-        scrollStyle: true
+        scrollStyle: true,
+        codeStyle: 'solarized-dark',
+        boxShadow: 'false'
       }
       return data
     }

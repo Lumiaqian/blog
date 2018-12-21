@@ -1,11 +1,13 @@
 <!--  -->
 <template>
- <div>
+ <div v-loading.lock="loading"
+      element-loading-text="正在施工"
+      element-loading-spinner="el-icon-loading">
      <div class="title">
          <p style="font-size:24px">标签</p>
-         <p>目前共计{{tags.length}}个标签</p>
+         <p>目前共计<span v-text="tags.length"/>个标签</p>
      </div>
-     <div class="content" v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+     <div class="content">
          <tags-cloud v-if="tags.length!=0" :tags="tags"/>
      </div>
  </div>

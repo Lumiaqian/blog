@@ -1,7 +1,9 @@
 <!--  -->
 <template>
- <div class="tag">
-    <timeline v-loading.fullscreen.lock="loading" element-loading-background="rgba(0, 0, 0, 0.8)">
+ <div class="tag" v-loading.lock="loading"
+      element-loading-text="正在施工"
+      element-loading-spinner="el-icon-loading">
+    <timeline>
       <timeline-title bg-color="#C1FFC1">{{tag.tagName}}</timeline-title>
       <timeline-item class="item" bg-color="#9dd8e0" v-for="(post,index) in posts" :key="index" @click.native="toPostDetail(post.postId)">
         {{post.publicDate | formatDate}} {{post.title}}

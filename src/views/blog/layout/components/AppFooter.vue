@@ -1,8 +1,8 @@
 <template>
     <div class="foo">
       <div class="main">
-        <p><span>©{{startYear}} — {{endYear}}&ensp;</span>
-          <span><svg-icon icon-class="user"/>&ensp;{{name}}</span>
+        <p><span>©<span v-text="startYear"/> — <span v-text="endYear"/>&ensp;</span>
+          <span><svg-icon icon-class="user"/>&ensp;<span v-text="name"/></span>
         </p>
         <p>
           <span>赣ICP备17009582号-1</span>
@@ -52,7 +52,7 @@ export default {
 
 <style scoped>
 .foo{
-  position: relative;
+  /* position: relative; */
   width: 100%;
   background-color: #f5f5f5;
   padding:0px; margin:0px;
@@ -67,6 +67,6 @@ export default {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
- transition: height .3s;
+  transition: height .3s;
 }
 </style>
