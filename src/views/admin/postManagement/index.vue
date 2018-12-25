@@ -54,11 +54,11 @@
      <el-table-column
        prop="title"
        label="标题"
-       width="200">
+       width="150">
      </el-table-column>
      <el-table-column
        label="分类"
-       width="200">
+       width="150">
         <template slot-scope="post">
           <span v-for="(cate,index) in post.row.categories" :key="index">
             {{cate.categoryName}}
@@ -67,7 +67,7 @@
      </el-table-column>
      <el-table-column
        label="标签"
-       width="200">
+       width="150">
         <template slot-scope="post">
           <el-tag size="mini" v-for="(tag,index) in post.row.tags" :key="index">
             {{tag.tagName}}
@@ -112,7 +112,7 @@
      </el-table-column>
      <el-table-column
        label="状态"
-       width="100">
+       width="80">
        <template slot-scope="post">
          <span v-if="post.row.status === 0 ">未发布</span>
          <span v-else-if="post.row.status === 1">已发布</span>

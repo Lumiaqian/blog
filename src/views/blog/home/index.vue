@@ -138,9 +138,10 @@ export default {
 .post-card{
   position: relative;
   left: 30%;
+  width: 50%
 }
 .card{
-  width: 50%;
+  /* width: 60%; */
 }
 .title {
   font-size:24px

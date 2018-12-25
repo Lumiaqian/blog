@@ -43,7 +43,8 @@
 <script>
 import {getCategories} from '@/api/admin/categories'
 import {getTags} from '@/api/admin/tags'
-import {post, save, pub} from '@/api/admin/posts'
+// eslint-disable-next-line no-unused-vars
+import {post, save, pub, edit} from '@/api/admin/posts'
 import {getNow} from '@/utils/date'
 import { mapGetters } from 'vuex'
 export default {
@@ -55,7 +56,9 @@ export default {
       selectedCate: [],
       value4: '',
       tags: [],
-      selectedTag: []
+      selectedTag: [],
+      publicDate: '',
+      postId: ''
     }
   },
 
@@ -78,11 +81,13 @@ export default {
   methods: {
     getPost () {
       var postId = this.$route.query.postId
+      this.postId = this.$route.query.postId
       post(postId).then(res => {
         this.selectedTag = res.data.data.post.tags
         this.selectedCate = res.data.data.cates
         this.title = res.data.data.post.title
         this.content = res.data.data.post.content
+        this.publicDate = res.data.data.post.publicDate
       })
     },
     getCayegoryList () {
@@ -169,18 +174,19 @@ export default {
         return
       }
       let data = {
-        postId: '000',
+        postId: this.postId,
         title: this.title,
         tagList: this.selectedTag,
         cateList: this.selectedCate,
-        publicDate: getNow(),
+        publicDate: this.publicDate,
+        editDate: getNow(),
         content: this.content,
         status: 1
       }
       if (this.post.status === 0) { // 已经保存过了的post
         data.postId = this.post.postId
       }
-      pub(data).then(res => {
+      edit(data).then(res => {
         if (res.data.code === '200') {
           console.log('发布成功！')
           let post = {

@@ -75,3 +75,10 @@ export function draftPost (postId) {
     method: 'put'
   })
 }
+export function edit (post) {
+  return request({
+    url: '/admin/posts/edit',
+    method: 'post',
+    data: post
+  })
+}
