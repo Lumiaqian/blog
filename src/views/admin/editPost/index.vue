@@ -83,7 +83,7 @@ export default {
       var postId = this.$route.query.postId
       this.postId = this.$route.query.postId
       post(postId).then(res => {
-        this.selectedTag = res.data.data.post.tags
+        this.selectedTag = res.data.data.tags
         this.selectedCate = res.data.data.cates
         this.title = res.data.data.post.title
         this.content = res.data.data.post.content
