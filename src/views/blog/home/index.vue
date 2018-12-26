@@ -15,10 +15,12 @@
               </div>
               <p v-text="getSummary(post)"></p>
            </div>
-            <div v-for="tag of post.tags" :key="tag.tagId" v-show="tag">
+           <div class="tags">
+             <div v-for="tag of post.tags" :key="tag.tagId" v-show="tag" class="tag">
               <!-- <el-tag size="medium">{{tag.tagName}}</el-tag> -->
               <el-button size="mini" type="success" round @click="toTag(tag)" v-cloak>#{{tag.tagName}}</el-button>
-            </div>
+             </div>
+           </div>
             <el-button type="text" @click="toDetail(post.postId)">阅读全文</el-button>
           </el-card>
         </div>
@@ -53,7 +55,7 @@ export default {
       // categories: [],
       pageNo: 1,
       pageSize: 5,
-      pageTotal: 20,
+      pageTotal: 0,
       loading: true
 
     }
@@ -158,5 +160,13 @@ export default {
 }
 [v-cloak] {
 display:none;
+}
+.tags{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+.tag{
+  margin: 0.5%;
 }
 </style>

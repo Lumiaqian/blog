@@ -21,7 +21,11 @@
          :boxShadow="prop.boxShadow"
          >
         </mavon-editor>
-        <p v-for="tag in tags" :key="tag.tagId" size="medium"><el-button size="mini" type="success" round @click="toTag(tag)">#{{tag.tagName}}</el-button></p>
+        <div class="tags">
+          <p v-for="tag in tags" :key="tag.tagId" size="medium" class="tag">
+            <el-button size="mini" type="success" round @click="toTag(tag)">#{{tag.tagName}}</el-button>
+          </p>
+        </div>
       </div>
  </div>
 </template>
@@ -113,5 +117,12 @@ export default {
 }
 .detail {
   display: inline-block
+}
+.tags {
+  display: flex;
+  flex-direction: row;
+}
+.tag{
+  margin: 0.5%;
 }
 </style>

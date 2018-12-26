@@ -1,8 +1,8 @@
 import request from '@/utils/request'
 
-export function getWeather (ip) {
+export function getWeather () {
   return request({
-    url: '/utils/weather/' + ip,
+    url: '/utils/weather/',
     method: 'get'
   })
 }

@@ -105,11 +105,6 @@ export default {
       })
     },
     save () {
-      console.log('save')
-      console.log(this.selectedCate)
-      console.log(this.selectedTag)
-      console.log(getNow())
-      console.log(this.content)
       if (this.title === '') {
         this.$message({
           message: '标题为空！',
@@ -125,23 +120,19 @@ export default {
         return
       }
       let data = {
-        postId: '000',
+        postId: this.postId,
         title: this.title,
         tagList: this.selectedTag,
         cateList: this.selectedCate,
-        saveDate: getNow(),
+        publicDate: this.publicDate,
+        editDate: getNow(),
         content: this.content,
         status: 0
       }
-      if (this.post.status === 0) { // 已经保存过了的post
-        data.postId = this.post.postId
-      }
-      save(data).then(res => {
+      edit(data).then(res => {
         if (res.data.code === '200') {
-          console.log('保存成功！')
           let post = {
-            status: 0,
-            postId: res.data.data
+            status: 0
           }
           this.$store.dispatch('setPost', post)
           this.$message({
@@ -182,9 +173,6 @@ export default {
         editDate: getNow(),
         content: this.content,
         status: 1
-      }
-      if (this.post.status === 0) { // 已经保存过了的post
-        data.postId = this.post.postId
       }
       edit(data).then(res => {
         if (res.data.code === '200') {

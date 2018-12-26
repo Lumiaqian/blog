@@ -27,12 +27,12 @@ export default {
       type: Object,
       default: function () {
         return {
-          right: '50px',
-          bottom: '50px',
-          width: '35px',
-          height: '35px',
+          right: '10px',
+          bottom: '15px',
+          width: '25px',
+          height: '25px',
           'border-radius': '4px',
-          'line-height': '45px',
+          'line-height': '30px',
           background: '#262a30'
         }
       }

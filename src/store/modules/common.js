@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import {getIp} from '@/utils/net'
 import {getWeather} from '@/api/utils'
 const common = {
@@ -44,30 +45,31 @@ const common = {
     // eslint-disable-next-line standard/object-curly-even-spacing
     getWeather ({ commit}) {
       return new Promise((resolve, reject) => {
-        getIp().then(res => {
-          let length = res.data.length - 1
-          let ip = JSON.parse(res.data.substring(19, length)).cip
-          // console.log(res.data.length)
-          getWeather(ip).then(res => {
-            let weatherInfo = {
-              temp: '',
-              weather: '',
-              city: ''
-            }
-            weatherInfo.temp = res.data.data[0].realtime.temp + '℃'
-            weatherInfo.weather = res.data.data[0].realtime.weather
-            weatherInfo.city = res.data.data[0].city
-            // commit('SET_CITY',city)
-            commit('SET_WEATHER', weatherInfo)
-            // console.log(weatherInfo)
-            resolve()
-          }).catch(err => {
-            reject(err)
-          })
+        // getIp().then(res => {
+        // let length = res.data.length - 1
+        // let ip = JSON.parse(res.data.substring(19, length)).cip
+        // console.log(res.data.length)
+        getWeather().then(res => {
+          let weatherInfo = {
+            temp: '',
+            weather: '',
+            city: ''
+          }
+          weatherInfo.temp = res.data.data[0].realtime.temp + '℃'
+          weatherInfo.weather = res.data.data[0].realtime.weather
+          weatherInfo.city = res.data.data[0].city
+          // commit('SET_CITY',city)
+          commit('SET_WEATHER', weatherInfo)
+          // console.log(weatherInfo)
+          resolve()
         }).catch(err => {
           reject(err)
         })
+      // }).catch(err => {
+      //   // eslint-disable-next-line no-undef
+      //   reject(err)
       })
+      // })
     }
   }
 }

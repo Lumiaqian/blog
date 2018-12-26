@@ -12,3 +12,10 @@ export function posts (pageNo, pageSize) {
     method: 'get'
   })
 }
+export function search (data) {
+  return request({
+    url: '/lumia/posts/search',
+    method: 'post',
+    data: data
+  })
+}

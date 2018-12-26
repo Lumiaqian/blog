@@ -114,7 +114,7 @@ export default {
         arrowLineData: [
           {
             width: '50%',
-            top: '1px',
+            top: '3px',
             transform: 'rotateZ(-45deg)',
             opacity: '1'
           },
@@ -126,7 +126,7 @@ export default {
           },
           {
             width: '50%',
-            top: '-1px',
+            top: '-3px',
             transform: 'rotateZ(45deg)',
             opacity: '1'
           }
@@ -197,15 +197,15 @@ export default {
 <style scoped>
 .toggle{
    position: fixed;
-    width: 35px;
-    height: 35px;
-    right: 50px;
-    bottom: 95px;
+    width: 25px;
+    height: 25px;
+    right: 10px;
+    bottom: 45px;
     padding: 5px;
     z-index: 1050;
     cursor: pointer;
-    line-height: 0;
     background: #262a30;
+    line-height: 0;
 }
 
 .toggle-line{
@@ -216,6 +216,9 @@ export default {
   height: 2px;
   margin-top: 4px;
   background: #fff;
+}
+.toggle-line:first-child{
+  margin-top: 0px;
 }
 #right-nav{
   position: relative;

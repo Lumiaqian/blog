@@ -40,16 +40,16 @@ module.exports = {
     // https://vue-loader.vuejs.org/en/options.html#cachebusting
     cacheBusting: true,
 
-    cssSourceMap: true,
-    proxyTable: {
-      '/api': {
-        target: 'http://pv.sohu.com/cityjson?ie=utf-8',
-        changeOrigin: true,
-        pathRewrite: {
-         '^/api': ''
-       } 
-      }
-     }
+    cssSourceMap: true
+    // proxyTable: {
+    //   '/api': {
+    //     target: 'http://pv.sohu.com/cityjson?ie=utf-8',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //      '^/api': ''
+    //    } 
+    //   }
+    //  }
   },
 
   build: {
