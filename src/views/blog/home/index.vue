@@ -169,4 +169,7 @@ display:none;
 .tag{
   margin: 0.5%;
 }
+p {
+  margin: 1.5% 0;
+}
 </style>

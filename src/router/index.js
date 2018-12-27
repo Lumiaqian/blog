@@ -7,6 +7,7 @@ import 'nprogress/nprogress.css'
 
 import Layout from '@/views/blog/layout/Layout.vue'
 import Home from '@/views/blog/home/'
+// eslint-disable-next-line no-unused-vars
 import Post from '@/views/blog/post'
 import About from '@/views/blog/about'
 import Tag from '@/views/blog/tag'
@@ -17,6 +18,7 @@ import Archive from '@/views/blog/archive'
 import Login from '@/views/admin/login'
 import AdminLayout from '@/views/admin/layout/Layout'
 import Search from '@/views/blog/search'
+import Article from '@/views/blog/article'
 
 Vue.use(Router)
 
@@ -42,7 +44,7 @@ export const constantRouterMap = [
       {
         path: '/posts',
         name: 'posts',
-        component: Post,
+        component: Article,
         hidden: true
       },
       {

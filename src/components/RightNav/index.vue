@@ -4,7 +4,11 @@
      <div v-show="show" id="right-nav" :style="{
       'width': Common.showRightNav ? '320px' : '0px',
       'transition': 'all .3s ease'}">
-      <transition >
+        <div class="right-nav-wrap" :style="{
+        'width': showRightNav ? '320px' : '0px',
+        'transition': 'all .3s'
+        }">
+        <transition >
         <div class="user-info" v-show="showMenu">
           <div class="avatar">
             <pan-thumb :image=avatar width='100px' height='100px' v-if="avatar!=''" class="image"></pan-thumb>
@@ -44,7 +48,17 @@
             </div>
           </div>
         </div>
-      </transition>
+       </transition>
+        </div>
+      <!-- <div class="menu-info-head" v-if="articleMenu">
+        <span :class="{'active': showMenu}" @click="showMenu = true">文章目录</span>
+        |
+        <span :class="{'active': !showMenu}" @click="showMenu = false">站点信息</span>
+      </div> -->
+      <!-- <transition name="slide-fade">
+          <article-menu class="article-menu" :menu="articleMenu" :start="0" v-show="showMenu"/>
+      </transition> -->
+
      </div>
      <div class="toggle" @click="toggle" @mouseover="setLineData" @mouseout="setLineData">
          <span
@@ -66,6 +80,7 @@
 <script>
 import PanThumb from '@/components/PanThumb'
 import { mapGetters } from 'vuex'
+import articleMenu from '@/components/articleMenu'
 export default {
   data () {
     return {
@@ -142,13 +157,26 @@ export default {
   watch: {
     // screen (value) {
     //   this.show = true
+
     //   if (value.width <= 990) {
     //     this.show = false
     //   }
-    // }
+    // },
+    articleMenu (value) {
+      console.log('value:', JSON.stringify(value))
+      if (value) {
+        this.showMenu = true
+        this.setShowRightNav(true)
+        this.toggleLineData = this.lineStyle.closeLineData
+      } else {
+        this.showMenu = false
+        this.setShowRightNav(false)
+        this.toggleLineData = this.lineStyle.normalLineData
+      }
+    }
   },
   components: {
-    PanThumb
+    PanThumb, articleMenu
   },
 
   computed: {
@@ -163,7 +191,9 @@ export default {
       'email',
       'lpostCount',
       'ltagCount',
-      'lcateCount'
+      'lcateCount',
+      'articleMenu',
+      'showRightNav'
     ])
   },
 
@@ -274,4 +304,8 @@ export default {
   border: 4px;
   border-radius: 50%;
 } */
+.slide-fade-enter,
+.slide-fade-leave-to{
+  opacity: 0;
+}
 </style>

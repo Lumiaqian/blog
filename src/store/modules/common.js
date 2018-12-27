@@ -10,30 +10,43 @@ const common = {
       temp: '',
       weather: '',
       city: ''
-    }
+    },
+    articleMenu: false,
+    articleMenuSource: [],
+    articleMenuTag: '1.'
   },
   mutations: {
-    SETShOW: (state, show) => {
+    SET_SHOW: (state, show) => {
       // console.log('进入mutations')
       state.showRightNav = show
     },
     IS_ADMIN_WRAP: (state, data) => {
-      console.log('IS_ADMIN_WRAP: ' + data)
+      // console.log('IS_ADMIN_WRAP: ' + data)
       state.isAdminWrap = data
     },
     SET_WEATHER: (state, weather) => {
       state.weatherInfo = weather
     },
     IS_ERROR_WRAP: (state, data) => {
-      console.log('IS_ERROR_WRAP: ' + data)
+      // console.log('IS_ERROR_WRAP: ' + data)
       state.isErrorWrap = data
+    },
+    SET_ARTICLE_MENU: (state, data) => {
+      state.articleMenu = data
+    },
+    SET_ARTICLE_MENU_SOURCE: (state, data) => {
+      state.articleMenuSource = data
+    },
+    SET_ARTICLE_MENU_TAG: (state, data) => {
+      state.articleMenuTag = data
     }
+
   },
   actions: {
     // eslint-disable-next-line standard/object-curly-even-spacing
     setShow ({ commit}, show) {
       // console.log('进入actions')
-      commit('SETShOW', show)
+      commit('SET_SHOW', show)
     },
     // eslint-disable-next-line standard/object-curly-even-spacing
     isAdminWrap ({ commit}, data) {
@@ -41,6 +54,15 @@ const common = {
     },
     isErrorWrap ({commit}, data) {
       commit('IS_ERROR_WRAP', data)
+    },
+    setArticleMenu ({commit}, data) {
+      commit('SET_ARTICLE_MENU', data)
+    },
+    setArticleMenuSource ({commit}, data) {
+      commit('SET_ARTICLE_MENU_SOURCE', data)
+    },
+    setArticleMenuTag ({commit}, data) {
+      commit('SET_ARTICLE_MENU_TAG', data)
     },
     // eslint-disable-next-line standard/object-curly-even-spacing
     getWeather ({ commit}) {

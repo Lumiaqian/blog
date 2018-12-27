@@ -84,9 +84,9 @@ export default {
     float: left;
   }
   .weather{
-    position: relative;
+    position: fixed;
     text-align: center;
-    left: 40%;
+    left: 50%;
   }
   .right-menu {
     float: right;

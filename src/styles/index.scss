@@ -1,7 +1,7 @@
 @import './variables.scss';
-//@import './mixin.scss';
+@import './mixin.scss';
 @import './transition.scss';
-//@import './element-ui.scss';
+@import './element-ui.scss';
 @import './sidebar.scss';
 @import './btn.scss';
 
@@ -43,7 +43,18 @@ html {
 .padding-content {
   padding: 4px 0;
 }
-
+ul,
+ol,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+  margin: 0;
+  padding: 0;
+}
 a:focus,
 a:active {
   outline: none;
