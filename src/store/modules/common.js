@@ -39,6 +39,9 @@ const common = {
     },
     SET_ARTICLE_MENU_TAG: (state, data) => {
       state.articleMenuTag = data
+    },
+    SET_SHOWRIGHTNAV: (state, data) => {
+      state.showRightNav = data
     }
 
   },
@@ -63,6 +66,9 @@ const common = {
     },
     setArticleMenuTag ({commit}, data) {
       commit('SET_ARTICLE_MENU_TAG', data)
+    },
+    setShowRightNav ({commit}, data) {
+      commit('SET_SHOWRIGHTNAV', data)
     },
     // eslint-disable-next-line standard/object-curly-even-spacing
     getWeather ({ commit}) {

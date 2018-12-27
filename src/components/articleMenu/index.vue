@@ -15,6 +15,7 @@ import {
 } from 'vuex'
 import {scroll} from '@/utils/scroll'
 export default {
+  name: 'article-menu',
   props: ['menu'],
   data () {
     return {
@@ -38,9 +39,13 @@ export default {
       this.scrollToTarget(top)
     },
     is (item) {
+      // let flag = (item.tag === this.articleMenuTag)
+      // console.log('is: ' + flag)
       return item.tag === this.articleMenuTag
     },
     isParent (item) {
+      // let flag = (this.articleMenuTag.indexOf(item.tag) === 0)
+      // console.log('isParent:' + flag)
       return this.articleMenuTag.indexOf(item.tag) === 0
     }
   }
@@ -62,9 +67,12 @@ li{
       cursor: pointer;
       transition: all .3s;
       border-bottom: 1px solid #555555;
-      :active,:hover {
-          color: #ffffff
-      }
+      // .active,:hover {
+
+      // }
     }
+}
+.active{
+ color: #ffffff
 }
 </style>

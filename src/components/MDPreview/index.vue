@@ -2,19 +2,19 @@
 <template>
   <div class="md">
     <link href="//cdn.bootcss.com/github-markdown-css/2.4.1/github-markdown.css" rel="stylesheet">
-    <section id="markdown-preview-body" class="preview markdown-body" v-html="md" v-highlight>
+    <section id="markdown-preview-body" class="preview markdown-body" v-html="contents" v-highlight>
     </section>
   </div>
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import {markdown} from '@/utils/markdown'
 export default {
   name: 'md-preview',
   props: ['contents'],
   data () {
     return {
-      // imgList: [],
       md: ''
     }
   },
@@ -45,29 +45,11 @@ export default {
   methods: {
     init () {
       document.body.scrollTop = document.documentElement.scrollTop = 0
-      this.md = markdown(this.contents)
-      // this.getImg()
       this.getMenu()
     },
-    // getImg () {
-    //   let imgDomList = document.getElementById('markdown-preview-body').getElementsByTagName('img')
-    //   this.imgList = []
-    //   Array.prototype.slice.call(imgDomList).forEach((img, index) => {
-    //     img.indexTag = index
-    //     img.onclick = this.showBigImg
-    //     this.imgList.push({
-    //       src: img.src,
-    //       w: img.width,
-    //       h: img.height,
-    //       target: img
-    //     })
-    //   })
-    //   console.log('imgs:', JSON.stringify(this.imgList))
-    // },
-    // showBigImg (e) {
-    //   this.$photoPreview.open(e.target.indexTag, this.imgList)
-    // },
     getMenu () {
+      // console.log('我被调用了！')
+      // this.md = markdown(this.contents)
       let headNodes = document.getElementById('markdown-preview-body').getElementsByClassName('my-blog-head')
       let headList = []
       Array.prototype.forEach.call(headNodes, item => {
@@ -77,7 +59,6 @@ export default {
           title: item.innerText
         })
       })
-      console.log('headList:', JSON.stringify(headList))
       let tree = this.treeify(headList, 0)
       if (tree.length === 0) {
         tree = false
@@ -86,8 +67,6 @@ export default {
       source.forEach(item => {
         item.children = []
       })
-      console.log('tree:', JSON.stringify(tree))
-      console.log('source:', JSON.stringify(source))
       this.$store.dispatch('setArticleMenuTag', '1.')
       this.$store.dispatch('setArticleMenuSource', source)
       this.$store.dispatch('setArticleMenu', tree)

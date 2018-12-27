@@ -8,58 +8,61 @@
         'width': showRightNav ? '320px' : '0px',
         'transition': 'all .3s'
         }">
-        <transition >
-        <div class="user-info" v-show="showMenu">
-          <div class="avatar">
-            <pan-thumb :image=avatar width='100px' height='100px' v-if="avatar!=''" class="image"></pan-thumb>
-          </div>
-          <div class="name">
-            <p>{{name}}</p>
-          </div>
-          <div class="motto">
-            <p>{{motto}}</p>
-          </div>
-          <div class="count">
-            <a class="count-item" v-if="lpostCount">
+        <div class="menu-info-head" v-if="articleMenu">
+        <span class= 'menu-info-head_item' :class="{'active': showMenu}" @click="showMenu = true">文章目录</span>
+        |
+        <span class= 'menu-info-head_item' :class="{'active': !showMenu}" @click="showMenu = false">站点信息</span>
+        </div>
+        <div class="content-wrap">
+          <el-collapse-transition>
+             <!-- <article-menu :menu="articleMenu" v-show="showMenu" class="article-menu" ></article-menu> -->
+            <article-menu class="article-menu" :menu="articleMenu" :start="0" v-show="showMenu"/>
+          </el-collapse-transition>
+          <el-collapse-transition>
+          <div class="user-info" v-show="!showMenu">
+            <div class="avatar">
+             <pan-thumb :image=avatar width='100px' height='100px' v-if="avatar!=''" class="image"></pan-thumb>
+            </div>
+            <div class="name">
+              <p>{{name}}</p>
+            </div>
+            <div class="motto">
+             <p>{{motto}}</p>
+            </div>
+            <div class="count">
+             <a class="count-item" v-if="lpostCount">
               <p class="count-item-num">{{lpostCount}}</p>
               <p >文章</p>
-            </a>
-            <a class="count-item" v-if="lcateCount">
+             </a>
+             <a class="count-item" v-if="lcateCount">
               <p class="count-item-num">{{lcateCount}}</p>
               <p>分类</p>
-            </a>
-            <a class="count-item" v-if="ltagCount">
+             </a>
+             <a class="count-item" v-if="ltagCount">
               <p class="count-item-num">{{ltagCount}}</p>
               <p>标签</p>
-            </a>
-          </div>
-          <div class="social">
-            <a target='_blank' class="social-item" :href="weibo" v-if="weibo"><svg-icon icon-class="weibo" /></a>
-            <div class="social-item">
-              <el-tooltip effect="dark" :content="QQ" placement="bottom" v-if="QQ" class="social-item">
-                 <svg-icon icon-class="qq"/>
-              </el-tooltip>
+             </a>
             </div>
-            <a target='_blank' class="social-item" :href="github" v-if="github"><svg-icon icon-class="github"/></a>
-            <div class="social-item">
-              <el-tooltip effect="dark" :content="email" placement="bottom" v-if="email" >
-               <svg-icon icon-class="email" />
-              </el-tooltip>
+            <div class="social">
+             <a target='_blank' class="social-item" :href="weibo" v-if="weibo"><svg-icon icon-class="weibo" /></a>
+             <div class="social-item">
+               <el-tooltip effect="dark" :content="QQ" placement="bottom" v-if="QQ" class="social-item">
+                  <svg-icon icon-class="qq"/>
+               </el-tooltip>
+             </div>
+             <a target='_blank' class="social-item" :href="github" v-if="github"><svg-icon icon-class="github"/></a>
+             <div class="social-item">
+               <el-tooltip effect="dark" :content="email" placement="bottom" v-if="email" >
+                <svg-icon icon-class="email" />
+               </el-tooltip>
+             </div>
             </div>
-          </div>
+           </div>
+          </el-collapse-transition>
         </div>
-       </transition>
-        </div>
-      <!-- <div class="menu-info-head" v-if="articleMenu">
-        <span :class="{'active': showMenu}" @click="showMenu = true">文章目录</span>
-        |
-        <span :class="{'active': !showMenu}" @click="showMenu = false">站点信息</span>
-      </div> -->
-      <!-- <transition name="slide-fade">
-          <article-menu class="article-menu" :menu="articleMenu" :start="0" v-show="showMenu"/>
-      </transition> -->
+      </div>
 
-     </div>
+    </div>
      <div class="toggle" @click="toggle" @mouseover="setLineData" @mouseout="setLineData">
          <span
          class="toggle-line"
@@ -166,11 +169,11 @@ export default {
       console.log('value:', JSON.stringify(value))
       if (value) {
         this.showMenu = true
-        this.setShowRightNav(true)
+        this.$store.dispatch('setShowRightNav', true)
         this.toggleLineData = this.lineStyle.closeLineData
       } else {
         this.showMenu = false
-        this.setShowRightNav(false)
+        this.$store.dispatch('setShowRightNav', false)
         this.toggleLineData = this.lineStyle.normalLineData
       }
     }
@@ -208,7 +211,7 @@ export default {
     toggle () {
       this.$store.dispatch('setShow', !this.Common.showRightNav)
       this.toggleLineData = this.Common.showRightNav ? this.lineStyle.closeLineData : this.lineStyle.normalLineData
-      this.showMenu = !this.showMenu
+      // this.showMenu = !this.showMenu
     },
     setLineData (e) {
       if (this.Common.showRightNav) {
@@ -254,7 +257,7 @@ export default {
   position: relative;
   width: 320px;
 }
-.user-info{
+.right-nav-wrap {
   position: fixed;
   background-color: #262a30;
   color: #fff;
@@ -269,11 +272,23 @@ export default {
   padding-top: 1%;
   overflow: hidden;
 }
+.user-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10%;
+}
+.article-menu {
+  padding-top: 10%;
+  padding-left: 10%;
+  /* margin-left: 1%; */
+}
 .count{
   display: flex;
   flex-direction: row;
   align-items: center;
   width: 80%;
+  padding: 5%;
 }
 .social{
   display: inline-flex;
@@ -281,6 +296,7 @@ export default {
   align-items: center;
   align-content: space-around;
   width: 50%;
+  padding: 5%;
 }
 .count-item {
   display: inline-flex;;
@@ -288,6 +304,8 @@ export default {
   align-items: center;
   text-decoration: none;
   width: 100%;
+  padding: 1%;
+  margin: 1%;
 }
 .social-item {
   display: flex;
@@ -296,16 +314,39 @@ export default {
   width: 100%;
 }
 .count-item-num {
-  bottom: 0;
+  /* bottom: 0;
   padding: 0;
-  margin: 0;
+  margin: 0; */
+
 }
 /* .avatar{
   border: 4px;
   border-radius: 50%;
 } */
+.name{
+  padding: 5%;
+}
 .slide-fade-enter,
 .slide-fade-leave-to{
   opacity: 0;
+}
+.content-wrap{
+  position: relative;
+  width: 100%;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+.menu-info-head{
+  margin-bottom: 10px;
+}
+.menu-info-head_item {
+    color: #999999;
+    padding: 5px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+:hover,
+.active {
+  color: #fff;
 }
 </style>

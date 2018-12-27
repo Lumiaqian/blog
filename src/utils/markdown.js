@@ -18,6 +18,6 @@ marked.setOptions({
 })
 
 export function markdown (str) {
-  console.log('使用marked')
+  // console.log('使用marked')
   return marked(str, { renderer: renderer })
 }

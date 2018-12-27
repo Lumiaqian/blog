@@ -24,6 +24,7 @@
 // eslint-disable-next-line no-unused-vars
 import MDPreview from '@/components/MDPreview'
 import {post} from '@/api/posts'
+import {markdown} from '@/utils/markdown'
 export default {
   data () {
     return {
@@ -51,6 +52,7 @@ export default {
       var postId = this.$route.query.id
       post(postId).then(res => {
         this.content = res.data.data.content
+        this.content = markdown(this.content)
         // console.log(this.content)
         this.title = res.data.data.title
         this.tags = res.data.data.tags

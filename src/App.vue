@@ -25,18 +25,58 @@
 import BackToTop from '@/components/BackToTop'
 import RightNav from '@/components/RightNav'
 import { mapGetters } from 'vuex'
+import {scroll} from '@/utils/scroll'
 export default {
   name: 'App',
   components: { BackToTop, RightNav },
+  mixins: [scroll],
   data () {
     return {
 
     }
   },
+  watch: {
+    showRightNav (value) {
+      this.setViewWrapWidth()
+    }
+  },
   computed: {
     ...mapGetters([
-      'Common'
+      'Common',
+      'articleMenuSource',
+      'articleMenu'
     ])
+  },
+  mounted () {
+    window.addEventListener('scroll', this.scrollListener)
+  },
+  methods: {
+    scrollListener () {
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      if (scrollTop >= 60) {
+        this.showScrollToTop = true
+      } else {
+        this.showScrollToTop = false
+      }
+      if (this.articleMenu) {
+        for (let i = 0, len = this.articleMenuSource.length; i < len; ++i) {
+          let item = this.articleMenuSource[i]
+          let top = document.getElementById(item.id).getBoundingClientRect().top
+          top += document.body.scrollTop || document.documentElement.scrollTop
+          if (scrollTop <= top + 20) {
+            this.$store.dispatch('setArticleMenuTag', item.tag)
+            break
+          }
+        }
+      }
+    },
+    setViewWrapWidth () {
+      let temp = 20
+      if (this.screen.width > 990 && this.showRightNav) {
+        temp = 340
+      }
+      this.viewWrapWidth = this.screen.width - temp + 'px'
+    }
   }
 }
 </script>

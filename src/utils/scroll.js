@@ -7,6 +7,7 @@ var scroll = {
         return
       }
       let currentNum = document.body.scrollTop || document.documentElement.scrollTop
+      // console.log('currentNum:', currentNum)
       let t = 0
       clearInterval(timer)
       let dir = 1
