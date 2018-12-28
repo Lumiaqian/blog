@@ -1,4 +1,4 @@
-<!--  -->
+<!-- 归档页面 -->
 <template>
  <div class="posts" v-loading.lock="loading"
       element-loading-text="正在施工"
@@ -114,9 +114,10 @@ export default {
 </script>
 <style scoped>
 .posts {
-    display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px 10px;
 }
 .item:hover{
   text-decoration:underline;

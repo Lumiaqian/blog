@@ -13,7 +13,7 @@ const tag = {
       state.tag.tagId = data.tagId
       state.tag.tagName = data.tagName
       Cookies.set('tag', data)
-      console.log('SETTAG' + JSON.stringify(state.tag))
+      // console.log('SETTAG' + JSON.stringify(state.tag))
     }
   },
   actions: {

@@ -2,6 +2,7 @@ const getters = {
   Tag: state => state.tag.tag,
   Category: state => state.category.category,
   Common: state => state.common,
+  screen: state => state.common.screen,
   weather: state => state.common.weatherInfo,
   // city: state => state.common.city,
   showRightNav: state => state.common.showRightNav,

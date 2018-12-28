@@ -1,6 +1,7 @@
 <template>
     <div class="layout">
       <navbar></navbar>
+      <!-- <b-header></b-header> -->
       <app-main></app-main>
       <app-footer></app-footer>
     </div>

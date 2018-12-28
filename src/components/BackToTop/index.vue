@@ -61,7 +61,7 @@ export default {
   methods: {
     handleScroll () {
       this.visible = window.pageYOffset > this.visibilityHeight
-      console.log(this.visible)
+      // console.log(this.visible)
     },
     backToTop () {
       const start = window.pageYOffset

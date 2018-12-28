@@ -1,16 +1,19 @@
 <template >
     <div v-loading.lock="loading"
          element-loading-text="正在施工"
-         element-loading-spinner="el-icon-loading">
+         element-loading-spinner="el-icon-loading" class="home">
       <div  class="post" v-for=" post in posts" :key="post.postId">
-        <div class="post-card" >
+        <div class="post-card">
           <el-card  shadow="hover" class="card">
            <div class="detail">
-              <p class="title" @click="toDetail(post.postId)" v-cloak>{{post.title}}</p>
+              <p class="title" @click="toDetail(post.postId)" v-cloak
+              :style="{
+              'font-size' : isPc ? '20px' : '18px'
+          }">{{post.title}}</p>
               <div class="detail-item">
-                <p v-cloak>&nbsp;发布于 {{post.publicDate | formatDate}} |</p>
-                <p v-cloak>&nbsp;更新于 {{post.editDate | formatDate}} |</p>
-                <p v-cloak>&nbsp;分类于&nbsp;</p>
+                <p v-cloak>发布{{post.publicDate | formatDate}} |</p>
+                <p v-cloak>&nbsp;更新{{post.editDate | formatDate}} |</p>
+                <p v-cloak>分类</p>
                 <p v-for="cate in post.categories" :key="cate.categoryId">{{cate.categoryName}}&nbsp;</p>
               </div>
               <p v-text="getSummary(post)"></p>
@@ -26,7 +29,7 @@
         </div>
       </div>
       <el-row >
-        <el-col :xs="{span:24}" :sm="{span:12,offset:6}" :lg="{span:8,offset:8}" :xl="{span:9,offset:8}">
+        <el-col :xs="{span:24}" :sm="{span:12,offset:4}" :lg="{span:8,offset:6}" :xl="{span:9,offset:4}">
           <el-pagination
           background
           @current-change="handleCurrentChange"
@@ -45,6 +48,7 @@ import {posts} from '@/api/posts'
 import PostCard from '@/components/PostCard'
 import {formatDate} from '@/utils/date.js'
 import {cutString} from '@/utils/string.js'
+import { mapGetters } from 'vuex'
 export default {
   props: {
   },
@@ -56,18 +60,20 @@ export default {
       pageNo: 1,
       pageSize: 5,
       pageTotal: 0,
-      loading: true
-
+      loading: true,
+      isPc: true
     }
   },
   filters: {
     formatDate (time) {
       var date = new Date(time)
-      return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
+      return formatDate(date, 'yyyy-MM-dd')
     }
   },
   computed: {
-
+    ...mapGetters([
+      'screen'
+    ])
   },
   created () {
     this.getPosts()
@@ -75,7 +81,12 @@ export default {
   mounted () {
   },
   watch: {
-
+    screen (value) {
+      this.isPc = true
+      if (value.width <= 768) {
+        this.isPc = false
+      }
+    }
   },
   methods: {
     getPosts () {
@@ -93,7 +104,7 @@ export default {
       let summary = post.content.toString()
       summary = cutString(summary)
       // console.log(summary.slice(0, 150) + '...')
-      return summary.slice(0, 150) + '...'
+      return summary.slice(0, 100) + '...'
     },
     toDetail (id) {
       this.$router.push({
@@ -132,21 +143,29 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  position: relative;
+  padding: 30px 10px;
+  min-height: 100px;
+}
 .post {
-  padding: 20px;
+  padding: 30px 10px;
   /* position: relative; */
   display: flex;
 }
 .post-card{
   position: relative;
-  left: 30%;
-  width: 50%
+  left: 15%;
+  width: 50%;
+  height: 100%;
 }
 .card{
   /* width: 60%; */
+  min-height: 200px;
+  min-width: 250px;
 }
 .title {
-  font-size:24px
+  font-size:20px
 }
 .title:hover{
   text-decoration:underline;
@@ -156,7 +175,8 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-size:13px
+  font-size:13px;
+  width: 100%;
 }
 [v-cloak] {
 display:none;

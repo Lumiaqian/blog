@@ -1,23 +1,23 @@
 <!-- 登录界面 -->
 <template>
  <div class="login">
-    <el-card class="box-card" >
-        <div slot="header" class="clearfix">
-            <span>登录</span>
-        </div>
-        <el-form ref="loginForm" status-icon :rules="rules" :model="userInfo" label-width="80px">
+    <div class="login-wrap">
+      <h1 class="login-title">博客系统-后台管理</h1>
+       <div class="login-form-wrap">
+          <el-form ref="loginForm" status-icon :rules="rules" :model="userInfo" label-width="80px">
             <el-form-item label="账号" prop="username">
-              <el-input v-model="userInfo.username"></el-input>
+              <el-input v-model="userInfo.username" clearable></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input v-model="userInfo.password" type="password"></el-input>
+              <el-input v-model="userInfo.password" type="password" clearable></el-input>
               <el-button type="text" size="mini" >忘记密码？</el-button>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="userLogin(userInfo)" :loading="loading">登录</el-button>
             </el-form-item>
         </el-form>
-    </el-card>
+       </div>
+    </div>
  </div>
 </template>
 
@@ -76,7 +76,7 @@ export default {
       this.$store.dispatch('isAdminWrap', true)
     },
     userLogin (userInfo) {
-      console.log('进入登录函数')
+      // console.log('进入登录函数')
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
@@ -92,22 +92,6 @@ export default {
           return false
         }
       })
-      // if (userInfo.username !== '' && userInfo.password !== '') {
-      //   login(userInfo).then(res => {
-      //     this.$message({
-      //       showClose: true,
-      //       message: res.data.message,
-      //       type: 'success'
-      //     })
-      //   })
-      // } else {
-      //   console.log('用户名密码为空')
-      //   this.$message({
-      //     showClose: true,
-      //     message: '用户名密码为空',
-      //     type: 'error'
-      //   })
-      // }
     }
   }
 }
@@ -115,16 +99,37 @@ export default {
 </script>
 <style scoped>
 .login{
-  position: relative;
+ position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   z-index: 2000;
-  width: 100%;
-  top: 30%;
-  left: 35%;
-  /* right: 50%;
-  bottom: 50%; */
+  /* opacity:0.7; */
+  background-position: center;
+  background-size: cover;
+  background-image: url('http://pj9aecdab.bkt.clouddn.com/6484f3e381bbe654a8b4adfa48da6bc6.jpg');
 }
-.box-card{
-  position: relative;
-  width: 30%;
+.login-title {
+  font-size: 20px;
+  color: #262a30;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.login-wrap{
+    position: relative;
+    background-color: #ffffff;
+    opacity:0.8;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 460px;
+    margin: 20px auto;;
+    line-height: 1;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.login-form-wrap{
+  margin: 0px auto;
 }
 </style>

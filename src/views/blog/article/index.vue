@@ -5,8 +5,10 @@
          element-loading-spinner="el-icon-loading">
        <div class="head">
         <p class="title">{{title}}</p>
-        <p class="detail" v-show="publicDate"><svg-icon icon-class="calendar"></svg-icon> 发表于 {{publicDate | formatDate}} |
-         <svg-icon icon-class="folder"></svg-icon> 分类于
+        <p class="detail" v-show="publicDate"><svg-icon icon-class="calendar"></svg-icon> 发表 {{publicDate | formatDate}} |
+        </p>
+        <p class="detail" v-show="editDate"><svg-icon icon-class="calendar"></svg-icon> 更新 {{editDate | formatDate}} |
+         <svg-icon icon-class="folder"></svg-icon> 分类
         </p>
         <p class="detail" v-for="cate in categories" :key="cate.categoryId" v-show="categories">{{cate.categoryName}} |</p>
         <p class="detail" v-show="watchCount"><svg-icon icon-class="eye"></svg-icon> 阅读次数 {{watchCount}}</p>
@@ -31,6 +33,7 @@ export default {
       content: '',
       title: '',
       publicDate: null,
+      editDate: null,
       tags: [],
       watchCount: null,
       categories: [],
@@ -58,6 +61,7 @@ export default {
         this.tags = res.data.data.tags
         this.categories = res.data.data.categories
         this.publicDate = res.data.data.publicDate
+        this.editDate = res.data.data.editDate
         // // this.watchCount = res.date.data.publicDate
         this.watchCount = res.data.data.watchCount
         this.loading = false
@@ -92,6 +96,7 @@ export default {
 .detail {
   display: inline-block;
   padding-bottom: 3%;
+  font-size: 14px;
   }
 }
 .tags {

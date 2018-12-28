@@ -68,7 +68,7 @@ export default {
   methods: {
     getPosts (pageNo, pageSize) {
       if (this.Tag.tagId === '' || this.Tag.tagName === '') {
-        console.log('进入Tag为空')
+        // console.log('进入Tag为空')
         let tag = Cookies.getJSON('tag')
         // console.log('Cookies: ' + JSON.stringify(tag))
         this.tag.tagId = tag.tagId

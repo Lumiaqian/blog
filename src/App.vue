@@ -32,11 +32,13 @@ export default {
   mixins: [scroll],
   data () {
     return {
-
     }
   },
   watch: {
     showRightNav (value) {
+      this.setViewWrapWidth()
+    },
+    screen (value) {
       this.setViewWrapWidth()
     }
   },
@@ -44,11 +46,19 @@ export default {
     ...mapGetters([
       'Common',
       'articleMenuSource',
-      'articleMenu'
+      'articleMenu',
+      'screen',
+      'showRightNav'
     ])
   },
   mounted () {
+    this.updateScreen()
+    window.addEventListener('resize', this.updateScreen)
     window.addEventListener('scroll', this.scrollListener)
+  },
+  beforeDestroy () {
+    window.removeEventListener('resize', this.updateScreen, false)
+    window.removeEventListener('scroll', this.scrollListener, false)
   },
   methods: {
     scrollListener () {
@@ -76,6 +86,12 @@ export default {
         temp = 340
       }
       this.viewWrapWidth = this.screen.width - temp + 'px'
+    },
+    updateScreen () {
+      this.$store.dispatch('setScreen', {
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
     }
   }
 }

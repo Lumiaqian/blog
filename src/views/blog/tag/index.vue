@@ -2,13 +2,13 @@
 <template>
  <div v-loading.lock="loading"
       element-loading-text="正在施工"
-      element-loading-spinner="el-icon-loading">
+      element-loading-spinner="el-icon-loading" class="tags">
      <div class="title">
-         <p style="font-size:24px">标签</p>
+         <p style="font-size:20px">标签</p>
          <p>目前共计<span v-text="tags.length"/>个标签</p>
      </div>
      <div class="content">
-         <tags-cloud v-if="tags.length!=0" :tags="tags"/>
+         <tags-cloud v-if="tags.length!=0" :tags="tags" :width="width" :height="height" :RADIUS="RADIUS" />
      </div>
  </div>
 </template>
@@ -16,11 +16,15 @@
 <script>
 import TagsCloud from '@/components/TagsCloud'
 import {getTags} from '@/api/tags'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
       tags: [],
-      loading: false
+      loading: false,
+      width: 400,
+      height: 400,
+      RADIUS: 160
     }
   },
 
@@ -29,6 +33,9 @@ export default {
   },
 
   computed: {
+    ...mapGetters([
+      'screen'
+    ])
   },
 
   created () {
@@ -36,6 +43,15 @@ export default {
   },
 
   mounted () {},
+  watch: {
+    screen (value) {
+      if (value.width <= 768) {
+        this.width = 250
+        this.height = 300
+        this.RADIUS = 100
+      }
+    }
+  },
 
   methods: {
     getTagList () {
@@ -58,6 +74,11 @@ export default {
     text-align: center
 }
 .content {
-    text-align: center
+    text-align: center;
+    /* justify-content: space-between; */
+    padding-top: 10%;
+}
+.tags {
+  padding: 30px 10px;
 }
 </style>

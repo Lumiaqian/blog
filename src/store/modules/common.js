@@ -13,7 +13,11 @@ const common = {
     },
     articleMenu: false,
     articleMenuSource: [],
-    articleMenuTag: '1.'
+    articleMenuTag: '1.',
+    screen: {
+      width: 0,
+      height: 0
+    }
   },
   mutations: {
     SET_SHOW: (state, show) => {
@@ -42,10 +46,16 @@ const common = {
     },
     SET_SHOWRIGHTNAV: (state, data) => {
       state.showRightNav = data
+    },
+    SET_SCREEN: (state, data) => {
+      state.screen = data
     }
 
   },
   actions: {
+    setScreen ({commit}, screen) {
+      commit('SET_SCREEN', screen)
+    },
     // eslint-disable-next-line standard/object-curly-even-spacing
     setShow ({ commit}, show) {
       // console.log('进入actions')

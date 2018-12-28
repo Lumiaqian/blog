@@ -1,7 +1,7 @@
 <template>
  <div>
      <div class="head">
-         <p style="font-size:25px">关于我</p>
+         <p style="font-size:20px">关于我</p>
      </div>
      <div class="content">
         <mavon-editor class="md"
@@ -62,6 +62,7 @@ export default {
   padding-right: 20%;
 }
 .head{
-  text-align: center
+  text-align: center;
+  padding: 30px 10px;
 }
 </style>

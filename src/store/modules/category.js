@@ -17,7 +17,7 @@ const category = {
       state.category.fatherId = data.fatherId
       state.category.count = data.count
       Cookies.set('category', data)
-      console.log('SETcategory' + JSON.stringify(state.category))
+      // console.log('SETcategory' + JSON.stringify(state.category))
     }
   },
   actions: {

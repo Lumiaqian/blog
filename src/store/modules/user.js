@@ -86,7 +86,7 @@ const user = {
         loginByUsername(username, userInfo.password).then(response => {
           // const data = response.data
           const headers = response.headers
-          console.log(JSON.stringify(headers))
+          // console.log(JSON.stringify(headers))
           commit('SET_TOKEN', headers.authorization)
           setToken(headers.authorization)
           resolve()
@@ -113,12 +113,12 @@ const user = {
           const data = response.data.data
           if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
             let temp = data.roles
-            console.log(temp)
+            // console.log(temp)
             let roles = new Array(temp.length)
             for (let i = 0; i < temp.length; i++) {
               roles[i] = temp[i].roleName.toLowerCase()
             }
-            console.log(roles)
+            // console.log(roles)
             commit('SET_ROLES', roles)
           } else {
             // eslint-disable-next-line prefer-promise-reject-errors
@@ -202,7 +202,7 @@ const user = {
 
     // 登出
     LogOut ({ commit, state }) {
-      console.log('退出！')
+      // console.log('退出！')
       return new Promise((resolve, reject) => {
         logout(state.token).then(() => {
           commit('SET_TOKEN', '')

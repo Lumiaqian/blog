@@ -3,7 +3,7 @@
  <div >
      <svg :width='width' :height='height' @mousemove='listener($event)'>
         <a @click="toTagDetail(tag.text,tag.id)" v-for='(tag,index) in tagList' :key="index" class="detail">
-            <text :x='tag.x' :y='tag.y' :font-size='20 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)' v-text="tag.text"></text>
+            <text :x='tag.x' :y='tag.y' :font-size='14 * (600/(600-tag.z))' :fill-opacity='((400+tag.z)/600)' v-text="tag.text"></text>
         </a>
     </svg>
  </div>
@@ -21,13 +21,22 @@ export default {
     tagsNum: {
       type: Number,
       default: 10
+    },
+    width: {
+      type: Number,
+      default: 400
+    },
+    height: {
+      type: Number,
+      default: 400
+    },
+    RADIUS: {
+      type: Number,
+      default: 160
     }
   },
   data: function () {
     return {
-      width: 600,
-      height: 600,
-      RADIUS: 200,
       speedX: Math.PI / 360,
       speedY: Math.PI / 360,
       tagList: []

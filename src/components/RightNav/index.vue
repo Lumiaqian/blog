@@ -166,7 +166,7 @@ export default {
     //   }
     // },
     articleMenu (value) {
-      console.log('value:', JSON.stringify(value))
+      // console.log('value:', JSON.stringify(value))
       if (value) {
         this.showMenu = true
         this.$store.dispatch('setShowRightNav', true)

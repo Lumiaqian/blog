@@ -28,13 +28,13 @@ export default {
       immediate: true,
       handler: function (con) {
         this.$store.dispatch('setArticleMenu', false)
-        console.log('contents')
+        // console.log('contents')
         setTimeout(this.init, 1000)
       }
     }
   },
   mounted () {
-    console.log('mounted')
+    // console.log('mounted')
     setTimeout(this.init, 1000)
   },
   beforeDestroy () {
