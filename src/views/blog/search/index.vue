@@ -7,7 +7,7 @@
     <div class="input">
       <el-input
         v-model="keyword"
-        placeholder="请输入内容"
+        placeholder="请输入关键字"
         clearable
         @keyup.enter.native="search(pageNo, pageSize)"
       ></el-input>

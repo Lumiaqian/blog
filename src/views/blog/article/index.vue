@@ -103,6 +103,7 @@ export default {
   display: flex;
   flex-direction: row;
   margin-left: 17%;
+  padding: 30px 10px;
   .tag{
   margin: 0.5%;
   }

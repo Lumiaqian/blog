@@ -106,6 +106,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px 10px;
 }
 .item:hover{
   text-decoration:underline;
