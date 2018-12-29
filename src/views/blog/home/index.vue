@@ -156,7 +156,7 @@ export default {
 .post-card{
   position: relative;
   left: 15%;
-  width: 50%;
+  width: 60%;
   height: 100%;
 }
 .card{

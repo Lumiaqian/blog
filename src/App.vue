@@ -48,10 +48,12 @@ export default {
       'articleMenuSource',
       'articleMenu',
       'screen',
-      'showRightNav'
+      'showRightNav',
+      'user'
     ])
   },
   mounted () {
+    // document.title = '${this.user.blogName}'
     this.updateScreen()
     window.addEventListener('resize', this.updateScreen)
     window.addEventListener('scroll', this.scrollListener)

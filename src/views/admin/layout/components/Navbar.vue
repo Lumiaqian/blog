@@ -84,7 +84,7 @@ export default {
     float: left;
   }
   .weather{
-    position: fixed;
+    position: absolute;
     text-align: center;
     left: 50%;
   }
