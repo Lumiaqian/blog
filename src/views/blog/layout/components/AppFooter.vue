@@ -3,12 +3,12 @@
       <div class="main">
         <p>
         本博客已萌萌哒运行<span>{{ runningTime }}</span><span class="time-jump">(●'◡'●)ﾉ♥</span>
-       </p>
+        </p>
         <p><span>©<span v-text="startYear"/> — <span v-text="endYear"/>&ensp;</span>
           <span><svg-icon icon-class="user"/>&ensp;<span v-text="name"/></span>
         </p>
         <p>
-          <span>赣ICP备17009582号-1</span>
+          <span>赣ICP备17009582号</span>
         </p>
       </div>
     </div>

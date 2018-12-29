@@ -108,7 +108,7 @@ export default {
   /* opacity:0.7; */
   background-position: center;
   background-size: cover;
-  background-image: url('http://pj9aecdab.bkt.clouddn.com/6484f3e381bbe654a8b4adfa48da6bc6.jpg');
+  background-image: url('http://image.caoyuqian.cn/6484f3e381bbe654a8b4adfa48da6bc6.jpg');
 }
 .login-title {
   font-size: 20px;

@@ -319,10 +319,10 @@ export default {
   margin: 0; */
 
 }
-/* .avatar{
+.avatar{
   border: 4px;
   border-radius: 50%;
-} */
+}
 .name{
   padding: 5%;
 }

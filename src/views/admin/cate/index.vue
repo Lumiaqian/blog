@@ -330,7 +330,7 @@ export default {
 }
 
 </script>
-<style rel="stylesheet/scss" lang="scss">
+<style rel="stylesheet/scss" lang="scss" scoped>
 .el-pagination {
   margin: 1%;
   margin-left: 3%

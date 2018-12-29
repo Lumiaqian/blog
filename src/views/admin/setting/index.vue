@@ -304,7 +304,7 @@ export default {
 }
 
 </script>
-<style el="stylesheet/scss" lang="scss">
+<style el="stylesheet/scss" lang="scss" scoped>
 .main-wrapper {
   position: relative;
   width: 100%;
