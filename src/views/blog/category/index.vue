@@ -5,7 +5,7 @@
       element-loading-spinner="el-icon-loading">
      <div class="title">
          <p style="font-size:24px">分类</p>
-         <p>目前共计<span v-text="categories.length"/>个分类</p>
+         <p style="padding: 20px 10px">目前共计<span v-text="categories.length"/>个分类</p>
      </div>
      <timeline>
          <div v-for="cate in parentCate" :key="cate.categoryId">
@@ -98,7 +98,7 @@ export default {
       })
     },
     handleCurrentChange (val) {
-      this.posts(val, this.pageSize)
+      this.getCayegoryList(val, this.pageSize)
     }
   }
 }
@@ -106,14 +106,13 @@ export default {
 </script>
 <style scoped>
 .title {
-    position: relative;
-    text-align: center
+    text-align: center;
 }
 .categories {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 10px;
+  padding: 10% 10px;
 }
 .item:hover{
   text-decoration:underline;

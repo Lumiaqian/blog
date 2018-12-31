@@ -13,7 +13,7 @@
         v-model="show"
         :width="150"
         :height="150"
-        url="http://localhost:8080/avatar"
+        url="http://39.108.115.109:8080/avatar"
         :headers="myHeader"
         :params="myParam"
         img-format="png"></my-upload>

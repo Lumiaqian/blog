@@ -5,7 +5,7 @@
    </div>
    <el-upload
       class="upload-md"
-      action="http://localhost:8080/upload"
+      action="http://39.108.115.109:8080/upload"
       :on-change="handleChange"
       :file-list="fileList"
       :on-error="handleError"

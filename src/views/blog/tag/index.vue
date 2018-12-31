@@ -79,6 +79,6 @@ export default {
     padding-top: 10%;
 }
 .tags {
-  padding: 30px 10px;
+  padding: 10% 10px;
 }
 </style>

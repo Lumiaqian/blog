@@ -8,7 +8,7 @@
           <span><svg-icon icon-class="user"/>&ensp;<span v-text="name"/></span>
         </p>
         <p>
-          <span>赣ICP备17009582号</span>
+          <span>赣ICP备17009582号-1</span>
         </p>
       </div>
     </div>

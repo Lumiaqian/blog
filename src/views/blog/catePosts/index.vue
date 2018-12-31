@@ -38,8 +38,8 @@ export default {
       posts: [],
       loading: true,
       pageNo: 1,
-      pageSize: 5,
-      pageTotal: 20
+      pageSize: 10,
+      pageTotal: 0
     }
   },
 
@@ -112,7 +112,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 10px;
+  padding: 10% 10px;
 }
 .item:hover{
   text-decoration:underline;

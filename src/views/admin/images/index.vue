@@ -4,7 +4,7 @@
    <div class="main">
      <el-upload
       class="upload-md"
-      action="http://localhost:8080/qiniu/images"
+      action="http://39.108.115.109:8080/qiniu/images"
       :on-change="handleChange"
       :file-list="fileList"
       :on-error="handleError"

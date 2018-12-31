@@ -1,30 +1,44 @@
 # blog
 
-> A Vue.js project
+> 博客前端源码，基于vue+element ui，博客的后台管理界面参考vue -element-admin，博客页面风格参考Next主题
 
-## Build Setup
+### 博客实现功能
 
-``` bash
-# install dependencies
-npm install
+- 首页（文章列表）
+- 菜单栏显示当时天气（根据IP获取当地当时天气）
+- 标签云
+- 分类列表
+- 文章归档
+- ‘关于’页面
+- 文章详情页
+- 分类/标签 对应的文章列表
+- 搜索功能
+- 文章详情页标题目录导航
+- 评论（进行中）
+- 图片集（进行中）
 
-# serve with hot reload at localhost:8080
-npm run dev
+### 博客后台管理系统实现的功能
 
-# build for production with minification
-npm run build
+- 登录
 
-# build for production and view the bundle analyzer report
-npm run build --report
+- 菜单栏显示当时天气（根据IP获取当地当时天气）
 
-# run unit tests
-npm run unit
+- 首页（显示文章、标签、分类等统计数据）
 
-# run e2e tests
-npm run e2e
+- 发布/编辑/删除文章（草稿箱、垃圾箱等）
 
-# run all tests
-npm test
-```
+- 导入MakeDown格式文章、上传MakeDown格式文章到七牛云
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+- 添加/编辑/删除分类
+
+- 添加/编辑/删除标签
+
+- 编辑‘关于’页面
+
+- 编辑博客配置页面（头像、昵称等）
+
+- 图片管理（七牛云作为图床）
+
+- 访客统计数据图包括ip、物理位置、当时天气、操作系统、浏览器等信息（进行中）
+
+   

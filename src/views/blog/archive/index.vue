@@ -106,7 +106,8 @@ export default {
       })
     },
     handleCurrentChange (val) {
-      this.posts(val, this.pageSize)
+      console.log(val)
+      this.getPosts(val, this.pageSize)
     }
   }
 }
@@ -117,7 +118,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 30px 10px;
+  padding: 10% 10px;
 }
 .item:hover{
   text-decoration:underline;

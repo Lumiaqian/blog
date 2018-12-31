@@ -21,7 +21,7 @@ import {about} from '@/api/about'
 export default {
   data () {
     return {
-      content: ''
+      content: '该作者有点懒，什么也没留下，倒是留下了一堆bug(￣▽￣)"'
     }
   },
 
