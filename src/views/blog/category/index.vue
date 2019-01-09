@@ -8,14 +8,25 @@
          <p style="padding: 20px 10px">目前共计<span v-text="categories.length"/>个分类</p>
      </div>
      <timeline>
+       <div v-if="parentCate.length>0">
          <div v-for="cate in parentCate" :key="cate.categoryId">
              <timeline-title class="item" bg-color="#C1FFC1" @click.native="toCateDetail(cate)">
                 {{cate.categoryName}}({{cate.count}})
              </timeline-title>
-             <timeline-item class="item" bg-color="#9dd8e0" v-if="cate.categoryId===child.fatherId" v-for="child in childrenCate" :key="child.categoryId" @click.native="toCateDetail(child)">
+             <div v-for="child in childrenCate" :key="child.categoryId">
+             <timeline-item class="item" bg-color="#9dd8e0" v-if="cate.categoryId===child.fatherId"  @click.native="toCateDetail(child)">
                  {{child.categoryName}}({{child.count}})
              </timeline-item>
+             </div>
          </div>
+       </div>
+       <div v-else>
+         <div v-for="child in childrenCate" :key="child.categoryId">
+             <timeline-item class="item" bg-color="#9dd8e0"  @click.native="toCateDetail(child)">
+                 {{child.categoryName}}({{child.count}})
+             </timeline-item>
+        </div>
+       </div>
      </timeline>
      <el-pagination
           background
@@ -65,19 +76,21 @@ export default {
         this.pageNo = res.data.data.pageNum
         this.pageSize = res.data.data.pageSize
         this.pageTotal = res.data.data.total
+        this.parentCate = []
+        this.childrenCate = []
         for (let i = 0; i < this.categories.length; i++) {
           if (this.categories[i].fatherId === '-1') {
             // console.log('parent' + this.categories[i])
-            this.parentCate[i] = this.categories[i]
+            this.parentCate.push(this.categories[i])
           } else {
-            this.childrenCate[i] = this.categories[i]
+            this.childrenCate.push(this.categories[i])
           }
         }
         this.parentCate = this.bouncer(this.parentCate)
         this.childrenCate = this.bouncer(this.childrenCate)
         // console.log('categories: ' + this.categories)
-        // console.log('parent: ' + this.parentCate.length)
-        // console.log('chaild: ' + this.childrenCate.length)
+        console.log('parent: ' + this.parentCate.length)
+        console.log('child: ' + this.childrenCate.length)
         this.loading = false
       })
     },

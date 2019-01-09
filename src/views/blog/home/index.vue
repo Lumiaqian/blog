@@ -19,9 +19,11 @@
               <p v-text="getSummary(post)"></p>
            </div>
            <div class="tags">
-             <div v-for="tag of post.tags" :key="tag.tagId" v-show="tag" class="tag">
+             <div v-for="tag of post.tags" :key="tag.tagId" v-show="tag" class="tag" @click="toTag(tag)">
+               <svg-icon icon-class="tag1" style="color:#FF0000;"></svg-icon>
+               <font style="color:#FF0000;">{{tag.tagName}}</font>
               <!-- <el-tag size="medium">{{tag.tagName}}</el-tag> -->
-              <el-button size="mini" type="success" round @click="toTag(tag)" v-cloak>#{{tag.tagName}}</el-button>
+              <!-- <el-button size="mini" type="success" round @click="toTag(tag)" v-cloak>#{{tag.tagName}}</el-button> -->
              </div>
            </div>
             <el-button type="text" @click="toDetail(post.postId)">阅读全文</el-button>
@@ -188,6 +190,7 @@ display:none;
 }
 .tag{
   margin: 0.5%;
+  cursor: pointer;
 }
 p {
   margin: 1.5% 0;

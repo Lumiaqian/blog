@@ -2,7 +2,8 @@
 <template>
   <div v-loading.lock="loading"
          element-loading-text="正在施工"
-         element-loading-spinner="el-icon-loading">
+         element-loading-spinner="el-icon-loading"
+         class="main">
        <div class="head">
         <p class="title">{{title}}</p>
         <p class="detail" v-show="publicDate"><svg-icon icon-class="calendar"></svg-icon> 发表 {{publicDate | formatDate}} |
@@ -15,8 +16,9 @@
       </div>
       <m-d-preview :contents="content" class="content"></m-d-preview>
       <div class="tags" >
-          <p v-for="tag in tags" :key="tag.tagId" size="medium" class="tag">
-            <el-button size="mini" type="success" round @click="toTag(tag)">#{{tag.tagName}}</el-button>
+          <p v-for="tag in tags" :key="tag.tagId" size="medium" class="tag" @click="toTag(tag)">
+            <svg-icon icon-class="tag1" style="color:#FF4500;"></svg-icon>
+            <font style="color:#FF4500;">{{tag.tagName}}</font>
           </p>
       </div>
   </div>
@@ -82,6 +84,9 @@ export default {
 
 </script>
 <style lang='scss' scoped>
+// .main {
+//   background-color: #f2ebd9;
+// }
 .content{
   margin-left: 17%;
   width: 80%;
@@ -106,6 +111,7 @@ export default {
   padding: 30px 10px;
   .tag{
   margin: 0.5%;
+  cursor: pointer;
   }
 }
 </style>

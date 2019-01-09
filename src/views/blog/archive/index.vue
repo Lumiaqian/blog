@@ -9,9 +9,11 @@
              <timeline-title bg-color="#C1FFC1">
                  {{year}}
              </timeline-title>
-             <timeline-item class="item" bg-color="#9dd8e0" v-if="(formatDateYear(post.publicDate)) === year" v-for="(post,index) in posts" :key="index"  @click.native="toDetail(post.postId)">
+             <div v-for="post in posts" :key="post.postId" >
+             <timeline-item class="item" bg-color="#9dd8e0" v-if="(formatDateYear(post.publicDate)) === year"  @click.native="toDetail(post.postId)">
                  {{post.publicDate | formatDate}} {{post.title}}
              </timeline-item>
+             </div>
          </div>
      </timeline>
      <el-pagination
@@ -74,12 +76,19 @@ export default {
         this.pageTotal = res.data.data.total
         // this.total = this.pageTotal
         let year = this.formatDateYear(this.posts[0].publicDate)
+        // console.log(res.data.data.list.length)
+        console.log(this.posts.length)
+        this.years = []
         this.years[0] = year
-        for (let i = 0; i < posts.length; i++) {
-          if (year !== this.formatDateYear(this.posts[i].publicDate)) {
-            this.years[i] = this.formatDateYear(this.posts[i].publicDate)
+        for (let i = 0; i < this.posts.length; i++) {
+          // console.log('i:' + i)
+          // console.log(this.formatDateYear(this.posts[i].publicDate))
+          let str = this.formatDateYear(this.posts[i].publicDate)
+          if (year !== str && this.years.indexOf(str) === -1) {
+            this.years.push(str)
           }
         }
+        // console.log(this.years)
         this.years = this.bouncer(this.years)
         // console.log(this.years)
         this.loading = false
@@ -106,7 +115,6 @@ export default {
       })
     },
     handleCurrentChange (val) {
-      console.log(val)
       this.getPosts(val, this.pageSize)
     }
   }
