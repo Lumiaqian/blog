@@ -18,7 +18,7 @@
           <div v-show="showResult" class="showResult">共搜索到{{pageTotal}}篇与"{{keyword}}"有关的文章</div>
        </transition>
       <el-collapse-transition>
-        <img v-show="posts.length===0" src="http://pj9aecdab.bkt.clouddn.com/血小板施工.jpg" class="img">
+        <img v-show="posts.length===0" src="http://image.caoyuqian.cn/血小板施工.jpg" class="img">
       </el-collapse-transition>
       <div  class="post" v-for=" post in posts" :key="post.postId">
         <div class="post-card">

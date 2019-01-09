@@ -3,7 +3,7 @@
  <div class="main-wrapper">
    <div class="main">
      <el-upload
-      class="upload-md"
+      class="upload-images"
       action="http://39.108.115.109:8080/qiniu/images"
       :on-change="handleChange"
       :file-list="fileList"
@@ -141,7 +141,7 @@ export default {
       if (!isLt2M) {
         this.$message.error('上传图片大小不能超过 20MB!')
       }
-      return isJPG && isLt2M
+      return (isJPG || isPNG) && isLt2M
     },
     getImages (pageNo, pageSize) {
       this.loading = true
@@ -186,7 +186,7 @@ export default {
   flex-direction: row;
   align-items: center;
 }
-.upload-md {
+.upload-images {
   width: 20%;
   margin-top: 8%;
   margin-left: 5%;
