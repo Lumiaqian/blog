@@ -1,4 +1,5 @@
 <template >
+  <transition name="el-zoom-in-center">
     <div v-loading.lock="loading"
          element-loading-text="正在施工"
          element-loading-spinner="el-icon-loading" class="home">
@@ -26,7 +27,7 @@
               <!-- <el-button size="mini" type="success" round @click="toTag(tag)" v-cloak>#{{tag.tagName}}</el-button> -->
              </div>
            </div>
-            <el-button type="text" @click="toDetail(post.postId)">阅读全文</el-button>
+            <el-button type="text" @click="toDetail(post.postId)">~~阅读全文~~</el-button>
           </el-card>
         </div>
       </div>
@@ -43,6 +44,7 @@
         </el-col>
       </el-row>
     </div>
+  </transition>
 </template>
 
 <script>
@@ -165,6 +167,7 @@ export default {
   /* width: 60%; */
   min-height: 200px;
   min-width: 250px;
+  /* background-color: #8EE5EE; */
 }
 .title {
   font-size:20px

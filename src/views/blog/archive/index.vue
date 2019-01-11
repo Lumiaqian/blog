@@ -77,7 +77,7 @@ export default {
         // this.total = this.pageTotal
         let year = this.formatDateYear(this.posts[0].publicDate)
         // console.log(res.data.data.list.length)
-        console.log(this.posts.length)
+        // console.log(this.posts.length)
         this.years = []
         this.years[0] = year
         for (let i = 0; i < this.posts.length; i++) {

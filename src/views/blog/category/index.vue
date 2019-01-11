@@ -89,8 +89,8 @@ export default {
         this.parentCate = this.bouncer(this.parentCate)
         this.childrenCate = this.bouncer(this.childrenCate)
         // console.log('categories: ' + this.categories)
-        console.log('parent: ' + this.parentCate.length)
-        console.log('child: ' + this.childrenCate.length)
+        // console.log('parent: ' + this.parentCate.length)
+        // console.log('child: ' + this.childrenCate.length)
         this.loading = false
       })
     },

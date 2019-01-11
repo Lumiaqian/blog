@@ -1,5 +1,6 @@
 <!--  -->
 <template>
+ <transition name="el-zoom-in-center">
   <div v-loading.lock="loading"
          element-loading-text="正在施工"
          element-loading-spinner="el-icon-loading"
@@ -22,6 +23,7 @@
           </p>
       </div>
   </div>
+ </transition>
 </template>
 
 <script>
