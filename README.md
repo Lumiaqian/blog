@@ -1,6 +1,6 @@
 # blog
 
-> 博客前端源码，基于vue+element ui，博客的后台管理界面参考vue -element-admin，博客页面风格参考Next主题
+> 博客前端源码，基于vue+element ui，博客的后台管理界面参考vue -element-admin，博客页面风格参考Next主题。后端源码详见https://github.com/Lumiaqian/blog-back-end
 
 ### 博客实现功能(详情请看http://39.108.115.109)
 
