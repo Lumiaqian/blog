@@ -210,16 +210,16 @@ export default {
   computed: {},
 
   created () {
-    this.getCates()
+    this.getCates(this.pageNo)
     this.getFatherCates()
   },
 
   mounted () {},
 
   methods: {
-    getCates () {
+    getCates (pageNo) {
       this.loading = true
-      getCates(this.pageNo, this.pageSize).then(res => {
+      getCates(pageNo, this.pageSize).then(res => {
         let cates = res.data.data.list
         this.cates = cates
         this.pageTotal = res.data.data.total
@@ -307,7 +307,7 @@ export default {
         .catch(_ => {})
     },
     handleCurrentChange (val) {
-
+      this.getCates(val)
     },
     addCate () {
       saveCate(this.cate).then(res => {
