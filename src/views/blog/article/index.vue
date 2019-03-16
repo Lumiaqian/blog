@@ -22,6 +22,54 @@
             <font style="color:#FF4500;">{{tag.tagName}}</font>
           </p>
       </div>
+      <div class="comment">
+        <div class="info">
+          <div class="comment-top">
+            <div class="comment-top-item">
+              <div class="comment-top-item-text">昵称：</div><el-input placeholder="请输入昵称" size="small" v-model="comment.commentator"></el-input>
+            </div>
+            <div class="comment-top-item">
+              <div class="comment-top-item-text">邮箱：</div>
+              <el-input placeholder="请输入邮箱" size="small" v-model="comment.email" type="email"></el-input>
+            </div>
+          </div>
+          <div class="comment-content">
+            <el-input
+            type="textarea"
+            :autosize="{ minRows: 5}"
+            placeholder="来一发吧，大兄弟 (>^ω^<)喵"
+            v-model="comment.content"
+            class="comment-content-input"></el-input>
+            <el-button type="danger" round size="small" @click="postComment">发表评论</el-button>
+          </div>
+          <div class="comment-list">
+            <div v-if="this.comments===null || this.comments.length === 0" class="comment-list-empty">
+              ╮(￣▽￣)╭ 暂无评论
+            </div>
+            <div v-else>
+              <div v-for="comment in comments" :key="comment.id">
+               <div class="comment-list-father" v-if="comment.fatherId==0"> <!-- v-if="comment.fatherId==0" -->
+                  <div>
+                    <div class="comment-list-father-commentatorAndDate">{{comment.commentator}}&nbsp;.&nbsp;{{comment.createDate | formatDate}}</div>
+                    <!-- <div class="comment-list-father-date">{{comment.createDate | formatDate}}</div> -->
+                    <div class="comment-list-father-content">{{comment.content}}</div>
+                    <el-button type="text" size="mini" >回复</el-button>
+                    <div v-for="reply in comments" :key="reply.id" class="comment-list-reply">
+                      <div v-if="(reply.fatherId!=0&&reply.fatherId==comment.id)">
+                        <div class="comment-list-reply-commentatorAndDate">{{reply.commentator}}&nbsp;.&nbsp;{{reply.createDate | formatDate}}</div>
+                        <div class="comment-list-reply-nickName">@{{reply.replyNickName}}：</div>
+                        <div class="comment-list-reply-content">{{reply.content}}</div>
+                        <el-button type="text" size="mini" >回复</el-button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
   </div>
  </transition>
 </template>
@@ -30,18 +78,31 @@
 // eslint-disable-next-line no-unused-vars
 import MDPreview from '@/components/MDPreview'
 import {post} from '@/api/posts'
+// eslint-disable-next-line no-unused-vars
+import {postComment, getComments} from '@/api/comment'
 import {markdown} from '@/utils/markdown'
 export default {
   data () {
     return {
       content: '',
       title: '',
+      postId: '',
       publicDate: null,
       editDate: null,
       tags: [],
       watchCount: null,
       categories: [],
-      loading: true
+      loading: true,
+      comment: {
+        email: '',
+        commentator: '',
+        content: '',
+        postId: this.postId,
+        isAuthor: false,
+        fatherId: '0',
+        replyId: '0'
+      },
+      comments: []
     }
   },
 
@@ -51,13 +112,14 @@ export default {
 
   created () {
     this.getPost()
+    this.getComments()
   },
   computed: {},
 
   methods: {
     getPost () {
-      var postId = this.$route.query.id
-      post(postId).then(res => {
+      this.postId = this.$route.query.id
+      post(this.postId).then(res => {
         this.content = res.data.data.content
         this.content = markdown(this.content)
         // console.log(this.content)
@@ -79,6 +141,42 @@ export default {
             id: tag.tagId
           }
         })
+      })
+    },
+    getComments () {
+      getComments(this.postId).then(res => {
+        if (res.data.code !== '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'error'
+          })
+        } else {
+          this.comments = res.data.data
+        }
+      })
+    },
+    postComment () {
+      if (this.comment.commentator === null || this.comment.commentator === '' ||
+      this.comment.email === null || this.comment.email ||
+      this.comment.content === null || this.comment.content === '') {
+        this.$message({
+          message: '请输入昵称、邮箱和评论',
+          type: 'error'
+        })
+      }
+      this.comment.postId = this.postId
+      postComment(this.comment).then(res => {
+        if (res.data.code === '200') {
+          this.$message({
+            message: res.data.message,
+            type: 'success'
+          })
+        } else {
+          this.$message({
+            message: res.data.message,
+            type: 'error'
+          })
+        }
       })
     }
   }
@@ -114,6 +212,60 @@ export default {
   .tag{
   margin: 0.5%;
   cursor: pointer;
+  }
+}
+.comment {
+  // display: flex;
+  // flex-direction: row;
+  margin-left: 17%;
+  -webkit-box-shadow:0px 3px 3px #c8c8c8 ;
+  -moz-box-shadow:0px 3px 3px #c8c8c8 ;
+  box-shadow:0px 3px 3px #c8c8c8 ;
+  padding: 30px 10px;
+  margin-bottom: 1%;
+  .comment-top,.comment-top-item {
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    .comment-top-item-text{
+      width: 60px;
+    }
+  }
+  .comment-content{
+
+    padding-top: 10px;
+    margin-left: 2%;
+    .comment-content-input{
+      width: 80%;
+    }
+  }
+  .comment-list-empty{
+    padding-top: 10px;
+    margin-left: 20%;
+  }
+  .comment-list-father{
+    padding-top: 10px;
+    margin-left: 2%;
+    .comment-list-father-commentatorAndDate{
+      font-weight:bold;
+      font-size: 15px;
+      font-family: Georgia;
+    }
+  }
+  .comment-list-reply{
+    padding-top: 1%;
+    margin-left: 3%;
+    .comment-list-reply-commentatorAndDate{
+      font-weight:bold;
+      font-size: 15px;
+      font-family: Georgia;
+    }
+    .comment-list-reply-nickName{
+      font-style:italic;
+      font-weight:bold;
+      font-size: 15px;
+      font-family: Georgia;
+    }
   }
 }
 </style>

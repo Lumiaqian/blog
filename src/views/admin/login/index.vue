@@ -9,7 +9,7 @@
               <el-input v-model="userInfo.username" clearable></el-input>
             </el-form-item>
             <el-form-item label="密码" prop="password">
-              <el-input v-model="userInfo.password" type="password" clearable></el-input>
+              <el-input v-model="userInfo.password" type="password" clearable show-password></el-input>
               <el-button type="text" size="mini" >忘记密码？</el-button>
             </el-form-item>
             <el-form-item>

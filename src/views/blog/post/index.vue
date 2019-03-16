@@ -42,7 +42,8 @@ export default {
       tags: [],
       watchCount: 1,
       categories: [],
-      loading: true
+      loading: true,
+      email: ''
     }
   },
   filters: {
