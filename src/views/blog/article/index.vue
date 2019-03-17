@@ -37,7 +37,7 @@
             <el-input
             type="textarea"
             :autosize="{ minRows: 5}"
-            placeholder="来一发吧，大兄弟 (>^ω^<)喵"
+            :placeholder="placeholder"
             v-model="comment.content"
             class="comment-content-input"></el-input>
             <el-button type="danger" round size="small" @click="postComment">发表评论</el-button>
@@ -53,13 +53,13 @@
                     <div class="comment-list-father-commentatorAndDate">{{comment.commentator}}&nbsp;.&nbsp;{{comment.createDate | formatDate}}</div>
                     <!-- <div class="comment-list-father-date">{{comment.createDate | formatDate}}</div> -->
                     <div class="comment-list-father-content">{{comment.content}}</div>
-                    <el-button type="text" size="mini" >回复</el-button>
+                    <el-button type="text" size="mini" @click="replyComment(comment)">回复</el-button>
                     <div v-for="reply in comments" :key="reply.id" class="comment-list-reply">
                       <div v-if="(reply.fatherId!=0&&reply.fatherId==comment.id)">
                         <div class="comment-list-reply-commentatorAndDate">{{reply.commentator}}&nbsp;.&nbsp;{{reply.createDate | formatDate}}</div>
                         <div class="comment-list-reply-nickName">@{{reply.replyNickName}}：</div>
                         <div class="comment-list-reply-content">{{reply.content}}</div>
-                        <el-button type="text" size="mini" >回复</el-button>
+                        <el-button type="text" size="mini" @click="replyComment(reply)">回复</el-button>
                       </div>
                     </div>
                   </div>
@@ -102,7 +102,8 @@ export default {
         fatherId: '0',
         replyId: '0'
       },
-      comments: []
+      comments: [],
+      placeholder: '来一发吧，大兄弟 (>^ω^<)喵'
     }
   },
 
@@ -151,26 +152,31 @@ export default {
             type: 'error'
           })
         } else {
+          this.comments = []
           this.comments = res.data.data
         }
       })
     },
     postComment () {
-      if (this.comment.commentator === null || this.comment.commentator === '' ||
-      this.comment.email === null || this.comment.email ||
-      this.comment.content === null || this.comment.content === '') {
+      if (this.comment.commentator === '' ||
+       this.comment.email === '' ||
+       this.comment.content === '') {
+        console.log(this.comment.commentator + ' ' + this.comment.email + '' + this.comment.content)
         this.$message({
           message: '请输入昵称、邮箱和评论',
           type: 'error'
         })
+        return
       }
       this.comment.postId = this.postId
-      postComment(this.comment).then(res => {
+      let comment = this.comment
+      postComment(comment).then(res => {
         if (res.data.code === '200') {
           this.$message({
             message: res.data.message,
             type: 'success'
           })
+          this.getComments()
         } else {
           this.$message({
             message: res.data.message,
@@ -178,6 +184,20 @@ export default {
           })
         }
       })
+    },
+    replyComment (comment) {
+      console.log('回复对象的id是：' + comment.id + ' 回复对象的昵称为：' + comment.commentator + ' 回复对象的父id为：' + comment.fatherId)
+      this.placeholder = '@' + comment.commentator
+      // this.comment = []
+      if (comment.fatherId === '0') {
+        this.comment.fatherId = comment.id
+      } else {
+        this.comment.fatherId = comment.fatherId
+      }
+      this.comment.replyId = comment.id
+      this.comment.content = ''
+      this.comment.email = ''
+      this.comment.commentator = ''
     }
   }
 }
@@ -253,7 +273,7 @@ export default {
     }
   }
   .comment-list-reply{
-    padding-top: 1%;
+    //padding-top: 5px;
     margin-left: 3%;
     .comment-list-reply-commentatorAndDate{
       font-weight:bold;
