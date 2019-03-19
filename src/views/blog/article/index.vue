@@ -248,7 +248,7 @@ export default {
     flex-direction: row;
     padding-left: 10px;
     .comment-top-item-text{
-      width: 60px;
+      width: 80px;
     }
   }
   .comment-content{
