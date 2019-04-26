@@ -23,15 +23,15 @@ function padLeftZero (str) {
 export function getNow () {
   let now = new Date()
   var Y = now.getFullYear()
-	var M = now.getMonth() + 1
-		M = M < 10 ? '0' + M : M // 不够两位补充0
-	var D = now.getDate();
-		D = D < 10 ? '0' + D : D
-	var H = now.getHours()
-		H = H < 10 ? '0' + H : H
-	var Mi = now.getMinutes()
-		Mi = Mi < 10 ? '0' + Mi : Mi
-	var S = now.getSeconds()
-    S = S < 10 ? '0' + S : S
+  var M = now.getMonth() + 1
+  M = M < 10 ? '0' + M : M // 不够两位补充0
+  var D = now.getDate()
+  D = D < 10 ? '0' + D : D
+  var H = now.getHours()
+  H = H < 10 ? '0' + H : H
+  var Mi = now.getMinutes()
+  Mi = Mi < 10 ? '0' + Mi : Mi
+  var S = now.getSeconds()
+  S = S < 10 ? '0' + S : S
   return Y + '-' + M + '-' + D + ' ' + H + ':' + Mi + ':' + S
 }

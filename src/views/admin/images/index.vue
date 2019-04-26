@@ -4,9 +4,9 @@
    <div class="main">
      <el-upload
       class="upload-images"
-      action="http://39.108.115.109:8080/qiniu/images"
+      action="https://blog.caoyuqian.cn/api/qiniu/images"
       :on-change="handleChange"
-      :file-list="fileList"
+      :file-list="files"
       :on-error="handleError"
       :on-success="handleSuccess"
       :before-upload="beforeAvatarUpload"

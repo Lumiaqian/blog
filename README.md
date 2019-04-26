@@ -2,7 +2,7 @@
 
 > 博客前端源码，基于vue+element ui，博客的后台管理界面参考vue -element-admin，博客页面风格参考Next主题。后端源码详见https://github.com/Lumiaqian/blog-back-end
 
-### 博客实现功能(详情请看http://39.108.115.109)
+### 博客实现功能(详情请看https://blog.caoyuqian.cn)
 
 - 首页（文章列表）
 - 菜单栏显示当时天气（根据IP获取当地当时天气）

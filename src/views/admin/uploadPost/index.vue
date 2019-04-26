@@ -5,9 +5,9 @@
    </div>
    <el-upload
       class="upload-md"
-      action="http://39.108.115.109:8080/upload"
+      action="https://blog.caoyuqian.cn/api/upload"
       :on-change="handleChange"
-      :file-list="fileList"
+      :file-list="files"
       :on-error="handleError"
       :on-success="handleSuccess"
       drag
