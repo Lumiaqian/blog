@@ -82,3 +82,10 @@ export function edit (post) {
     data: post
   })
 }
+export function openComment (data) {
+  return request({
+    url: '/admin/posts/openComment',
+    method: 'post',
+    data: data
+  })
+}

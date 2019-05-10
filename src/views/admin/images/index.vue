@@ -4,7 +4,7 @@
    <div class="main">
      <el-upload
       class="upload-images"
-      action="https://blog.caoyuqian.cn/api/qiniu/images"
+      action="https://blog.caoyuqian.cn/api/upload/image"
       :on-change="handleChange"
       :file-list="files"
       :on-error="handleError"

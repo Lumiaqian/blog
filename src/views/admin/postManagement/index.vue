@@ -33,6 +33,15 @@
         </el-select>
         <el-button icon="el-icon-search" type="primary" size="mini" circle @click="search"></el-button>
      </div>
+     <div class="operation">
+       <el-switch
+       v-model="openComment"
+       active-text="开启评论"
+       inactive-text="关闭评论"
+       active-color="#13ce66"
+       inactive-color="#ff4949"
+       @change="changeOpenComment"></el-switch>
+     </div>
      <el-table
      class="table"
      v-loading="loading"
@@ -119,6 +128,14 @@
          <span v-else-if="post.row.status === -1">已删除</span>
        </template>
      </el-table-column>
+     <el-table-column
+       label="是否开启评论"
+       width="120">
+       <template slot-scope="post">
+         <span v-if="post.row.openComment === true ">开启</span>
+         <span v-else>关闭</span>
+       </template>
+     </el-table-column>
      <el-table-column label="操作">
       <template slot-scope="post">
         <el-button
@@ -156,7 +173,7 @@
 </template>
 
 <script>
-import {posts, discardPost, pubPost, draftPost, postList} from '@/api/admin/posts'
+import {posts, discardPost, pubPost, draftPost, postList, openComment} from '@/api/admin/posts'
 import {getCategories} from '@/api/admin/categories'
 import {getTags} from '@/api/admin/tags'
 import {formatDate} from '@/utils/date.js'
@@ -172,7 +189,9 @@ export default {
       cates: [],
       selectedCate: [],
       tags: [],
-      selectedTag: []
+      selectedTag: [],
+      openComment: false,
+      selectedPostData: []
     }
   },
 
@@ -227,8 +246,47 @@ export default {
         this.loading = false
       })
     },
-    handleSelectionChange () {
-      console.log('多选！')
+    handleSelectionChange (val) {
+      this.selectedPostData = val
+      console.log('多选！' + JSON.stringify(this.selectedPostData))
+    },
+    // 改变文章评论开启状态
+    changeOpenComment () {
+      if (this.selectedPostData.length === 0) {
+        this.$message.error('您还未勾选任何数据')
+        this.openComment = !this.openComment
+        return
+      }
+      let idList = []
+      this.selectedPostData.forEach(element => {
+        idList.push(element.postId)
+      })
+      let data = {
+        idList: idList,
+        openComment: this.openComment
+      }
+      return new Promise((resolve, reject) => {
+        openComment(data).then(res => {
+          if (res.data.code === '200') {
+            this.$message({
+              message: res.data.message,
+              type: 'success'
+            })
+            this.selectedPostData.forEach(element => {
+              element.openComment = this.openComment
+            })
+          } else {
+            this.$message({
+              message: res.data.message,
+              type: 'error'
+            })
+          }
+          resolve()
+        }).catch(err => {
+          this.openComment = !this.openComment
+          reject(err)
+        })
+      })
     },
     packData (pageNo, pageSize) {
       let cate = {
@@ -398,7 +456,7 @@ export default {
 .el-button {
     margin: 1%;
 }
-.table {
+.table,.operation {
   margin-left: 3%;
 }
 </style>

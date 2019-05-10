@@ -64,7 +64,8 @@ export default {
       'postCount',
       'tagCount',
       'cateCount',
-      'postAllCount'
+      'postAllCount',
+      'commentCount'
     ])
   },
 
@@ -81,6 +82,7 @@ export default {
         this.option.data[0].allcount = this.postAllCount
         this.option.data[1].count = this.cateCount
         this.option.data[2].count = this.tagCount
+        this.option.data[3].count = this.commentCount
       })
     }
   }

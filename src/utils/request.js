@@ -2,7 +2,7 @@ import axios from 'axios'
 // eslint-disable-next-line no-unused-vars
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import store from '@/store'
-// import { Message, MessageBox} from 'element-ui'
+import { Message } from 'element-ui'
 
 // 创建axios实例
 const service = axios.create({
@@ -28,6 +28,12 @@ service.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   // 对响应错误做点什么
+  // console.log(JSON.stringify(error)) // for debug
+  Message({
+    message: JSON.parse(JSON.stringify(error)).response.data.message,
+    type: 'error',
+    duration: 5 * 1000
+  })
   return Promise.reject(error)
 })
 export default service

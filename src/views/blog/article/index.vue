@@ -40,10 +40,13 @@
             :placeholder="placeholder"
             v-model="comment.content"
             class="comment-content-input"></el-input>
-            <el-button type="danger" round size="small" @click="postComment">发表评论</el-button>
+            <el-button type="danger" round size="small" @click="postComment" :disabled="!openComment">发表评论</el-button>
           </div>
           <div class="comment-list">
-            <div v-if="this.comments===null || this.comments.length === 0" class="comment-list-empty">
+            <div v-if="openComment === false">
+              ╮(￣▽￣)╭ 评论暂且关闭
+            </div>
+            <div v-else-if="this.comments===null || this.comments.length === 0" class="comment-list-empty">
               ╮(￣▽￣)╭ 暂无评论
             </div>
             <div v-else>
@@ -93,6 +96,7 @@ export default {
       watchCount: null,
       categories: [],
       loading: true,
+      openComment: false,
       comment: {
         email: '',
         commentator: '',
@@ -131,6 +135,7 @@ export default {
         this.editDate = res.data.data.editDate
         // // this.watchCount = res.date.data.publicDate
         this.watchCount = res.data.data.watchCount
+        this.openComment = res.data.data.openComment
         this.loading = false
       })
     },
