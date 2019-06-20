@@ -195,7 +195,7 @@ export default {
         })
       }
       this.$confirm('确认删除标题为：' + row.title + '的文章？')
-        .then(_ => {
+        .then(() => {
           discardPost(row.postId).then(res => {
             if (res.data.code === '200') {
               this.$message({
@@ -217,7 +217,7 @@ export default {
             })
           })
         })
-        .catch(_ => {})
+        .catch(() => {})
     },
     pub (row) {
       if (row.status === 1) {

@@ -96,7 +96,7 @@
         <el-button
           size="mini"
           type="primary"
-          @click="edit(cate.row,cate.$index)"
+          @click="edit(cate.row)"
           >编辑</el-button>
          <el-button v-if="cate.row.status != 0"
           size="mini"
@@ -242,7 +242,7 @@ export default {
     handleSelectionChange () {
 
     },
-    edit (row, index) {
+    edit (row) {
       this.cate = row
       this.editDialogVisible = true
       console.log(JSON.stringify(this.cate))
@@ -266,7 +266,7 @@ export default {
     },
     rev (row) {
       this.$confirm('确认恢复名称为：' + row.cateName + '的分类？')
-        .then(_ => {
+        .then(()=> {
           recoveryCate(row.cateId).then(res => {
             if (res.data.code === '200') {
               this.$message({
@@ -283,11 +283,11 @@ export default {
             }
           })
         })
-        .catch(_ => {})
+        .catch(() => {})
     },
     discard (row) {
       this.$confirm('确认删除名称为：' + row.cateName + '的分类？')
-        .then(_ => {
+        .then(() => {
           discardCate(row.cateId).then(res => {
             if (res.data.code === '200') {
               this.$message({
@@ -304,7 +304,7 @@ export default {
             }
           })
         })
-        .catch(_ => {})
+        .catch(() => {})
     },
     handleCurrentChange (val) {
       this.getCates(val)

@@ -108,9 +108,9 @@ export default {
   mounted () {},
 
   methods: {
-    handleChange (file) {
+    // handleChange (file) {
 
-    },
+    // },
     // eslint-disable-next-line handle-callback-err
     handleError (err, file, fileList) {
       // console.log(JSON.stringify(err))

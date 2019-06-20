@@ -26,6 +26,7 @@ export default {
   watch: {
     contents: {
       immediate: true,
+      // eslint-disable-next-line no-unused-vars
       handler: function (con) {
         this.$store.dispatch('setArticleMenu', false)
         // console.log('contents')

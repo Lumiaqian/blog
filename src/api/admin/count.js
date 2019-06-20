@@ -6,3 +6,9 @@ export function getCount () {
     method: 'get'
   })
 }
+export function getDeviceCount () {
+  return request({
+    url: '/admin/device/count',
+    method: 'get'
+  })
+}

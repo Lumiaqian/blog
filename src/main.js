@@ -17,6 +17,7 @@ import 'viewerjs/dist/viewer.css'
 import Viewer from 'v-viewer'
 import Highlight from './utils/mHighlight'
 import {formatDate} from '@/utils/date.js'
+import VCharts from 'v-charts'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI, {
@@ -27,6 +28,7 @@ Vue.use(mavonEditor)
 Vue.use(uploader)
 Vue.use(Viewer)
 Vue.use(Highlight)
+Vue.use(VCharts)
 Vue.filter('formatDate', function (time) {
   var date = new Date(time)
   return formatDate(date, 'yyyy-MM-dd hh:mm:ss')

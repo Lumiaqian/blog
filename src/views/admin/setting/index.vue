@@ -191,12 +191,12 @@ export default {
     toggleShow () {
       this.show = !this.show
     },
-
+    // eslint-disable-next-line no-unused-vars
     cropSuccess (imgDataUrl, field) {
       console.log('-------- crop success --------')
       this.image = imgDataUrl
     },
-
+    // eslint-disable-next-line no-unused-vars
     cropUploadSuccess (jsonData, field) {
       console.log('-------- upload success --------')
       console.log(jsonData)

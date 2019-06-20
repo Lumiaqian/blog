@@ -14,7 +14,6 @@
 <script>
 // import { Sidebar } from './components'
 import { Navbar, AppMain, Sidebar, TagsView } from './components'
-import BackToTop from '@/components/BackToTop'
 export default {
   data () {
     return {
@@ -25,7 +24,6 @@ export default {
     Sidebar,
     Navbar,
     AppMain,
-    BackToTop,
     TagsView
   },
 

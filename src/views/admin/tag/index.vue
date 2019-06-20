@@ -236,7 +236,7 @@ export default {
     },
     rev (row) {
       this.$confirm('确认恢复名称为：' + row.tagName + '的标签？')
-        .then(_ => {
+        .then(() => {
           recoveryTag(row.tagId).then(res => {
             if (res.data.code === '200') {
               this.$message({
@@ -253,11 +253,11 @@ export default {
             }
           })
         })
-        .catch(_ => {})
+        .catch(() => {})
     },
     discard (row) {
       this.$confirm('确认删除名称为：' + row.tagName + '的标签？')
-        .then(_ => {
+        .then(() => {
           discardTag(row.tagId).then(res => {
             if (res.data.code === '200') {
               this.$message({
@@ -274,7 +274,7 @@ export default {
             }
           })
         })
-        .catch(_ => {})
+        .catch(() => {})
     },
     addTag () {
       console.log(this.tag.saveDate + this.tag.tagName)

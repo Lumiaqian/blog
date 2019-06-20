@@ -49,7 +49,7 @@
 
 <script>
 import {posts} from '@/api/posts'
-import PostCard from '@/components/PostCard'
+// import PostCard from '@/components/PostCard'
 import {formatDate} from '@/utils/date.js'
 import {cutString} from '@/utils/string.js'
 import { mapGetters } from 'vuex'
@@ -141,7 +141,6 @@ export default {
     }
   },
   components: {
-    PostCard
   }
 }
 </script>

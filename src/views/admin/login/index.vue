@@ -75,7 +75,7 @@ export default {
     setAdmin () {
       this.$store.dispatch('isAdminWrap', true)
     },
-    userLogin (userInfo) {
+    userLogin () {
       // console.log('进入登录函数')
       this.$refs.loginForm.validate(valid => {
         if (valid) {

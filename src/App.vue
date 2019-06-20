@@ -35,10 +35,10 @@ export default {
     }
   },
   watch: {
-    showRightNav (value) {
+    showRightNav () {
       this.setViewWrapWidth()
     },
-    screen (value) {
+    screen () {
       this.setViewWrapWidth()
     }
   },
